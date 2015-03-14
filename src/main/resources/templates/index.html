@@ -12,24 +12,21 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div id="listaanuncios">
+	<div id="principal">
        <div id="cabecera">
-            <div id="logo" class="col-lg-6">
-				<img src="img/poxmania.png"></img>
-            </div>
-            <div id="buscar">
-                
-        <form class="search" id="searchForm">
-            <span class="icon-search"></span>
-            <input class="searchInput" id="search" name="search-field" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="" data-node-uid="28"/>
-            <input type="hidden" value="keyword_search" name="subaction"/>
-            <button id="search_bttn" class="button btn btnBold" type="submit">
-                Buscar
-            </button>
-        </form>
-           
-        </div>
-        <div id="cestaadmin">
+       		<div id="logoBuscadorCuenta">
+	            <div id="logo" class="col-lg-6">
+					<img src="img/poxmania.png"></img>
+        	    </div>
+            	<div id="buscar">
+			        <form class="search" id="searchForm">
+            			<span class="icon-search"></span>
+            			<input class="searchInput" id="search" name="search-field" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="" data-node-uid="28"/>
+            			<input type="hidden" value="keyword_search" name="subaction"/>
+            			<button id="search_bttn" class="button btn btnBold" type="submit">Buscar</button>
+        			</form>
+           		</div>
+        		<div id="cestaadmin">
         <button type="button" class="btn btn-primary btn-lg active">Cesta</button>
 		<button type="button" class="btn btn-default btn-lg active">Admin</button>
         </div>
