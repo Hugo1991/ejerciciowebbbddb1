@@ -1,0 +1,83 @@
+body{}
+header{
+    position: relative;
+    height: 80px;
+}
+header #logo{
+    position: absolute;
+}
+header .form-group{
+    position: absolute;
+    margin-left: 400px;
+    top:30px;
+    width: 350px;
+    height: 50px;
+}
+header .toolbar{
+    position: absolute;
+   margin-left: 900px; 
+    top:25px;
+    width: 160px;
+}
+#seleccion{
+    position: relative;
+    height: 45px;
+    margin-left: 20px;
+}
+
+.nav li ul {
+display:none;
+position:absolute;
+min-width:140px;
+}
+* {
+font-family:sans-serif;
+list-style:none;
+text-decoration:none;
+margin:0;
+padding:0;
+}
+
+.nav > li {
+float:left;
+}
+.nav > li:hover {
+background:#FF69B4;
+}
+.nav li  a {
+background:#D3D3D3;
+color:#FFF;
+display:block;
+border:1px solid;
+padding:10px 12px;
+}
+
+.form-group .btn{
+    background-image:linear-gradient(to bottom, #FF69B4, #FF69B4);
+    color: #fff;
+}
+
+.form-group .btn:hover{
+    background-image:linear-gradient(to bottom, #FF69B4, #FF69B4);
+    color: #fff;
+}
+.form-group .form-control{
+    margin-top: 0px;
+    width: 250px;
+}
+
+.nav li a:hover {
+background:#FF69B4;
+}
+.nav li:hover > ul {
+display:block;
+}
+.nav li ul li {
+    position:relative;
+    margin-left: -25px;
+}
+ 
+.nav li ul li ul {
+right:-165px;
+top:0;
+}
