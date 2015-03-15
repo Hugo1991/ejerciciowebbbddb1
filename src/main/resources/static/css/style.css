@@ -83,18 +83,41 @@ top:0;
 }
 
 
+
+#cuerpo{
+	right:-50px;
+	position:relative;
+}
+
+.contenido{
+
+}
+
+
+//aqui van los estilos de los productos
 #productos{
      border-size:1px;
      border-color:blue;
      width:500px;
      height:100px;
-     background-color:blue;
-     position:relative
+	background-color:red;
+     position:relative;
 }
-#cuerpo{
-	right:-50px;
+#img_txtProd{
+	padding-top:10px;
+	padding-left:40px;
 	position:relative;
+	background-color:blue;
+	width:200px;
+	
 }
-.contenido{
+#img_prod{
+	width:75px;
+	height:75px;
+}
+#precio{
+	position:relative;
+	width:75px;
+	background-color:green;
 
 }

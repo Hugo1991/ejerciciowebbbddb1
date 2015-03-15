@@ -78,13 +78,19 @@
 
 				<p th:each="producto : ${productos}">
 					<div id="productos">
-						<!--<a th:href="@{/mostrar(idProducto=${producto.id})}"
-							th:text="|${producto.nombre} ${producto.categoria} |"/>
-							<img th:src="|${producto.imagen}|"/>-->
+						<div id="img_txtProd">
+							<img th:src="|${producto.imagen}|" id="img_prod"/>
+							<a th:href="@{/mostrar(idProducto=${producto.id})}"
+							th:text="|${producto.nombre}|"/>
+						</div>
+						<div id="precio">
+							<p th:text="|${producto.precio}|"/>
+						</div>
+							
 					</div>
 				</p>
-	</div>
-        </div>
+		</div>
+        
     </div>
     <footer></footer>
 </body>
