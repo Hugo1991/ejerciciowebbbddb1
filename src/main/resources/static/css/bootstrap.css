@@ -3956,11 +3956,6 @@ input[type="submit"].btn.btn-mini {
   display: block;
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
-  text-decoration: none;
-  background-color: #eeeeee;
-}
 
 .nav > li > a > img {
   max-width: none;
