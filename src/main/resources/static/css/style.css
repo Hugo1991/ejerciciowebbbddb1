@@ -81,3 +81,20 @@ display:block;
 right:-165px;
 top:0;
 }
+
+
+#productos{
+     border-size:1px;
+     border-color:blue;
+     width:500px;
+     height:100px;
+     background-color:blue;
+     position:relative
+}
+#cuerpo{
+	right:-50px;
+	position:relative;
+}
+.contenido{
+
+}
