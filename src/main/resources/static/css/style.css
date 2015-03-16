@@ -1,7 +1,12 @@
-body{}
+#pagina{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+
 header{
     position: relative;
-    height: 80px;
+    height: 100px;
 }
 header #logo{
     position: absolute;
@@ -14,20 +19,15 @@ header .form-group{
     height: 50px;
 }
 
-header .toolbar{
-position: inherit;
-   margin-left: 80%;
-    top:20px;
-    width: 180px;
-}
+
 #seleccion{
     position: relative;
-    height: 45px;
+    height: 42px;
     margin-left: 20px;
     z-index:1;
 }
 .toolbar a{
-    height: 30px;
+    height: 50px;
     text-transform: capitalize;
     padding-top: 20px;
     padding-right: 20px;
@@ -39,6 +39,7 @@ display:none;
 position:absolute;
 min-width:140px;
 }
+
 * {
 font-family:sans-serif;
 list-style:none;
@@ -47,37 +48,66 @@ margin:0;
 padding:0;
 }
 
+#super{
+      background-image: url("img/linea-banner.PNG");
+        background-repeat: repeat-x;
+}
+
 .nav > li {
+    
 float:left;
 }
 
-.nav li  a:hover {
-background:#fff;
+.nav  li a{
+background-color:#FF69B4;
 }
+.nav li  a:hover {
+background:#FF69B4;
+list-style:none;
+text-decoration:none;
+color: #000;
+
+}
+.nav li:hover > ul {
+display:block;
+    color: black;
+}
+
+
 
 .nav li  a {
-background:#D3D3D3;
-color: black;
-display:block;
-
-padding:10px 12px;
+    background:#D3D3D3;
+    color: black;
+    display:block;
+    border: 0.1em;
+    border-color: #B0B0B0  ;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    padding:10px 10px;
 }
+
 
 .form-group .form-control{
     margin-top: 0px;
     width: 250px;
 }
 
+a.btn.btn-defauld.btn-lg.active {
+  color: white;
+}
+.btn.active,
+.btn.btn-primary{
+    color:#000;
+}
+
 .nav li a:hover {
-background:#FF69B4;
+background-color:#FF69B4;
 list-style:none;
 text-decoration:none;
-color: 000000;
+color: #fff;
 }
-.nav li:hover > ul {
-display:block;
-    color: black;
-}
+
 .nav li ul li {
     position:relative;
     margin-left: -25px;
@@ -88,29 +118,117 @@ right:-165px;
 top:0;
 }
 <!--Buscador-->
-.search{float:left;padding:5px;border:0;}
-.search input{margin:0;padding-left:24px;padding-right:10px;color:#555;font-size:1.1em;width:100%;border:1px solid rgba(0,0,0,0.1);-webkit-border-radius:3px 0 0 3px;border-radius:3px 0 0 3px}
+.search{float:left;}
+input#search {
+  height: 31px;
+}
 .search button{
-border:1px solid rgba(0,0,0,0.1);padding:8px 1em;min-height:0;
-height:33px;float:left;
+height:30px;float:left;
 margin-left:50px;padding-left:20px;padding-right:20px;
-margin-top: 2px;
+margin-top: 9px;
 background:#bf3288;
-background:-webkit-linear-gradient(top, #d056a0 0%, #bf3288 100%);
+
 color:#fff;font-weight:bold;
 -webkit-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
-.search input[type=search]{padding:8px 0 7px 22px;border-color:#d4d4d4}
-.search{float:none;margin:0 10px;position:relative;-webkit-box-sizing:padding-box;-moz-box-sizing:padding-box;box-sizing:padding-box;padding:0;}
-.search fieldset{width:160px;padding:2px;margin-bottom:0;background:#ebebeb}
-.search input,.search input[type=search]{float:left;margin:0;width:160px;font-size:1em}
-.search button{position:absolute;top:7px;left:170px;padding-left:12px;padding-right:12px}
-.search span{position:absolute;top:23px;left:12px}
-.search{position:absolute;top:0;left:50%;margin-left:-19%;margin-top:23px;width:355px;padding:0;}
-.search fieldset{overflow:hidden;margin-bottom:0;background:#ebebeb;padding:5px}
-.search input,.search input[type=search]{display:block;width:100px;padding:8px 0 7px 22px;}
-.search button{position:absolute;top:4px;right:px;min-width:116px}
-.search input,.search input[type=search]{width:305px; height: 18px;}
+.search fieldset{ height: 50;width:300;padding:2px;margin-bottom:0;background:#ebebeb}
+
+.search button{position:absolute;left:144px;padding-left:12px;padding-right:12px}
+.search span{position:absolute;top:13px;left:12px}
+.search{position:absolute;top:0;left:50%;margin-left:-19%;margin-top:23px;width:195px;padding:0;}
+.search fieldset{overflow:hidden;margin-bottom:0;background:#ebebeb;padding:10px}
+.search input,.search input[type=search]{display:block;padding:8px 0 7px 22px;}
+.search button{position:absolute;top:2px;right:px;min-width:100px}
+.search input,.search input[type=search]{width:220; height: 30px;}
 .btn.btnBold:focus,.btn.btnBold[type="button"]:focus,.btn.btnBold:hover,.btn.btnBold[type="button"]:hover,.btn.btnBold:active,.btn.btnBold[type="button"]:active,.btn.btnBold.active,.btn.btnBold[type="button"].active{color:#fff;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #d056a0), color-stop(1, #bf3288));}
 <!--FIN Buscador-->
 
+.panel-heading h3{
+    color: grey;
+    margin-bottom: 0px;
+    font-family:"trebuchet ms", arial, sans-serif;
+    width: 600px;
+    font-size: 19px;
+    font-weight: bold;
+}
+.toolbar button{
+    height:50px;float:left;
+    margin-left:10px;padding-left:10px;padding-right:25px;
+    padding-bottom: 0px;
+    background:#bf3288;
+    color:#fff;
+}
+button#micuenta{
+    background:#D3D3D3;
+    color:black;
+}
+header .toolbar{
+position: absolute;
+   margin-left: 75%;
+    top:20px;
+    width: 300px;
+    height: 70px;
+}
+.panel-heading h3{
+    color:#bf3288;
+    margin-bottom: 0px;
+    font-family:"trebuchet ms", arial, sans-serif;
+    width: 600px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#titulo{
+    background:white;
+    
+}
+
+div#infor,
+.container-fluid,
+div#contenido{
+    border: 0px;
+}
+
+#panel{
+border:1px;
+}
+#pro{
+width: 650px;
+}
+
+
+
+.prod_list{
+     position:relative;
+}
+
+#precioInfo{
+	position: absolute;
+	float:right;
+	top:20px;
+	right:50px;
+	text-align:right;
+}
+#imgProd_nomProd{
+	position absolute;
+	padding-top:20px;
+	padding-left:30px;
+	valign:top;
+    padding-bottom: 20px;
+}
+#img_prod{
+	width:75px;
+	height:75px;
+}
+#precioListProd{
+	font-size:20px;
+	color:red;
+	
+}
+#precioInfo button{
+    height:45px;float:left;
+    padding-left:6px;padding-right:5px;
+    background:#bf3288;
+    color:#fff;
+    margin-bottom: 20px;
+}
 

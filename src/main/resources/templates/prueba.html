@@ -1,42 +1,115 @@
-<!doctype html>
-    <head>
-        <title>Poxmania</title>
+<html>
+<head>  
+        
         <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="../static/css/bootstrap-responsive.css" />
-        <link rel="stylesheet" href="../static/css/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
         <script src="../static/js/jquery.min.js"></script>
         <script src="../static/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../static/css/estilo.css" media="screen">
-                        </head>
-    <body >
-                    <!-- Header -->
-<header id="header" class="row nosp">
-					<h1 id="logo" class="logo">
-					<a itemprop="url" href="prueba.html" title="back_to_home">
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
 
-						<img itemprop="logo" src="../static/img/poxmania.png" alt="Pixmania Spain">
-					</a>
-					</h1>
-			
-			<form class="search" id="searchForm" method="POST"  action="">
-	<fieldset>
-		<span class="icon-search"></span>
-		<input class="searchInput" id="search" name="search-field" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required>
-		<input type="hidden" value="keyword_search" name="subaction">
-		<button id="search_bttn" class="button btn btnBold" type="submit" >
-			Buscar
-		</button>
-	</fieldset>
-</form>	
-	<div class="toolbar">
-        <a href="#" class="btn btn-primary btn-lg active" role="button"><span>Mi cuenta</span></a>
-        <a href="#" class="btn btn-primary btn-lg active" role="button">Cesta</a>
+    
+</head>
+<body>
+<div id="pagina">
+    <div id="super">
+    <header>
+        <h1 id="logo" class="logo" itemscope="" itemtype="http://schema.org/Organization">
+            <a itemprop="url" href="/templates/principal.html" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
+				<img itemprop="logo" src="../static/img/poxmania.png" alt="Poxmania"/>
+			</a>
+        </h1>
+       <form class="search" id="searchForm" method="POST"  action="">
+	       <fieldset>
+		      <span class="icon-search"></span>
+		      <input class="searchInput" id="search" name="search-field" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
+		      <input type="hidden" value="keyword_search" name="subaction"/>
+		      <button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
+	       </fieldset>
+        </form>	
+        <div class="toolbar">
+            
+            <button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
+            <button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button>
+            <span class="ico-pedidos"></span>
         </div>
-</header>
-	
-		
-		
-
-    </body>
+    </header>
+    <div id="seleccion">
+        <ul class="nav">
+            <li><a href="">Home</a></li>
+            <li><a href="">Hogar</a>
+                <ul>
+                    <li><a href="">jhj</a></li>
+                    <li><a href="">Diseno web</a>
+                        <ul>
+                            <li><a href="">Submenu 1</a></li>
+                            <li><a href="">Submenu 2</a></li>
+                            <li><a href="">Submenu 3</a></li>
+                            <li><a href="">Submenu 4</a></li>
+                            <li><a href="">Submenu 5</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Marketing</a>
+                        <ul>
+                            <li><a href="">Submenu 1</a></li>
+                            <li><a href="">Submenu 2</a></li>
+                            <li><a href="">Submenu 3</a>
+                                <ul>
+                                    <li><a href="">Submenu 1</a></li>
+                                    <li><a href="">Submenu 2</a></li>
+                                    <li><a href="">Submenu 3</a></li>
+                                    <li><a href="">Submenu 4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="">SEO</a></li>
+                </ul>
+            </li>
+            <li><a href="">Pequeños electrodomesticos</a>
+                <ul>
+                    <li><a href="">Historia</a></li>
+                    <li><a href="">Mision</a></li>
+                    <li><a href="">Vision</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <div id="cuerpo">      
+                <!--Ignacio de lucas & Hugo Fernandez Visier-->
+                <div class="panel panel-default" id="contenido">            
+                    <div class="container-fluid">
+                        <div id="informacion">
+                            <div class="panel panel-default" id="infor">
+                                <div class="panel-heading" id="titulo">
+                                    <h3>Pequeño electrodomestico</h3>
+                                </div>
+                                <div class="panel-body" id="panel">
+                                        <p th:each="producto : ${productos}">
+                                             <div class="panel panel-default" id="pro">
+				                        <div class="prod_list">
+					                       <div id="imgProd_nomProd">
+						                      <img th:src="|${producto.imagen}|" id="img_prod"/>
+                                               <a th:href="@{/producto(idProducto=${producto.id})}" 
+						th:text="|${producto.nombre}|"/>
+					                       </div>
+                                           <div id="precioInfo">
+                                                <p id="precioListProd" th:text="|${producto.precio}|+&euro;"/>
+                                                <button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
+                                           </div>
+                                        </div>
+                                        </div>
+                                        </p>
+                                   
+                                </div>
+                            </div>
+                        </div>  
+                    </div> 
+                
+                    <footer></footer>
+                </div>
+    </div>
+</div>
+</body>
 </html>
-	
