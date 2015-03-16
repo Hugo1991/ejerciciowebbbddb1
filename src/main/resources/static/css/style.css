@@ -111,3 +111,13 @@ color:#fff;font-weight:bold;
 .search input,.search input[type=search]{width:305px; height: 18px;}
 .btn.btnBold:focus,.btn.btnBold[type="button"]:focus,.btn.btnBold:hover,.btn.btnBold[type="button"]:hover,.btn.btnBold:active,.btn.btnBold[type="button"]:active,.btn.btnBold.active,.btn.btnBold[type="button"].active{color:#fff;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #d056a0), color-stop(1, #bf3288));}
 <!--FIN Buscador-->
+div #prod{
+     position:absolute;
+     background-color:red;
+     width:900px;
+     height:300px;
+}
+#img_prod{
+	width:75px;
+	height:75px;
+}
