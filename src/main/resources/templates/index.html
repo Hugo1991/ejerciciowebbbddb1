@@ -1,6 +1,6 @@
 <html>
 <head>  
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" />
         <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -72,17 +72,19 @@
         </ul>
     </div>
     <div id="cuerpo">
-    	<div id="prod">hohohohoohoh</div>
-     	<nav class="categoria">
+    	
+		<nav class="categoria">
 			
 		</nav>
        	<div class="contenido">
 			<p th:each="producto : ${productos}">
-				<a th:href="@{/mostrar(idProducto=${producto.id})}"
-				th:text="|${producto.nombre}|"/>
-				<img th:src="|${producto.imagen}|" id="img_prod"/>
-				<p th:text="|${producto.precio}|"/>
-				<!--<a href="#" class="btn btn-primary btn-lg active" role="button">Mas informacion</a>-->
+				<div id="prod">
+					<img th:src="|${producto.imagen}|" id="img_prod"/>
+					<a th:href="@{/mostrar(idProducto=${producto.id})}"
+					th:text="|${producto.nombre}|"/>
+					<p th:text="|${producto.precio}|"/>
+					<a href="#" class="btn btn-primary btn-lg active" role="button">Mas informacion</a>
+				</div>
 			</p>
 			</div>
     	</div>
