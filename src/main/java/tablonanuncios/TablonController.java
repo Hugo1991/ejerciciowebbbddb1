@@ -57,12 +57,12 @@ public class TablonController {
 		return new ModelAndView("insertar");
 	}
 
-	@RequestMapping("/mostrar")
+	@RequestMapping("/producto")
 	public ModelAndView mostrar(@RequestParam long idProducto) {
 
 		Producto producto = repository.findOne(idProducto);
 
-		return new ModelAndView("mostrar").addObject("producto", producto);
+		return new ModelAndView("producto").addObject("producto", producto);
 	}
 	
 	@RequestMapping("/nuevoAnuncio")

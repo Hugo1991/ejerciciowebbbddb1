@@ -1,0 +1,100 @@
+<html>
+<head>  
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/estiloHugo.css"/>
+       	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+    
+</head>
+<body>
+
+    <header>
+        <h1 id="logo" class="logo" itemscope="" itemtype="http://schema.org/Organization">
+            <a itemprop="url" href="/templates/principal.html" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
+				<img itemprop="logo" src="img/poxmania.png" alt="Poxmania"/>
+			</a>
+        </h1>
+       <form class="search" id="searchForm" method="POST"  action="">
+	       <fieldset>
+		      <span class="icon-search"></span>
+		      <input class="searchInput" id="search" name="search-field" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
+		      <input type="hidden" value="keyword_search" name="subaction"/>
+		      <button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
+	       </fieldset>
+        </form>	
+        <div class="toolbar">
+        <a href="#" class="btn btn-primary btn-lg active" role="button">Mi cuenta</a>
+        <a href="#" class="btn btn-primary btn-lg active" role="button">Cesta</a>
+        </div>
+    </header>
+    <div id="seleccion">
+        <ul class="nav">
+            <li><a href="">Home</a></li>
+            <li><a href="">Informatica</a>
+                <ul>
+                    <li><a href="">jhj</a></li>
+                    <li><a href="">Diseno web</a>
+                        <ul>
+                            <li><a href="">Submenu 1</a></li>
+                            <li><a href="">Submenu 2</a></li>
+                            <li><a href="">Submenu 3</a></li>
+                            <li><a href="">Submenu 4</a></li>
+                            <li><a href="">Submenu 5</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Marketing</a>
+                        <ul>
+                            <li><a href="">Submenu 1</a></li>
+                            <li><a href="">Submenu 2</a></li>
+                            <li><a href="">Submenu 3</a>
+                                <ul>
+                                    <li><a href="">Submenu 1</a></li>
+                                    <li><a href="">Submenu 2</a></li>
+                                    <li><a href="">Submenu 3</a></li>
+                                    <li><a href="">Submenu 4</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="">SEO</a></li>
+                </ul>
+            </li>
+            <li><a href="">Electrodomesticos</a>
+                <ul>
+                    <li><a href="">Historia</a></li>
+                    <li><a href="">Mision</a></li>
+                    <li><a href="">Vision</a></li>
+                </ul>
+            </li>
+            <li><a href="">Contacto</a></li>
+        </ul>
+    </div>
+    <div id="cuerpo">
+    	
+		<nav class="categoria">
+			Nombre de producto
+		</nav>
+       	<div class="contenido">
+			<p th:each="producto : ${productos}">
+				<div class="prod_list">
+					<div id="imgProd_nomProd">
+						<img th:src="|${producto.imagen}|" id="img_prod"/>
+						<a th:href="@{/mostrar(idProducto=${producto.id})}" 
+						th:text="|${producto.nombre}|"/>
+					</div>
+					<div id="precioInfo">
+						<p id="precioListProd" th:text="|${producto.precio}|+&euro;"/>
+						<a href="#" class="btn btn-primary btn-lg active" role="button">Mas informacion</a>
+					</div>
+				</div>
+			</p>
+			</div>
+    	</div>
+    <footer></footer>
+</body>
+</html>
+
