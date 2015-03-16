@@ -24,6 +24,7 @@ position: inherit;
     position: relative;
     height: 45px;
     margin-left: 20px;
+    z-index:1;
 }
 .toolbar a{
     height: 30px;
@@ -112,7 +113,4 @@ color:#fff;font-weight:bold;
 .btn.btnBold:focus,.btn.btnBold[type="button"]:focus,.btn.btnBold:hover,.btn.btnBold[type="button"]:hover,.btn.btnBold:active,.btn.btnBold[type="button"]:active,.btn.btnBold.active,.btn.btnBold[type="button"].active{color:#fff;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #d056a0), color-stop(1, #bf3288));}
 <!--FIN Buscador-->
 
-#img_prod{
-	width:75px;
-	height:75px;
-}
+
