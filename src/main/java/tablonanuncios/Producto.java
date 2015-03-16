@@ -10,7 +10,7 @@ public class Producto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long idProducto;
 
 	private String nombre;
 	private String categoria;
@@ -54,7 +54,7 @@ public class Producto {
 	public String toString() {
 		return String.format("Producto[id=%d, Name='%s', Categorie='%s',Image='%s',"
 				+ " Description='%s', Prize='%s']",
-				id, nombre, categoria,imagen,descripcion,precio);
+				idProducto, nombre, categoria,imagen,descripcion,precio);
 	}
 
 
@@ -80,7 +80,7 @@ public class Producto {
 	}
 	
 	public long getId() {
-		return id;
+		return idProducto;
 	}
 
 }
