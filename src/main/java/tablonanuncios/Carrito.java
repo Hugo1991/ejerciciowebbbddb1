@@ -2,9 +2,12 @@ package tablonanuncios;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 public class Carrito {
+	private long id;
 	private ArrayList<Producto> productos;
-	public Carrito(Producto p, Integer cantidad){
+	public Carrito(Producto p){
 		addProducto(p);
 		
 	}
@@ -27,4 +30,9 @@ public class Carrito {
 		for(Producto p:productos)
 			this.productos.remove(p);
 	}
+	public long getId(){
+		
+		return id;
+	}
+	
 }

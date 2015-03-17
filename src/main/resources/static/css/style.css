@@ -204,7 +204,7 @@ width: 650px;
 #precioInfo{
 	position: absolute;
 	float:right;
-	top:20px;
+	top:0px;
 	right:50px;
 	text-align:right;
 }
@@ -219,8 +219,7 @@ width: 650px;
 	width:75px;
 	height:75px;
 }
-#precioListProd{
-	font-size:20px;
+.precioListProd{
 	color:red;
 	
 }
@@ -232,7 +231,4 @@ width: 650px;
     margin-bottom: 20px;
 }
 
-#imagenProducto{
-width:150px;
-background-color:red;
-}
+

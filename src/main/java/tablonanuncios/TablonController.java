@@ -32,7 +32,6 @@ public class TablonController {
 	@Autowired
 	private ProductRepository repository;
 	
-	
 
 	@RequestMapping("/")
 	public ModelAndView tablon(HttpSession sesion) {
@@ -46,25 +45,37 @@ public class TablonController {
 
 		return mv;
 	}
+	@RequestMapping("/")
+	public ModelAndView tablon(HttpSession sesion, String cat) {
+		ArrayList<Producto> p=(ArrayList<Producto>) repository.findAll();
+		p.get(0).getCategoria();
+		//añadiendo las categorias
+		ModelAndView mv = new ModelAndView("index").addObject("productos",
+				repository.findAll());
 
+		if (sesion.isNew()) {
+			mv.addObject("saludo", "Bienvenido!!");
+		}
+
+		return mv;
+	}
 	@RequestMapping("/insertar")
 	public ModelAndView insertar(Producto producto, HttpSession sesion) {
-
 		repository.save(producto);
-
 		sesion.setAttribute("nombre", producto.getNombre());
-		
 		return new ModelAndView("insertar");
 	}
 
 	@RequestMapping("/producto")
 	public ModelAndView mostrar(@RequestParam long idProducto) {
-
 		Producto producto = repository.findOne(idProducto);
-
 		return new ModelAndView("producto").addObject("producto", producto);
 	}
 	
+	@RequestMapping("/carrito")
+	public ModelAndView anadirCarrito(HttpSession sesion,Producto p){
+		return new ModelAndView("carrito"); 
+	}
 	@RequestMapping("/nuevoAnuncio")
 	public ModelAndView nuevoAnuncio(HttpSession sesion) {
 

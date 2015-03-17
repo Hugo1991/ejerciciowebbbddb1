@@ -15,7 +15,7 @@
     <div id="super">
     <header>
         <h1 id="logo" class="logo" itemscope="" itemtype="http://schema.org/Organization">
-            <a itemprop="url" href="index.html" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
+            <a itemprop="url" href="/" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
 				<img itemprop="logo" src="img/poxmania.png" alt="Poxmania"/>
 			</a>
         </h1>
@@ -95,7 +95,7 @@
 						th:text="|${producto.nombre}|"/>
 					                       </div>
                                            <div id="precioInfo">
-                                                <p id="precioListProd" th:text="|${producto.precio}|+&euro;"/>
+                                                <h2 class="precioListProd" th:text="|${producto.precio}|+&euro;"/>
                                                <a th:href="@{/producto(idProducto=${producto.id})}" > 
                                            			<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
                                                </a>
