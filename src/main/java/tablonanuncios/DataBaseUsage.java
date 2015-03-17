@@ -18,8 +18,8 @@ public class DataBaseUsage implements CommandLineRunner {
 		
 		 // save a couple of customers
         repository.save(new Producto("TV SAMSUNG", "Televisiones","img/tv.jpg","la mejor del mercaso",300.00));
-        repository.save(new Producto("TV SAMSUNG", "Televisiones","URLimage","la mejor del mercaso",300.00));
-        repository.save(new Producto("TV SAMSUNG", "Televisiones","URLimage","la mejor del mercaso",300.00));
+        repository.save(new Producto("TV SAMSUNG", "Radio","URLimage","la mejor del mercaso",300.00));
+        repository.save(new Producto("TV SAMSUNG", "Aspiradora","URLimage","la mejor del mercaso",300.00));
         repository.save(new Producto("TV SAMSUNG", "Televisiones","URLimage","la mejor del mercaso",300.00));
         
         // fetch all customers
