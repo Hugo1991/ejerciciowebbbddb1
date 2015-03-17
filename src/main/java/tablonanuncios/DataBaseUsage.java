@@ -17,10 +17,11 @@ public class DataBaseUsage implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		 // save a couple of customers
-        repository.save(new Producto("TV SAMSUNG", "Televisiones","img/tv.jpg","la mejor del mercaso",300.00));
-        repository.save(new Producto("TV SAMSUNG", "Radio","URLimage","la mejor del mercaso",300.00));
-        repository.save(new Producto("TV SAMSUNG", "Aspiradora","URLimage","la mejor del mercaso",300.00));
-        repository.save(new Producto("TV SAMSUNG", "Televisiones","URLimage","la mejor del mercaso",300.00));
+        repository.save(new Producto("TV SAMSUNG", "Televisiones","img/tv.jpg","la mejor del mercaso asjkdasjkl jklsajkl "
+        		+ "jkasjk dsajk jkas jklasjkl asjkjkadsjkas ",300.00));
+        repository.save(new Producto("Lavadora BALAY", "Lavadoras","img/lavadora.jpg","la mejor del mercaso",300.00));
+        repository.save(new Producto("Portatil HP", "Portatiles","img/portatil.jpg","la mejor del mercaso",300.00));
+        repository.save(new Producto("TV LG", "Televisiones","img/tele.jpg","la mejor del mercaso",300.00));
         
         // fetch all customers
         Iterable<Producto> productos = repository.findAll();

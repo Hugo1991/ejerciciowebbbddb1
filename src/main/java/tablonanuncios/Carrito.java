@@ -34,5 +34,8 @@ public class Carrito {
 		
 		return id;
 	}
+	public Carrito getCarrito(){
+		return this;
+	}
 	
 }

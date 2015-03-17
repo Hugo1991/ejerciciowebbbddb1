@@ -31,7 +31,7 @@ public class TablonController {
 	
 	@Autowired
 	private ProductRepository repository;
-	
+	private Carrito carrito;
 
 	@RequestMapping("/")
 	public ModelAndView tablon(HttpSession sesion) {
@@ -46,21 +46,19 @@ public class TablonController {
 		return mv;
 	}
 	@RequestMapping("/index")
-	public ModelAndView tablon(HttpSession sesion, String cat) {
+	public ModelAndView tablon(HttpSession sesion, String find) {
 		ArrayList<Producto> productos=new ArrayList<Producto>();
 		for(Producto p:repository.findAll())
-			if (p.getCategoria().equals(cat))
+			if (p.getCategoria().contains(find) || p.getNombre().contains(find)||p.getDescripcion().contains(find))
 				productos.add(p);
 		//añadiendo las categorias
-		ModelAndView mv = new ModelAndView("index").addObject("productos",
-				productos);
-
+		ModelAndView mv = new ModelAndView("index").addObject("productos",productos).addObject("categorias",find);
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
 		}
-
 		return mv;
 	}
+
 	@RequestMapping("/insertar")
 	public ModelAndView insertar(Producto producto, HttpSession sesion) {
 		repository.save(producto);
@@ -75,14 +73,13 @@ public class TablonController {
 	}
 	
 	@RequestMapping("/carrito")
-	public ModelAndView anadirCarrito(HttpSession sesion,Producto p){
-		return new ModelAndView("carrito"); 
+	public ModelAndView anadirCarrito(HttpSession sesion,Long id){
+		carrito.getCarrito().addProducto(repository.findOne(id));		
+		return new ModelAndView("carrito").addObject("productos", repository.findAll()).addObject("carrito", carrito.getId()); 
 	}
 	@RequestMapping("/nuevoAnuncio")
 	public ModelAndView nuevoAnuncio(HttpSession sesion) {
-
 		String nombre = (String) sesion.getAttribute("nombre");
-		
 		return new ModelAndView("nuevoAnuncio").addObject("nombre", nombre);
 	}
 	
