@@ -15,20 +15,19 @@
     <div id="super">
     <header>
         <h1 id="logo" class="logo" itemscope="" itemtype="http://schema.org/Organization">
-            <a itemprop="url" href="/templates/principal.html" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
-				<img itemprop="logo" src="../static/img/poxmania.png" alt="Poxmania"/>
+            <a itemprop="url" href="/" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
+				<img itemprop="logo" src="img/poxmania.png" alt="Poxmania"/>
 			</a>
         </h1>
-       <form class="search" id="searchForm" method="POST"  action="">
+       <form class="search" id="searchForm" method="GET"  action="/index">
 	       <fieldset>
 		      <span class="icon-search"></span>
-		      <input class="searchInput" id="search" name="search-field" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
+		      <input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
 		      <input type="hidden" value="keyword_search" name="subaction"/>
-		      <button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
+		      		<button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
 	       </fieldset>
         </form>	
         <div class="toolbar">
-            
             <button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
             <button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button>
             <span class="ico-pedidos"></span>
@@ -83,7 +82,7 @@
                         <div id="informacion">
                             <div class="panel panel-default" id="infor">
                                 <div class="panel-heading" id="titulo">
-                                    <h3>Pequeño electrodomestico</h3>
+                                    <h3><p th:text="|${categorias}|"/></h3>
                                 </div>
                                 <div class="panel-body" id="panel">
                                         <p th:each="producto : ${productos}">
@@ -92,11 +91,13 @@
 					                       <div id="imgProd_nomProd">
 						                      <img th:src="|${producto.imagen}|" id="img_prod"/>
                                                <a th:href="@{/producto(idProducto=${producto.id})}" 
-						th:text="|${producto.nombre}|"/>
+												th:text="|${producto.nombre}|"/>
 					                       </div>
                                            <div id="precioInfo">
-                                                <p id="precioListProd" th:text="|${producto.precio}|+&euro;"/>
-                                                <button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
+                                                <h2 class="precioListProd" th:text="|${producto.precio}|+&euro;"/>
+                                               <a th:href="@{/producto(idProducto=${producto.id})}" > 
+                                           			<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
+                                               </a>
                                            </div>
                                         </div>
                                         </div>
@@ -113,3 +114,4 @@
 </div>
 </body>
 </html>
+

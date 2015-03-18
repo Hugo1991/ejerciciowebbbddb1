@@ -41,11 +41,12 @@ min-width:140px;
 }
 
 * {
-font-family:sans-serif;
+font: serif;
 list-style:none;
 text-decoration:none;
 margin:0;
 padding:0;
+color: black;
 }
 
 #super{
@@ -154,8 +155,6 @@ color:#fff;font-weight:bold;
     height:50px;float:left;
     margin-left:10px;padding-left:10px;padding-right:25px;
     padding-bottom: 0px;
-    background:#bf3288;
-    color:#fff;
 }
 button#micuenta{
     background:#D3D3D3;
@@ -191,44 +190,144 @@ div#contenido{
 #panel{
 border:1px;
 }
-#pro{
-width: 650px;
+#pro,
+#impt_bajo .panel{
+width: 670px;
 }
 
-
+#search_bttn{
+    background:#bf3288;
+    color:#fff; 
+}
 
 .prod_list{
      position:relative;
+    height: 150;
 }
 
 #precioInfo{
 	position: absolute;
-	float:right;
 	top:0px;
-	right:50px;
+	right:40px;
+    height: 40px;
 	text-align:right;
+    margin-top: 30px;
+    margin-bottom: 80px;
+}
+#precioInfo h2{
+margin-top: 0px;
+}
+h2.precioListProd p{
+    font-size: 12px;
+    color: red;
+    width: 60px;
+    height: 35px;
+    padding-top: 10
 }
 #imgProd_nomProd{
 	position absolute;
 	padding-top:20px;
 	padding-left:30px;
-	valign:top;
     padding-bottom: 20px;
 }
 #img_prod{
 	width:75px;
-	height:75px;
-}
-.precioListProd{
-	color:red;
-	
+	height:80px;
 }
 #precioInfo button{
-    height:45px;float:left;
+    height:45px;
+    float:left;
     padding-left:6px;padding-right:5px;
     background:#bf3288;
     color:#fff;
     margin-bottom: 20px;
 }
+#hpedido{
+    position: absolute;
+    height: 220;
+    width: 250px;
+}
+div #cesta{
+color:black;
+    font-weight: normal;
+}
 
+#hacer_pedido{
+    position: absolute;
+    height: 220;
+    margin-top: -208px;
+    width: 250px;
+    margin-left: 680;
+}
+#hacer_pedido button{
+    position: absolute;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: 40px;
+    width: 210px;
+    right: 20px;;
+    top:20px;
+
+}
+
+#hacer_pedido h2.precioListProd p{
+    margin-top: 45px;
+}
+
+#imp_iqz{
+    position: absolute;
+    color: black;
+    top: 80px;
+    width: 70;
+    left: 30
+}
+
+#impt_bajo{
+    position: relative;
+    height: 60px;
+    width: 670px;
+}
+
+#impt_bajo h2.precioListProd p{
+margin-top: -18px;
+}
+
+
+div #imgProd_nomProd img{
+    height: 60px;
+    width: 60px;
+}
+
+#datos_compra{
+    position: relative;
+    width: 670px;
+    height: 60px;
+
+}
+#impt_bajo div > p{
+    padding-top: 20;
+    padding-left: 40px;
+    
+}
+
+.cantidad{
+    position: relative;
+    margin-left: 140px;
+    width: 230;
+}
+.cantidad textarea{
+    width:100px;
+    height:21px;
+    border: 1px solid #ccc;
+    resize:none;
+    overflow: hidden;
+}
+.cantidad .eliminar{
+    color:#bf3288;
+    background-color: inherit;
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: -6;
+    font-size: 13px;
+}
 
