@@ -73,9 +73,9 @@
                                              <div  class="panel panel-default" id="pro">
 				                        <div class="prod_list">
 					                       <div id="imgProd_nomProd">
-						                      <img th:src="|${producto.imagen}|" id="img_prod"/>
-                                               <a th:href="@{/producto(idProducto=${producto.id})}" 
-												th:text="|${producto.nombre}|"/>
+						                      <img th:src="|${producto.getImagen()}|" id="img_prod"/>
+                                               <a th:href="@{/producto(idProducto=${producto.getId()})}" 
+												th:text="|${producto.getNombre()}|"/>
 					                       </div>
                                             <div class="cantidad">
                                                 <form>
@@ -84,13 +84,13 @@
                                                     <button>Actualizar cantidad</button>
                                                 </form>
                                                 <form action="/eliminarCarrito" method="GET">
-                                                	<input th:value="${producto.id}" type="hidden" th:name="idProducto"/>
+                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
                                                 	<button class="eliminar" type="submit">x Eliminar</button>
                                                 </form>
                                             </div>
                                                  
                                            <div id="precioInfo">
-                                            <h2 class="precioListProd" th:text="|${producto.precio}|+&euro;">
+                                            <h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;">
                                                 <p>iva incluido </p>
                                             </h2>
 
@@ -104,7 +104,7 @@
 					                   <div id="imp_iqz">
                                             <p><b>Importe total:</b>(gastos de envío incluidos)</p>
 					                   </div>
-                                        <a th:href="@{/producto(idProducto=${producto.id})}" > 
+                                        <a th:href="@{/creaPedido(idProducto=${producto.getId()})}" > 
                                             <button id="search_bttn" class="button btn btnBold" type="submit">Hacer mi pedido</button>
                                         </a>
                                         <div id="precioInfo">
