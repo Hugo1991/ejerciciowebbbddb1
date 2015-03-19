@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="panel-body" id="panel">
                                 	<!--<div th:if="${carrito.contador(producto)<=1}">-->
-                                        <p th:each="producto : ${carrito.getCarrito()}">
+                                        <div th:each="producto : ${carrito.getCarrito()}">
                                              <div  class="panel panel-default" id="pro">
 				                        <div class="prod_list">
 					                       <div id="imgProd_nomProd">
@@ -88,16 +88,15 @@
                                                 	<button class="eliminar" type="submit">x Eliminar</button>
                                                 </form>
                                             </div>
-                                                 
-                                           <div id="precioInfo">
-                                            <h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;">
-                                                <p>iva incluido </p>
-                                            </h2>
-
+                                            <div id="precioInfo">
+                                                <span class="precioListProd">
+							                         <ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+                                                    <span>iva incluido</span>
+								                </span>
                                            </div>
                                         </div>
                                         </div>
-                                        </p>
+                                        </div>
 
                                 <div id="hacer_pedido">
                                     <div class="panel panel-default" id="hpedido">
@@ -108,9 +107,10 @@
                                             <button id="search_bttn" class="button btn btnBold" type="submit">Hacer mi pedido</button>
                                         </a>
                                         <div id="precioInfo">
-                                            <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
-                                                <p>iva incluido </p>
-                                            </h2>   
+                                            <span class="precioListProd">
+							                     <ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+                                                 <span>iva incluido</span>
+								            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -118,14 +118,13 @@
                                         <div class="panel panel-default" >
                                             <div id="datos_compra">
                                                 <p><b>Importe total:</b>(gastos de envío incluidos)</p>
-                                                <div id="precioInfo">
-                                                    <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
-                                                        <p>iva incluido </p>
-                                                    </h2>
+                                           <div id="precioInfo">
+                                            <span class="precioListProd">
+							                     <ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+							                     <span>iva incluido</span>
+								            </span>
+                                           </div>
 
-                                                </div>
-                                            
-                                            
                                             </div>
                                         </div>
                                     </div>
@@ -141,3 +140,4 @@
 </div>
 </body>
 </html>
+

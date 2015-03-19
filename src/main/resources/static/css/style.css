@@ -205,27 +205,28 @@ width: 670px;
     height: 150;
 }
 
-#precioInfo{
-	position: absolute;
-	top:0px;
+#precioInfo  {
+    position: absolute;
+	top:30px;
 	right:40px;
-    height: 40px;
-	text-align:right;
-    margin-top: 30px;
-    margin-bottom: 80px;
+    width: 140px; 
+    text-align: right;
 }
-#precioInfo h2{
-margin-top: 0px;
-}
-h2.precioListProd p{
-    font-size: 12px;
+#precioInfo  ins{
     color: red;
-    width: 60px;
-    height: 35px;
-    padding-top: 10
+    font-size: 1.35em;
+}
+#precioInfo  span{
+    color: red;
+    font-size: 0.9em;
+}
+#hacer_pedido #precioInfo{
+    margin-top: 50px;
+    width: 70px;
+    right: 30px;
 }
 #imgProd_nomProd{
-	position absolute;
+	position: absolute;
 	padding-top:20px;
 	padding-left:30px;
     padding-bottom: 20px;
@@ -243,7 +244,7 @@ h2.precioListProd p{
     margin-bottom: 20px;
 }
 #hpedido{
-    position: absolute;
+    position: fixed;
     height: 220;
     width: 250px;
 }
@@ -253,11 +254,11 @@ color:black;
 }
 
 #hacer_pedido{
-    position: absolute;
+    position: fixed;
     height: 220;
-    margin-top: -172px;
+    top:231;
     width: 250px;
-    margin-left: 680;
+    margin-left: 700;
 }
 #hacer_pedido button{
     position: absolute;
@@ -304,16 +305,17 @@ div #imgProd_nomProd img{
     height: 60px;
 
 }
-#impt_bajo div > p{
+#impt_bajo div > p:first-child{
     padding-top: 20;
-    padding-left: 40px;
-    
+    padding-left: 40px;    
 }
 
 .cantidad{
-    position: relative;
+    position: absolute;
     margin-left: 140px;
-    width: 230;
+    height: 60;
+    width: 230px;
+    margin-top: 90px;
 }
 .cantidad textarea{
     width:100px;
@@ -330,4 +332,3 @@ div #imgProd_nomProd img{
     margin-top: -6;
     font-size: 13px;
 }
-

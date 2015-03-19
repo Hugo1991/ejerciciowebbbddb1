@@ -19,57 +19,40 @@
 				<img itemprop="logo" src="img/poxmania.png" alt="Poxmania"/>
 			</a>
         </h1>
-       <form class="search" id="searchForm" method="GET"  action="/index">
+       <form class="search" id="searchForm" method="POST"  action="/index">
 	       <fieldset>
 		      <span class="icon-search"></span>
 		      <input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
 		      <input type="hidden" value="keyword_search" name="subaction"/>
-		      		<button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
+		      <button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
 	       </fieldset>
         </form>	
         <div class="toolbar">
+            
             <button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
-            <button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button>
+            <a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
             <span class="ico-pedidos"></span>
         </div>
     </header>
     <div id="seleccion">
         <ul class="nav">
-            <li><a href="">Home</a></li>
-            <li><a href="">Hogar</a>
+            <li><a href="/">Home</a></li>
+            <li><a href="/index?find=TV">TV/Video</a>
                 <ul>
-                    <li><a href="">jhj</a></li>
-                    <li><a href="">Diseno web</a>
-                        <ul>
-                            <li><a href="">Submenu 1</a></li>
-                            <li><a href="">Submenu 2</a></li>
-                            <li><a href="">Submenu 3</a></li>
-                            <li><a href="">Submenu 4</a></li>
-                            <li><a href="">Submenu 5</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">Marketing</a>
-                        <ul>
-                            <li><a href="">Submenu 1</a></li>
-                            <li><a href="">Submenu 2</a></li>
-                            <li><a href="">Submenu 3</a>
-                                <ul>
-                                    <li><a href="">Submenu 1</a></li>
-                                    <li><a href="">Submenu 2</a></li>
-                                    <li><a href="">Submenu 3</a></li>
-                                    <li><a href="">Submenu 4</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="">SEO</a></li>
+                    <li><a href="/index?find=Televisiones">Televisiones</a></li>
+                    <li><a href="/index?find=Reproductores DVD">Reproductores DVD</a></li>
                 </ul>
             </li>
-            <li><a href="">Pequeños electrodomesticos</a>
+            <li><a href="/index?find=Informatica">Informatica</a>
                 <ul>
-                    <li><a href="">Historia</a></li>
-                    <li><a href="">Mision</a></li>
-                    <li><a href="">Vision</a></li>
+                	<li><a href="/index?find=Portatiles">Portatiles</a></li>
+                    <li><a href="/index?find=Sobremesas">Sobremesas</a></li>
+                </ul>
+            </li>
+            <li><a href="/index?find=Grandes Electrodomesticos">Grandes Electrodomesticos</a>
+                <ul>
+                    <li><a href="/index?find=Lavadoras">Lavadoras</a></li>
+					<li><a href="/index?find=Neveras">Neveras</a></li>
                 </ul>
             </li>
         </ul>
@@ -82,35 +65,80 @@
                         <div id="informacion">
                             <div class="panel panel-default" id="infor">
                                 <div class="panel-heading" id="titulo">
-                                    <h3><p th:text="|${categorias}|"/></h3>
+                                    <h3 id="cesta">Mi Cesta</h3>
                                 </div>
                                 <div class="panel-body" id="panel">
-                                        <p th:each="producto : ${productos}">
-                                             <div class="panel panel-default" id="pro">
+                                	<!--<div th:if="${carrito.contador(producto)<=1}">-->
+                                        <div th:each="producto : ${carrito.getCarrito()}">
+                                             <div  class="panel panel-default" id="pro">
 				                        <div class="prod_list">
 					                       <div id="imgProd_nomProd">
-						                      <img th:src="|${producto.imagen}|" id="img_prod"/>
-                                               <a th:href="@{/producto(idProducto=${producto.id})}" 
-												th:text="|${producto.nombre}|"/>
+						                      <img th:src="|${producto.getImagen()}|" id="img_prod"/>
+                                               <a th:href="@{/producto(idProducto=${producto.getId()})}" 
+												th:text="|${producto.getNombre()}|"/>
 					                       </div>
+                                            <div class="cantidad">
+                                                <form>
+                                                    <textarea type="text" class="estilotextarea" readonly="true"></textarea>
+                                                
+                                                    <button>Actualizar cantidad</button>
+                                                </form>
+                                                <form action="/eliminarCarrito" method="GET">
+                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
+                                                	<button class="eliminar" type="submit">x Eliminar</button>
+                                                </form>
+                                            </div>
+                                                 
                                            <div id="precioInfo">
-                                                <h2 class="precioListProd" th:text="|${producto.precio}|+&euro;"/>
-                                               <a th:href="@{/producto(idProducto=${producto.id})}" > 
-                                           			<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
-                                               </a>
+                                            <h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;">
+                                                <p>iva incluido </p>
+                                            </h2>
+
                                            </div>
                                         </div>
                                         </div>
-                                        </p>
-                                   
-                                </div>
+                                        </div>
+
+                                
+                                <div id="impt_bajo">
+                                        <div class="panel panel-default" >
+                                            <div id="datos_compra">
+                                                <p><b>Importe total:</b>(gastos de envío incluidos)</p>
+                                                <div id="precioInfo">
+                                                    <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
+                                                        <p>iva incluido </p>
+                                                    </h2>
+
+                                                </div>
+                                            
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
+                                <div id="hacer_pedido">
+                                    <div class="panel panel-default" id="hpedido">
+					                   <div id="imp_iqz">
+                                            <p><b>Importe total:</b>(gastos de envío incluidos)</p>
+					                   </div>
+                                        <a th:href="@{/creaPedido(idProducto=${producto.getId()})}" > 
+                                            <button id="search_bttn" class="button btn btnBold" type="submit">Hacer mi pedido</button>
+                                        </a>
+                                        <div id="precioInfo">
+                                            <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
+                                                <p>iva incluido </p>
+                                            </h2>   
+                                        </div>
+                                    </div>
+                                </div>
                         </div>  
                     </div> 
                 
                     <footer></footer>
                 </div>
+                
     </div>
+</div>
 </div>
 </body>
 </html>
