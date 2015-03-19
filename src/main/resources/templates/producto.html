@@ -95,7 +95,7 @@
                                    		<p th:text="|${producto.getDescripcion()}|" />
                                    </div>
                                    <div class="anadirCarrito panel panel-default">
-                                   		<a th:href="@{/carrito(idProducto=${producto.id})}">
+                                   		<a th:href="@{/addCarrito(idProducto=${producto.id})}">
                                    			<button id="search_bttn" class="button btn btnBold" type="submit">a&ntilde;adir al carrito</button>
                                    		</a>
                                    </div>

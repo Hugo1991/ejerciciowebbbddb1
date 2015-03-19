@@ -6,16 +6,13 @@ import javax.servlet.http.HttpSession;
 
 public class Carrito {
 	private long id;
-	private ArrayList<Producto> productos;
-	public Carrito(Producto p){
-		addProducto(p);
-		
-	}
+	private ArrayList<Producto> productos=new ArrayList<Producto>();
+
 	public void addProducto(Producto p){
 		productos.add(p);
 	}
 	public void removeProducto(Producto p){
-		productos.remove(productos.equals(p));
+		productos.remove(p);
 	}
 	public int CalcularCantidadProducto(Producto p){
 		int cont=0;
@@ -34,8 +31,8 @@ public class Carrito {
 		
 		return id;
 	}
-	public Carrito getCarrito(){
-		return this;
+	public ArrayList<Producto> getCarrito(){
+		return productos;
 	}
 	
 }
