@@ -12,7 +12,15 @@ public class Carrito {
 		productos.add(p);
 	}
 	public void removeProducto(Producto p){
-		productos.remove(p);
+		System.out.println(p.toString());
+		for(Producto pr:productos){
+			System.out.println(pr.toString());
+			if(pr.getId()==(p.getId())){
+				productos.remove(pr);
+				
+				break;
+			}
+			}
 	}
 	public int CalcularCantidadProducto(Producto p){
 		int cont=0;

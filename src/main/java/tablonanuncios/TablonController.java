@@ -75,7 +75,6 @@ public class TablonController {
 	@RequestMapping("/addCarrito")
 	public ModelAndView anadirCarrito(HttpSession sesion,Long idProducto){
 		Producto producto = repository.findOne(idProducto);
-		
 		carrito.addProducto(producto);		
 		return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito", carrito); 
 	}
@@ -88,6 +87,7 @@ public class TablonController {
 		Producto producto = repository.findOne(idProducto);		
 		carrito.removeProducto(producto);
 		return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto",producto); 
+		
 	}
 	
 	@RequestMapping("/nuevoAnuncio")
