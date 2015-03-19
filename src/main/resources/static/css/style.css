@@ -332,3 +332,40 @@ div #imgProd_nomProd img{
     margin-top: -6;
     font-size: 13px;
 }
+#mostrar{
+    border: 0;
+    width: 500px;
+    margin-left: 190px;
+    margin-top: 20px;
+}
+#busqueda_iz{
+    width: 180px;
+    height: 500px;
+}
+#busqueda_iz .container-fluid{
+    padding: 0;
+    position: absolute;
+}
+#busqueda_iz .panel-info{
+    width:180px;
+    background: #B0B0B0;
+    padding-left: 0;
+}
+#busqueda_iz .panel-heading,
+#busqueda_iz li{
+    width: 178px;
+    margin: 0px;
+}
+#busqueda_iz a{
+   border:0;
+    background: #B0B0B0;
+}
+div .cesta{
+    position: fixed;
+    margin-top: -12px;
+}
+div .cesta button#search_bttn{
+    color: #000;
+    background: #CFE527;
+}
+

@@ -65,72 +65,66 @@
                         <div id="informacion">
                             <div class="panel panel-default" id="infor">
                                 <div class="panel-heading" id="titulo">
-                                    <h3 id="cesta">Mi Cesta</h3>
+                                    <h3><p th:text="|${producto.getNombre()}|"/></h3>
                                 </div>
                                 <div class="panel-body" id="panel">
+                                    <div id="busqueda_iz">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                            <div class="col-xs-12 col-sm-3">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">categorias</div>
+                                                    <ul id="categories-menu" class="nav nav-pills nav-stacked">
+                                                        <li id="cid-1"><a href="automotive-vehicles">Automotive Vehicles</a></li>
+                                                        <li id="cid-8"><a href="business-to-business">Business-to-Business</a></li>
+                                                        <li id="cid-10"><a href="community">Community</a></li>
+                                                        <li id="cid-2"><a href="electronics">fdgdgf</a></li>
+                                                        <li id="cid-11"><a href="events">fdsgfgdf</a></li>
+                                                    </ul>
+                                                    <div class="panel-heading">otra cosa</div>
+                                                    <ul id="categories-menu" class="nav nav-pills nav-stacked">
+                                                        <li id="cid-1"><a href="automotive-vehicles">fghgff</a></li>
+                                                        <li id="cid-8"><a href="business-to-business">dgfdgfdg</a></li>
+                                                        <li id="cid-10"><a href="community">Community</a></li>
+                                                        <li id="cid-2"><a href="electronics">fdgdgf</a></li>
+                                                    </ul> 
+                                                </div>
+
+                                            </div>           
+                                            </div>                                        
+                                        
+                                        
+                                    </div>
+
                                 	<!--<div th:if="${carrito.contador(producto)<=1}">-->
                                         <div th:each="producto : ${carrito.getCarrito()}">
-                                             <div  class="panel panel-default" id="pro">
+                                             <div  class="panel panel-default" id="mostrar">
 				                        <div class="prod_list">
 					                       <div id="imgProd_nomProd">
 						                      <img th:src="|${producto.getImagen()}|" id="img_prod"/>
                                                <a th:href="@{/producto(idProducto=${producto.getId()})}" 
 												th:text="|${producto.getNombre()}|"/>
 					                       </div>
-                                            <div class="cantidad">
-                                                <form>
-                                                    <textarea type="text" class="estilotextarea" readonly="true"></textarea>
-                                                
-                                                    <button>Actualizar cantidad</button>
-                                                </form>
-                                                <form action="/eliminarCarrito" method="GET">
-                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
-                                                	<button class="eliminar" type="submit">x Eliminar</button>
-                                                </form>
-                                            </div>
-                                                 
-                                           <div id="precioInfo">
-                                            <h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;">
-                                                <p>iva incluido </p>
-                                            </h2>
 
+                                            <div id="precioInfo">
+                                                <span class="precioListProd">
+							                         <ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+                                                    <span>iva incluido</span>
+								                </span>
                                            </div>
                                         </div>
                                         </div>
                                         </div>
 
-                                
-                                <div id="impt_bajo">
-                                        <div class="panel panel-default" >
-                                            <div id="datos_compra">
-                                                <p><b>Importe total:</b>(gastos de envío incluidos)</p>
-                                                <div id="precioInfo">
-                                                    <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
-                                                        <p>iva incluido </p>
-                                                    </h2>
-
-                                                </div>
-                                            
-                                            
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                                <div id="hacer_pedido">
+                                <div id="hacer_pedido" class="cesta">
                                     <div class="panel panel-default" id="hpedido">
-					                   <div id="imp_iqz">
-                                            <p><b>Importe total:</b>(gastos de envío incluidos)</p>
-					                   </div>
-                                        <a th:href="@{/creaPedido(idProducto=${producto.getId()})}" > 
-                                            <button id="search_bttn" class="button btn btnBold" type="submit">Hacer mi pedido</button>
+
+                                        <a th:href="@{/addCarrito(idProducto=${producto.getId()})}" > 
+                                            <button id="search_bttn" class="button btn btnBold" type="submit">A&ntilde;adir al carrito</button>
                                         </a>
-                                        <div id="precioInfo">
-                                            <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
-                                                <p>iva incluido </p>
-                                            </h2>   
-                                        </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>  
                     </div> 
                 
@@ -142,4 +136,3 @@
 </div>
 </body>
 </html>
-
