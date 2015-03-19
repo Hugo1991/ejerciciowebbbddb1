@@ -30,7 +30,7 @@
         <div class="toolbar">
             
             <button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
-            <button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button>
+            <a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
             <span class="ico-pedidos"></span>
         </div>
     </header>
@@ -68,8 +68,8 @@
                                     <h3 id="cesta">Mi Cesta</h3>
                                 </div>
                                 <div class="panel-body" id="panel">
+                                	<!--<div th:if="${carrito.contador(producto)<=1}">-->
                                         <p th:each="producto : ${carrito.getCarrito()}">
-                                        	<!--th:if="carrito.contador(producto)<=1"-->
                                              <div  class="panel panel-default" id="pro">
 				                        <div class="prod_list">
 					                       <div id="imgProd_nomProd">
@@ -98,6 +98,7 @@
                                         </div>
                                         </div>
                                         </p>
+
                                 <div id="hacer_pedido">
                                     <div class="panel panel-default" id="hpedido">
 					                   <div id="imp_iqz">

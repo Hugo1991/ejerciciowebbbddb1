@@ -32,7 +32,7 @@ public class TablonController {
 	@Autowired
 	private ProductRepository repository;
 	private Carrito carrito=new Carrito();
-
+	private Producto producto=new Producto();
 	@RequestMapping("/")
 	public ModelAndView tablon(HttpSession sesion) {
 
@@ -55,6 +55,7 @@ public class TablonController {
 		ModelAndView mv = new ModelAndView("index").addObject("productos",productos).addObject("categorias",find);
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
+			mv.addObject(carrito);
 		}
 		return mv;
 	}
@@ -74,18 +75,18 @@ public class TablonController {
 	
 	@RequestMapping("/addCarrito")
 	public ModelAndView anadirCarrito(HttpSession sesion,Long idProducto){
-		Producto producto = repository.findOne(idProducto);
+		producto = repository.findOne(idProducto);
 		carrito.addProducto(producto);
 		mostrarCarrito(sesion);
 		return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito", carrito); 
 	}
 	@RequestMapping("/mostrarCarrito")
 	public ModelAndView mostrarCarrito(HttpSession sesion){
-			return new ModelAndView("carrito").addObject("carrito", carrito); 
+			return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto", producto);
 	}
 	@RequestMapping("/eliminarCarrito")
 	public ModelAndView eliminarCarrito(HttpSession sesion, Long idProducto){
-		Producto producto = repository.findOne(idProducto);		
+		producto = repository.findOne(idProducto);		
 		carrito.removeProducto(producto);
 		return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto",producto); 
 		
