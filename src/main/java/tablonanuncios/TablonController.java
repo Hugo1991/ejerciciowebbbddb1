@@ -75,7 +75,8 @@ public class TablonController {
 	@RequestMapping("/addCarrito")
 	public ModelAndView anadirCarrito(HttpSession sesion,Long idProducto){
 		Producto producto = repository.findOne(idProducto);
-		carrito.addProducto(producto);		
+		carrito.addProducto(producto);
+		mostrarCarrito(sesion);
 		return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito", carrito); 
 	}
 	@RequestMapping("/mostrarCarrito")

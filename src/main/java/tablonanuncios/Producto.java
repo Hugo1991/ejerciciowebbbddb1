@@ -21,7 +21,6 @@ public class Producto {
 	protected Producto() {
 		// Used by SpringData
 	}
-
 	public Producto(String nombre, String categoria,String imagen,String descripcion,Double precio) {
 		setNombre(nombre);
 		setCategoria(categoria);
@@ -29,37 +28,27 @@ public class Producto {
 		setDescription(descripcion);
 		setPrecio(precio);
 	}
-
 	public String getNombre() {
 		return nombre;
 	}
-
 	public String getCategoria() {
 		return categoria;
 	}
 	public String getImagen() {
 		return imagen;
 	}
-
 	public String getDescripcion() {
 		return descripcion;
 	}
 	public Double getPrecio() {
 		return precio;
 	}
-
-	
-
 	@Override
 	public String toString() {
 		return String.format("Producto[id=%d, Name='%s', Categorie='%s',Image='%s',"
 				+ " Description='%s', Prize='%s']",
 				id, nombre, categoria,imagen,descripcion,precio);
 	}
-
-
-	
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -67,20 +56,19 @@ public class Producto {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
 	public void setDescription(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 	public void setPrecio(Double precio) {
 		this.precio =precio;
 	}
-	
 	public long getId() {
 		return id;
 	}
-
+	public boolean iguales(Producto p1,Producto p2){
+		return (p1==p2);
+	}
 }

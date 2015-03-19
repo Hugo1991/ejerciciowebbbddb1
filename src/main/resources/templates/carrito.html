@@ -69,7 +69,8 @@
                                 </div>
                                 <div class="panel-body" id="panel">
                                         <p th:each="producto : ${carrito.getCarrito()}">
-                                             <div class="panel panel-default" id="pro">
+                                        	<!--th:if="carrito.contador(producto)<=1"-->
+                                             <div  class="panel panel-default" id="pro">
 				                        <div class="prod_list">
 					                       <div id="imgProd_nomProd">
 						                      <img th:src="|${producto.imagen}|" id="img_prod"/>
@@ -106,7 +107,7 @@
                                             <button id="search_bttn" class="button btn btnBold" type="submit">Hacer mi pedido</button>
                                         </a>
                                         <div id="precioInfo">
-                                            <h2 class="precioListProd" th:text="|${producto.precio}|+&euro;">
+                                            <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
                                                 <p>iva incluido </p>
                                             </h2>   
                                         </div>
@@ -117,7 +118,7 @@
                                             <div id="datos_compra">
                                                 <p><b>Importe total:</b>(gastos de envío incluidos)</p>
                                                 <div id="precioInfo">
-                                                    <h2 class="precioListProd" th:text="|${producto.precio}|+&euro;">
+                                                    <h2 class="precioListProd" th:text="|${carrito.getPrecioFinal()}|+&euro;">
                                                         <p>iva incluido </p>
                                                     </h2>
 
