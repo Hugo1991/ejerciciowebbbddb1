@@ -260,7 +260,8 @@ color:black;
     width: 250px;
     margin-left: 700;
 }
-#hacer_pedido button{
+#hacer_pedido button,
+#enviar_cesta button#search_bttn{
     position: absolute;
     padding-left: 40px;
     padding-right: 40px;
@@ -360,12 +361,17 @@ div #imgProd_nomProd img{
    border:0;
     background: #B0B0B0;
 }
-div .cesta{
-    position: fixed;
-    margin-top: -12px;
+#enviar_cesta {
+    position: static;
+    margin-top: -500px;
+    margin-left: 700;
 }
-div .cesta button#search_bttn{
+#enviar_cesta > #hpedido{ 
+position:static;
+}
+div #enviar_cesta button#search_bttn{
     color: #000;
     background: #CFE527;
 }
+
 

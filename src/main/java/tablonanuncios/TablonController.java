@@ -34,7 +34,7 @@ public class TablonController {
 	private ProductRepository repository;
 	private Carrito carrito=new Carrito();
 	private Producto producto=new Producto();
-	
+	private Pedido pedido;
 	
 	@RequestMapping("/")
 	public ModelAndView tablon(HttpSession sesion) {
@@ -106,17 +106,23 @@ public class TablonController {
 	}
 	
 	//METODOS DE PEDIDO
-	@RequestMapping(value="crearPedido",method=RequestMethod.POST)
+	@RequestMapping(value="/crearPedido",method=RequestMethod.POST)
 	public ModelAndView crearPedido(HttpSession sesion, @ModelAttribute(value="carrito") Carrito carrito){
-		return new ModelAndView("formularioCompra").addObject("carrito", carrito); 
+		pedido=new Pedido();
+		pedido.setCarrito(carrito);
+		Usuario usuario=new Usuario();
+		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject("Usuario", usuario); 
 		
 	}
 	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
-	public ModelAndView confirmarPedido(HttpSession sesion, @ModelAttribute(value="nombreUsuario") String nombre,@ModelAttribute(value="apellidosUsuario") String apellidos,@ModelAttribute (value="carrito")Carrito carrito){
-		Usuario usuario =new Usuario(nombre,apellidos);
-		Pedido pedido=new Pedido(usuario,carrito);
+	//,@ModelAttribute(value="apellidosUsuario") String apellidos,@ModelAttribute (value="carrito")Carrito carrito
+	public ModelAndView confirmarPedido(HttpSession sesion, @ModelAttribute(value="Usuario") Usuario usuario){
+		//Usuario usuario =new Usuario(nombre,"perez");
+		
+		pedido.setUsuario(usuario);
 		carrito.VaciarCesta();
-		return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto",producto); 
+		System.out.println("pedido confirmado");
+		return new ModelAndView("/"); 
 		
 	}
 		
