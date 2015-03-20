@@ -50,7 +50,7 @@ color: black;
 }
 
 #super{
-      background-image: url("img/linea-banner.PNG");
+      background-image: url("../img/linea-banner.PNG");
         background-repeat: repeat-x;
 }
 
@@ -262,13 +262,14 @@ color:black;
 }
 #hacer_pedido button,
 #enviar_cesta button#search_bttn{
-    position: absolute;
+    position: static;
     padding-left: 40px;
     padding-right: 40px;
     height: 40px;
     width: 210px;
-    right: 20px;;
-    top:20px;
+    margin-left: 20px;
+    margin-top: 20px;
+
 
 }
 
@@ -325,7 +326,8 @@ div #imgProd_nomProd img{
     resize:none;
     overflow: hidden;
 }
-.cantidad .eliminar{
+.cantidad .eliminar,
+#admin-bor button{
     color:#bf3288;
     background-color: inherit;
     border: 0;
@@ -373,5 +375,42 @@ div #enviar_cesta button#search_bttn{
     color: #000;
     background: #CFE527;
 }
+#subir-imagen .container{
+    position: relative;
+    width: 500px;
+}
+.form-control.file-caption{
+    width: 250px;
+}
+#subir-imagen button.btn.btn-default{
+    width: 90px;
+}
 
+#subir-imagen .btn.btn-primary.btn-file{
+    width: 100px;
+    background: #bf3288;
+    color:#fff;
+ 
+}
+.catalogo .close{
 
+}
+
+.controls{
+    position: relative;
+    top: -44px;
+    margin-left: 100
+}
+
+.control-label{
+    position: static;
+    margin-bottom: 20px;
+}
+#subir-imagen .file-preview{
+    height: 200px;
+    width: 250
+}
+#admin-bor .eliminar{
+    margin-left: 90%;
+    margin-top: 5px;
+}

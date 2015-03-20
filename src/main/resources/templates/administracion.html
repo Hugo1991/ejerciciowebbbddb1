@@ -1,26 +1,143 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
+<html>
+<head>  
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/fileinput.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<div id="pagina">
+    <div id="super">
+    	<header>
+        	<h1 id="logo" class="logo" itemscope="" itemtype="http://schema.org/Organization">
+            	<a itemprop="url" href="/" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
+					<img itemprop="logo" src="img/poxmania.png" alt="Poxmania"/>
+				</a>
+        	</h1>
+       		<form class="search" id="searchForm" method="GET"  action="/index">
+	       		<fieldset>
+		      		<span class="icon-search"></span>
+		      		<input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
+		      		<input type="hidden" value="keyword_search" name="subaction"/>
+		      		<button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
+	       		</fieldset>
+        	</form>	
+        	<div class="toolbar">
+            	<button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
+            	<a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
+            	<span class="ico-pedidos"></span>
+        	</div>
+    	</header>
+    	<div id="seleccion">
+        	<ul class="nav">
+        	    <li><a href="/">Home</a></li>
+            	<li><a href="/index?find=TV">TV/Video</a>
+           			<ul>
+                    	<li><a href="/index?find=Televisiones">Televisiones</a></li>
+                    	<li><a href="/index?find=Reproductores DVD">Reproductores DVD</a></li>
+                	</ul>
+            	</li>
+            	<li><a href="/index?find=Informatica">Informatica</a>
+                	<ul>
+                		<li><a href="/index?find=Portatiles">Portatiles</a></li>
+                    	<li><a href="/index?find=Sobremesas">Sobremesas</a></li>
+                	</ul>
+            	</li>
+            	<li><a href="/index?find=Grandes Electrodomesticos">Grandes Electrodomesticos</a>
+                	<ul>
+                    	<li><a href="/index?find=Lavadoras">Lavadoras</a></li>
+						<li><a href="/index?find=Neveras">Neveras</a></li>
+                	</ul>
+            	</li>
+        	</ul>
+    	</div>
+    </div>
+    <div id="cuerpo">      
+    <!--Ignacio de lucas & Hugo Fernandez Visier-->
+		<div class="panel panel-default" id="contenido">            
+        	<div class="container-fluid">
+        		<div id="informacion">
+        			<div class="panel panel-default" id="infor">
+        				<div class="panel-heading" id="titulo">
+        					<h3><p th:text="|${categorias}|"/></h3>
+        				</div>
+        				<div class="panel-body" id="panel">
+                            <div id="catalogo">
+        					<p th:each="producto : ${productos}">
+        							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
+										<div class="prod_list">
+											<div id="imgProd_nomProd">
+												<img th:src="|${producto.getImagen()}|" id="img_prod"/>
+        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" th:text="|${producto.getNombre()}|"/>
+											</div>
+        									<div id="precioInfo">
+        										<h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/>
+        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" > 
+        											<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
+        										</a>
+        									</div>         
+                                                <form id="admin-bor" action="/eliminarCarrito" method="GET">
+                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
+                                                	<button class="eliminar" type="submit">Eliminar x</button>
+                                                </form>
+										</div>
+									</div>
+        						
+							</p>
+                        </div>
+                        <div id="subir-imagen">
+                            <div class="container">      
+                                <form enctype="multipart/form-data">
+                                   <fieldset>
 
-	<h1>Nuevo Producto</h1>
+                                        <!-- Form Name -->
+                                        <legend>Nuevo producto</legend>
 
-	<form action="/insertar" method="post">
-		<p>
-			<b>Nombre:</b> <input type='text' th:value="${nombre}" name='nombre' />
-		</p>
+                                        <!-- Text input-->
+                                        <div class="control-group">
+                                          <label class="control-label" for="textinput">Modelo</label>
+                                          <div class="controls">
+                                            <input id="textinput" name="textinput" type="text" placeholder="Modelo" class="input-medium" required="">
 
-		<p>
-			<b>Asunto:</b> <input type='text' name='asunto' />
-		</p>
+                                          </div>
+                                        </div>
 
-		<p>
-			<b>Comentario:</b><br />
-			<textarea name='comentario' rows='5' cols='40'></textarea>
-		</p>
+                                        <!-- Text input-->
+                                        <div class="control-group">
+                                          <label class="control-label" for="precio">Precio</label>
+                                          <div class="controls">
+                                            <input id="precio" name="precio" type="text" placeholder="Precio" class="input-medium">
 
-		<input type='submit' name='enviar' value='Enviar' />
-	</form>
+                                          </div>
+                                        </div>
+
+                                        <!-- Textarea -->
+                                        <div class="control-group">
+                                          <label class="control-label" for="Descripcion">Descripción</label>
+                                          <div class="controls">                     
+                                            <textarea id="Descripcion" name="Descripcion"></textarea>
+                                          </div>
+                                        </div>
+
+                                        
+                                    <div class="form-group">
+                                        <input id="file-1" type="file" class="file" multiple=true data-preview-file-type="any">
+                                    </div>
+                                       </fieldset>
+                                </form>
+                            </div>
+                        </div>    
+                        
+        				</div>
+        			</div>
+        		</div>  
+        	</div> 
+			<footer></footer>
+		</div>
+	</div>
+</div>
 </body>
 </html>
