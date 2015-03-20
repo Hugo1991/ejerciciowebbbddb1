@@ -16,6 +16,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -105,9 +106,16 @@ public class TablonController {
 	}
 	
 	//METODOS DE PEDIDO
-	@RequestMapping("/anadirPedido")
-	public ModelAndView anadirPedido(HttpSession sesion, Pedido pedido){
-		carrito.removeProducto(producto);
+	@RequestMapping(value="crearPedido",method=RequestMethod.POST)
+	public ModelAndView crearPedido(HttpSession sesion, @ModelAttribute(value="carrito") Carrito carrito){
+		return new ModelAndView("formularioCompra").addObject("carrito", carrito); 
+		
+	}
+	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
+	public ModelAndView confirmarPedido(HttpSession sesion, @ModelAttribute(value="nombreUsuario") String nombre,@ModelAttribute(value="apellidosUsuario") String apellidos,@ModelAttribute (value="carrito")Carrito carrito){
+		Usuario usuario =new Usuario(nombre,apellidos);
+		Pedido pedido=new Pedido(usuario,carrito);
+		carrito.VaciarCesta();
 		return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto",producto); 
 		
 	}

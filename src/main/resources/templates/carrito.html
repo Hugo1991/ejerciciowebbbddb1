@@ -103,12 +103,13 @@
 					                   <div id="imp_iqz">
                                             <p><b>Importe total:</b>(gastos de envío incluidos)</p>
 					                   </div>
-                                        <a th:href="@{/creaPedido(idProducto=${producto.getId()})}" > 
+					                   <form th:action="@{/crearPedido}" th:object="${carrito}" method="post">
+                     
                                             <button id="search_bttn" class="button btn btnBold" type="submit">Hacer mi pedido</button>
-                                        </a>
+                                        </form>
                                         <div id="precioInfo">
                                             <span class="precioListProd">
-							                     <ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+							                     <ins itemprop="precio" th:text="|${carrito.getPrecioFinal()}|+&euro;">&nbsp;€</ins>
                                                  <span>iva incluido</span>
 								            </span>
                                         </div>
@@ -120,7 +121,7 @@
                                                 <p><b>Importe total:</b>(gastos de envío incluidos)</p>
                                            <div id="precioInfo">
                                             <span class="precioListProd">
-							                     <ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+							                     <ins itemprop="precio" th:text="|${carrito.getPrecioFinal()}|+&euro;">&nbsp;€</ins>
 							                     <span>iva incluido</span>
 								            </span>
                                            </div>

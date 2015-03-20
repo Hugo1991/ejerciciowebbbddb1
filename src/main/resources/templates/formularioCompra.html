@@ -66,9 +66,13 @@
                                 <div class="panel-heading" id="titulo">
                                     <h3><p th:text="|${categorias}|"/></h3>
                                 </div>
-                                <div class="panel-body" id="panel">    
-                                	
-                                                               
+                                <div class="panel-body" id="panel">
+                                	<form action="#"  th:action="@{/confirmarPedido}" th:object="${pedido}" method="post">
+                                		<span>nombre: <input type="text" th:field="*{nombreUsuario}"></span>
+                                		<span>apellidos: <input type="text" th:field="*{apellidosUsuario}"></span>
+                                        <input type="hidden" th:field="${carrito}"/>
+                                        <button type="submit" value="enviar"/>
+                                  	</form>
                                 </div>
                             </div>
                         </div>  
