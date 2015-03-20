@@ -33,14 +33,17 @@ public class TablonController {
 	private ProductRepository repository;
 	private Carrito carrito=new Carrito();
 	private Producto producto=new Producto();
+	
+	
 	@RequestMapping("/")
 	public ModelAndView tablon(HttpSession sesion) {
-
 		ModelAndView mv = new ModelAndView("index").addObject("productos",
 				repository.findAll());
 
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
+			carrito=new Carrito();
+			sesion.setAttribute("carrito", carrito.getId());
 		}
 
 		return mv;
@@ -60,19 +63,28 @@ public class TablonController {
 		return mv;
 	}
 
-	@RequestMapping("/insertar")
-	public ModelAndView insertar(Producto producto, HttpSession sesion) {
-		repository.save(producto);
-		sesion.setAttribute("nombre", producto.getNombre());
-		return new ModelAndView("insertar");
-	}
 
-	@RequestMapping("/producto")
-	public ModelAndView mostrar(@RequestParam long idProducto) {
+
+	//METDOS DE PRODUCTOS
+	@RequestMapping("/mostrarProducto")
+	public ModelAndView mostrar(HttpSession sesion,@RequestParam long idProducto) {
 		Producto producto = repository.findOne(idProducto);
 		return new ModelAndView("producto").addObject("producto", producto);
 	}
+	@RequestMapping("/addProducto")
+	public ModelAndView insertar(Producto producto, HttpSession sesion) {
+		repository.save(producto);
+		return new ModelAndView("insertar");
+	}
+	@RequestMapping("/borrarProducto")
+	public ModelAndView borrar(Producto producto, HttpSession sesion) {
+		repository.delete(producto);
+		return new ModelAndView("insertar");
+	}
 	
+	
+	
+	//METODOS DE CESTA DE LA COMPRA
 	@RequestMapping("/addCarrito")
 	public ModelAndView anadirCarrito(HttpSession sesion,Long idProducto){
 		producto = repository.findOne(idProducto);
@@ -92,12 +104,13 @@ public class TablonController {
 		
 	}
 	
-	@RequestMapping("/nuevoAnuncio")
-	public ModelAndView nuevoAnuncio(HttpSession sesion) {
-		String nombre = (String) sesion.getAttribute("nombre");
-		return new ModelAndView("nuevoAnuncio").addObject("nombre", nombre);
+	//METODOS DE PEDIDO
+	@RequestMapping("/anadirPedido")
+	public ModelAndView anadirPedido(HttpSession sesion, Pedido pedido){
+		carrito.removeProducto(producto);
+		return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto",producto); 
+		
 	}
-	
 		
 	
 	@RequestMapping("/image/{fileName}")
