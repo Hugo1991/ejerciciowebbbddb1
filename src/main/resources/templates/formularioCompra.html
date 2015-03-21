@@ -35,25 +35,11 @@
     </header>
     <div id="seleccion">
         <ul class="nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/index?find=TV">TV/Video</a>
-                <ul>
-                    <li><a href="/index?find=Televisiones">Televisiones</a></li>
-                    <li><a href="/index?find=Reproductores DVD">Reproductores DVD</a></li>
-                </ul>
-            </li>
-            <li><a href="/index?find=Informatica">Informatica</a>
-                <ul>
-                	<li><a href="/index?find=Portatiles">Portatiles</a></li>
-                    <li><a href="/index?find=Sobremesas">Sobremesas</a></li>
-                </ul>
-            </li>
-            <li><a href="/index?find=Grandes Electrodomesticos">Grandes Electrodomesticos</a>
-                <ul>
-                    <li><a href="/index?find=Lavadoras">Lavadoras</a></li>
-					<li><a href="/index?find=Neveras">Neveras</a></li>
-                </ul>
-            </li>
+                        <li><a href="/">Home</a></li>
+            <li><a href="/index?find=Pequeños electrodomesticos">Pequeños electrodomésticos</a></li>
+            <li><a href="/index?find=Televisiones">Televisiones</a></li>
+			<li><a href="/index?find=Informatica">Informatica</a></li>
+            <li><a href="/index?find=Videoconsolas">Videoconsolas</a></li>
         </ul>
     </div>
     </div>
@@ -67,11 +53,11 @@
                                     <h3><p th:text="|${categorias}|"/></h3>
                                 </div>
                                 <div class="panel-body" id="panel">
-                                	<form action="#"  th:action="@{/confirmarPedido}" th:object="${Usuario}" method="post">
+                                	<form action="#"  th:action="@{/confirmarPedido}"  method="post">
                                 		<span>nombre: 
-                                		<input type="text" th:field="*{nombre}"/>
+                                		<!--<input type="text" th:field="*{nombre}"/>-->
                                 		</span>
-                                		<span>apellidos: <input type="text" th:field="*{nombre}"/></span>
+                                		<!--<span>apellidos: <input type="text" th:field="*{nombre}"/></span>-->
   
                                         <button type="submit" value="enviar">enviar</button>
                                   	</form>

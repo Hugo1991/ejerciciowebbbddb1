@@ -111,18 +111,20 @@ public class TablonController {
 		pedido=new Pedido();
 		pedido.setCarrito(carrito);
 		Usuario usuario=new Usuario();
-		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject("Usuario", usuario); 
+		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject("usuario", usuario); 
 		
 	}
-	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
+	
 	//,@ModelAttribute(value="apellidosUsuario") String apellidos,@ModelAttribute (value="carrito")Carrito carrito
-	public ModelAndView confirmarPedido(HttpSession sesion, @ModelAttribute(value="Usuario") Usuario usuario){
+	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
+	public ModelAndView confirmarPedido(HttpSession sesion, @ModelAttribute(value="usuario") Usuario usuario){
 		//Usuario usuario =new Usuario(nombre,"perez");
 		
-		pedido.setUsuario(usuario);
+		//pedido.setUsuario(usuario);
 		carrito.VaciarCesta();
 		System.out.println("pedido confirmado");
-		return new ModelAndView("/"); 
+		return new ModelAndView("/index").addObject("productos",
+				repository.findAll());
 		
 	}
 		
