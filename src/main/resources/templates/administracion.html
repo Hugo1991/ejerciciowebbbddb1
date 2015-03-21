@@ -79,7 +79,7 @@
         											<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
         										</a>
         									</div>         
-                                                <form id="admin-bor" action="/eliminarCarrito" method="GET">
+                                                <form id="admin-bor" th:action="@{/borrarProducto}" method="POST">
                                                 	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
                                                 	<button class="eliminar" type="submit">Eliminar x</button>
                                                 </form>

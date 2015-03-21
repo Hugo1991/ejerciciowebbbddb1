@@ -72,15 +72,16 @@ public class TablonController {
 		Producto producto = repository.findOne(idProducto);
 		return new ModelAndView("producto").addObject("producto", producto);
 	}
-	@RequestMapping("/addProducto")
-	public ModelAndView insertar(Producto producto, HttpSession sesion) {
-		repository.save(producto);
-		return new ModelAndView("insertar");
+	@RequestMapping(value="/addProducto",method=RequestMethod.POST)
+	public ModelAndView insertar(HttpSession sesion) {
+		//FALTA PASARLE LOS PARAMETROS Y EN EL FORM DE ADMINISTRACION LLAMAR CADA CAMPO CON NAME
+		//repository.save(new Producto(nombre, categoria,imagen,descripcion,precio));
+		return new ModelAndView("administracion").addObject("productos",repository.findAll());
 	}
-	@RequestMapping("/borrarProducto")
-	public ModelAndView borrar(Producto producto, HttpSession sesion) {
-		repository.delete(producto);
-		return new ModelAndView("insertar");
+	@RequestMapping(value="/borrarProducto",method=RequestMethod.POST)
+	public ModelAndView borrar(@RequestParam Long idProducto, HttpSession sesion) {
+		repository.delete(idProducto);
+		return new ModelAndView("administracion").addObject("productos",repository.findAll());
 	}
 	
 	
