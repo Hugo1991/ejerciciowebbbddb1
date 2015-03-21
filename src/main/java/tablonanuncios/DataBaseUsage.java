@@ -13,7 +13,7 @@ public class DataBaseUsage implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository repository;
-	
+	//private PedidosRepository repositorioPedidos;
 	@Override
 	public void run(String... args) throws Exception {
 		

@@ -32,9 +32,9 @@ public class TablonController {
 	
 	@Autowired
 	private ProductRepository repository;
+	//private PedidosRepository repositorio;
 	private Carrito carrito=new Carrito();
 	private Producto producto=new Producto();
-	private Pedido pedido;
 	
 	@RequestMapping("/")
 	public ModelAndView tablon(HttpSession sesion) {
@@ -108,27 +108,36 @@ public class TablonController {
 	//METODOS DE PEDIDO
 	@RequestMapping(value="/crearPedido",method=RequestMethod.POST)
 	public ModelAndView crearPedido(HttpSession sesion, @ModelAttribute(value="carrito") Carrito carrito){
-		pedido=new Pedido();
+		Pedido pedido=new Pedido();
 		pedido.setCarrito(carrito);
-		Usuario usuario=new Usuario();
-		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject("usuario", usuario); 
+		return new ModelAndView("formularioCompra").addObject("pedido", pedido); 
 		
 	}
 	
-	//,@ModelAttribute(value="apellidosUsuario") String apellidos,@ModelAttribute (value="carrito")Carrito carrito
 	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
-	public ModelAndView confirmarPedido(HttpSession sesion, @ModelAttribute(value="usuario") Usuario usuario){
-		//Usuario usuario =new Usuario(nombre,"perez");
-		
-		//pedido.setUsuario(usuario);
+	public ModelAndView confirmarPedido(HttpSession sesion,@ModelAttribute("pedido") Pedido pedido, @RequestParam String name, @RequestParam String apellidos){
+		Usuario usuario =new Usuario(name,apellidos);
+		pedido.setUsuario(usuario);
 		carrito.VaciarCesta();
 		System.out.println("pedido confirmado");
-		return new ModelAndView("/index").addObject("productos",
-				repository.findAll());
+		return new ModelAndView("/index").addObject("productos",repository.findAll());
 		
 	}
+	//Pagina de administracion
+	@RequestMapping("/sesion")
+	public ModelAndView sesion(){
+		Administrador admin=new Administrador();
+		return new ModelAndView("sesion").addObject("admin", admin);
+	}
+	@RequestMapping(value="logIn",method=RequestMethod.POST)
+	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
+		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll());//.addObject("pedidos",repositorio.findAll());
 		
-	
+		if (nombre.equalsIgnoreCase(admin.getNombre()) && pass.equalsIgnoreCase(admin.getPass()))
+			return mv;
+		else
+			return new ModelAndView("loginError");
+	}
 	@RequestMapping("/image/{fileName}")
 	public void handleFileDownload(@PathVariable String fileName,
 			HttpServletResponse res) throws FileNotFoundException, IOException {

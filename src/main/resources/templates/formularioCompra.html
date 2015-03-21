@@ -53,11 +53,12 @@
                                     <h3><p th:text="|${categorias}|"/></h3>
                                 </div>
                                 <div class="panel-body" id="panel">
-                                	<form action="#"  th:action="@{/confirmarPedido}"  method="post">
+                                	<form action="#"  th:action="@{/confirmarPedido}" method="post">
                                 		<span>nombre: 
-                                		<!--<input type="text" th:field="*{nombre}"/>-->
+                                		<input type="text" name="${name}"/>
                                 		</span>
-                                		<!--<span>apellidos: <input type="text" th:field="*{nombre}"/></span>-->
+                                		<span>apellidos: 
+                                		<input type="text" name="${apellidos}"/></span>
   
                                         <button type="submit" value="enviar">enviar</button>
                                   	</form>
