@@ -27,6 +27,7 @@ header .form-group{
     z-index:1;
 }
 
+
 .nav li ul {
 display:none;
 position:absolute;
@@ -164,14 +165,6 @@ position: absolute;
     width: 300px;
     height: 70px;
 }
-.panel-heading h3{
-    color:#bf3288;
-    margin-bottom: 0px;
-    font-family:"trebuchet ms", arial, sans-serif;
-    width: 600px;
-    font-size: 30px;
-    font-weight: bold;
-}
 .toolbar .ico-pedidos .carrito{
     position: absolute;
     margin-left: -30px;
@@ -184,6 +177,14 @@ position: absolute;
 }
 .toolbar .ico-pedidos{
     color: white;
+}
+.panel-heading h3{
+    color:#bf3288;
+    margin-bottom: 0px;
+    font-family:"trebuchet ms", arial, sans-serif;
+    width: 600px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 #titulo{
