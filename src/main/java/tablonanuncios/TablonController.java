@@ -134,6 +134,15 @@ public class TablonController {
 		else
 			return new ModelAndView("loginError");
 	}
+	/*@RequestMapping("/pedidos")
+	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
+		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll());//.addObject("pedidos",repositorio.findAll());
+		
+		if (nombre.equalsIgnoreCase(admin.getNombre()) && pass.equalsIgnoreCase(admin.getPass()))
+			return mv;
+		else
+			return new ModelAndView("loginError");
+	}*/
 	@RequestMapping("/image/{fileName}")
 	public void handleFileDownload(@PathVariable String fileName,
 			HttpServletResponse res) throws FileNotFoundException, IOException {
