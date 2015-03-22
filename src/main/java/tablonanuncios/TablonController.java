@@ -46,7 +46,6 @@ public class TablonController {
 			carrito=new Carrito();
 			sesion.setAttribute("carrito", carrito.getId());
 		}
-
 		return mv;
 	}
 	@RequestMapping("/index")
@@ -63,8 +62,6 @@ public class TablonController {
 		return mv;
 	}
 
-
-
 	//METDOS DE PRODUCTOS
 	@RequestMapping("/mostrarProducto")
 	public ModelAndView mostrar(HttpSession sesion,@RequestParam long idProducto) {
@@ -73,7 +70,6 @@ public class TablonController {
 	}
 	@RequestMapping(value="/addProducto",method=RequestMethod.POST)
 	public ModelAndView insertar(HttpSession sesion,@RequestParam String nombre,@RequestParam String categoria,@RequestParam String descripcion, @RequestParam Double precio) {
-//FALLA AL PASARLE LOS PARAMETROS POR POST, PROBADO CON GET E IGUAL ERROR= There was an unexpected error (type=Method Not Allowed, status=405).
 		repository.save(new Producto(nombre, categoria,"img/",descripcion,precio));
 		return new ModelAndView("administracion").addObject("productos",repository.findAll());
 	}
@@ -114,13 +110,13 @@ public class TablonController {
 		
 	}
 	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
-	public ModelAndView confirmarPedido(HttpSession sesion,@ModelAttribute("pedido") Pedido pedido,@ModelAttribute("carrito") Carrito carrito, @RequestParam String nombre1, @RequestParam String apellidos){
+	public ModelAndView confirmarPedido(HttpSession sesion,@ModelAttribute("pedido") Pedido pedido, @RequestParam String nombre1, @RequestParam String apellidos){
 		Usuario usuario =new Usuario(nombre1,apellidos);
 		pedido.setUsuario(usuario);
 		pedidos.add(pedido);
-		pedido.getCarrito().VaciarCesta();
-		System.out.println("pedido confirmado");
-		return new ModelAndView("/index").addObject("productos",repository.findAll());
+		System.out.println("ahora se procedera a borrar el carrito");
+		carrito.VaciarCesta();
+		return new ModelAndView("/index").addObject("productos",repository.findAll()).addObject(carrito);
 		
 	}
 	//Pagina de administracion

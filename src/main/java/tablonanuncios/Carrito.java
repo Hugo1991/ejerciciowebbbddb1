@@ -54,9 +54,14 @@ public class Carrito {
 		try{
 		for(Producto p:productos){
 			removeProducto(p);
-			System.out.println(p);
+			System.out.println(p+" borrado");
 		}
-		}catch(Exception e){}
+		}catch(Exception e){
+			System.out.println("error borrando producto");
+		}
+		finally{
+			productos=new ArrayList<Producto>();
+		}
 	}
 	public int contador(Producto p){
 		int conta=0;
