@@ -32,7 +32,7 @@ public class TablonController {
 	
 	@Autowired
 	private ProductRepository repository;
-	//private PedidosRepository repositorio;
+	private ArrayList<Pedido> pedidos=new ArrayList<Pedido>();
 	private Carrito carrito=new Carrito();
 	private Producto producto=new Producto();
 	
@@ -43,6 +43,7 @@ public class TablonController {
 
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
+			 
 			carrito=new Carrito();
 			sesion.setAttribute("carrito", carrito.getId());
 		}
@@ -59,7 +60,6 @@ public class TablonController {
 		ModelAndView mv = new ModelAndView("index").addObject("productos",productos).addObject("categorias",find);
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
-			mv.addObject(carrito);
 		}
 		return mv;
 	}
@@ -73,9 +73,9 @@ public class TablonController {
 		return new ModelAndView("producto").addObject("producto", producto);
 	}
 	@RequestMapping(value="/addProducto",method=RequestMethod.POST)
-	public ModelAndView insertar(HttpSession sesion) {
-		//FALTA PASARLE LOS PARAMETROS Y EN EL FORM DE ADMINISTRACION LLAMAR CADA CAMPO CON NAME
-		//repository.save(new Producto(nombre, categoria,imagen,descripcion,precio));
+	public ModelAndView insertar(HttpSession sesion,@RequestParam String nombre,@RequestParam String categoria,@RequestParam String descripcion, @RequestParam Double precio) {
+//FALLA AL PASARLE LOS PARAMETROS POR POST, PROBADO CON GET E IGUAL ERROR= There was an unexpected error (type=Method Not Allowed, status=405).
+		repository.save(new Producto(nombre, categoria,"img/",descripcion,precio));
 		return new ModelAndView("administracion").addObject("productos",repository.findAll());
 	}
 	@RequestMapping(value="/borrarProducto",method=RequestMethod.POST)
@@ -91,34 +91,34 @@ public class TablonController {
 	public ModelAndView anadirCarrito(HttpSession sesion,Long idProducto){
 		producto = repository.findOne(idProducto);
 		carrito.addProducto(producto);
-		mostrarCarrito(sesion);
-		return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito", carrito); 
+		
+		return new ModelAndView("carrito").addObject("producto", producto).addObject(carrito); 
 	}
 	@RequestMapping("/mostrarCarrito")
 	public ModelAndView mostrarCarrito(HttpSession sesion){
-			return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto", producto);
+			return new ModelAndView("carrito").addObject("producto", producto).addObject(carrito);
 	}
 	@RequestMapping("/eliminarCarrito")
 	public ModelAndView eliminarCarrito(HttpSession sesion, Long idProducto){
 		producto = repository.findOne(idProducto);		
 		carrito.removeProducto(producto);
-		return new ModelAndView("carrito").addObject("carrito", carrito).addObject("producto",producto); 
+		return new ModelAndView("carrito").addObject("producto",producto).addObject(carrito); 
 		
 	}
 	
 	//METODOS DE PEDIDO
 	@RequestMapping(value="/crearPedido",method=RequestMethod.POST)
-	public ModelAndView crearPedido(HttpSession sesion, @ModelAttribute(value="carrito") Carrito carrito){
+	public ModelAndView crearPedido(HttpSession sesion){
 		Pedido pedido=new Pedido();
 		pedido.setCarrito(carrito);
-		return new ModelAndView("formularioCompra").addObject("pedido", pedido); 
+		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject(carrito);
 		
 	}
-	
 	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
-	public ModelAndView confirmarPedido(HttpSession sesion,@ModelAttribute("pedido") Pedido pedido, @RequestParam String name, @RequestParam String apellidos){
-		Usuario usuario =new Usuario(name,apellidos);
+	public ModelAndView confirmarPedido(HttpSession sesion,@ModelAttribute("pedido") Pedido pedido,@ModelAttribute("carrito") Carrito carrito, @RequestParam String nombre1, @RequestParam String apellidos){
+		Usuario usuario =new Usuario(nombre1,apellidos);
 		pedido.setUsuario(usuario);
+		pedidos.add(pedido);
 		carrito.VaciarCesta();
 		System.out.println("pedido confirmado");
 		return new ModelAndView("/index").addObject("productos",repository.findAll());
@@ -130,7 +130,7 @@ public class TablonController {
 		Administrador admin=new Administrador();
 		return new ModelAndView("sesion").addObject("admin", admin);
 	}
-	@RequestMapping(value="logIn",method=RequestMethod.POST)
+	@RequestMapping(value="admin",method=RequestMethod.POST)
 	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
 		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll());//.addObject("pedidos",repositorio.findAll());
 		

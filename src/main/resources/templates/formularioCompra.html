@@ -55,10 +55,11 @@
                                 <div class="panel-body" id="panel">
                                 	<form action="#"  th:action="@{/confirmarPedido}" method="post">
                                 		<span>nombre: 
-                                		<input type="text" name="${name}"/>
+                                			<input type="text" th:value="${nombre1}" name="nombre1" />
                                 		</span>
                                 		<span>apellidos: 
-                                		<input type="text" name="${apellidos}"/></span>
+                                			<input type="text" th:value="${apellidos}" name="apellidos"/>
+                                		</span>
   
                                         <button type="submit" value="enviar">enviar</button>
                                   	</form>

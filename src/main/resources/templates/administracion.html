@@ -33,25 +33,8 @@
     	</header>
     	<div id="seleccion">
         	<ul class="nav">
-        	    <li><a href="/">Home</a></li>
-            	<li><a href="/index?find=TV">TV/Video</a>
-           			<ul>
-                    	<li><a href="/index?find=Televisiones">Televisiones</a></li>
-                    	<li><a href="/index?find=Reproductores DVD">Reproductores DVD</a></li>
-                	</ul>
-            	</li>
-            	<li><a href="/index?find=Informatica">Informatica</a>
-                	<ul>
-                		<li><a href="/index?find=Portatiles">Portatiles</a></li>
-                    	<li><a href="/index?find=Sobremesas">Sobremesas</a></li>
-                	</ul>
-            	</li>
-            	<li><a href="/index?find=Grandes Electrodomesticos">Grandes Electrodomesticos</a>
-                	<ul>
-                    	<li><a href="/index?find=Lavadoras">Lavadoras</a></li>
-						<li><a href="/index?find=Neveras">Neveras</a></li>
-                	</ul>
-            	</li>
+        	    <li><a href="/logIn">Productos</a></li>
+            	<li><a href="/index?find=TV">Pedidos</a></li>
         	</ul>
     	</div>
     </div>
@@ -90,7 +73,7 @@
                         </div>
                         <div id="subir-imagen">
                             <div class="container">      
-                                <form enctype="multipart/form-data">
+                                <form method="POST" th:action="@{/addproducto}">
                                    <fieldset>
 
                                         <!-- Form Name -->
@@ -100,7 +83,14 @@
                                         <div class="control-group">
                                           <label class="control-label" for="textinput">Modelo</label>
                                           <div class="controls">
-                                            <input id="textinput" name="textinput" type="text" placeholder="Modelo" class="input-medium" required="true"/>
+                                            <input id="textinput" name="nombre" type="text" placeholder="Modelo" class="input-medium" required="true"/>
+
+                                          </div>
+                                        </div>
+ 										<div class="control-group">
+                                          <label class="control-label" for="textinput">Modelo</label>
+                                          <div class="controls">
+                                            <input id="textinput" name="categoria" type="text" placeholder="Modelo" class="input-medium" required="true"/>
 
                                           </div>
                                         </div>
@@ -121,11 +111,11 @@
                                             <textarea id="Descripcion" name="Descripcion"></textarea>
                                           </div>
                                         </div>
-
+										<input type="submit">enviar</input>
                                         
-                                    <div class="form-group">
-                                        <input id="file-1" type="file" class="file" multiple="true" data-preview-file-type="any"/>
-                                    </div>
+                                    <!--<div class="form-group">-->
+                                    <!--    <input id="file-1" type="file" class="file" multiple="true" data-preview-file-type="any"/>-->
+                                    <!--</div>-->
                                        </fieldset>
                                 </form>
                             </div>

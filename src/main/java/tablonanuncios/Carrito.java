@@ -51,8 +51,11 @@ public class Carrito {
 		}
 	}
 	public void VaciarCesta(){
-		for(Producto p:productos)
-			this.productos.remove(p);
+		
+		for(Producto p:productos){
+			removeProducto(p);
+			System.out.println(p);
+		}
 	}
 	public int contador(Producto p){
 		int conta=0;
