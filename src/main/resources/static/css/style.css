@@ -26,13 +26,6 @@ header .form-group{
     margin-left: 20px;
     z-index:1;
 }
-.toolbar a{
-    height: 50px;
-    text-transform: capitalize;
-    padding-top: 20px;
-    padding-right: 20px;
-    
-} 
 
 .nav li ul {
 display:none;
@@ -152,13 +145,17 @@ color:#fff;font-weight:bold;
     font-weight: bold;
 }
 .toolbar button{
-    height:50px;float:left;
-    margin-left:10px;padding-left:10px;padding-right:25px;
+    height:50px;
+    float:left;
+    margin-left:10px;
+    padding-left:10px;
+    padding-right:34px;
     padding-bottom: 0px;
 }
 button#micuenta{
     background:#D3D3D3;
     color:black;
+    padding: 10px;
 }
 header .toolbar{
 position: absolute;
@@ -271,6 +268,19 @@ color:black;
     margin-top: 20px;
 
 
+}
+.toolbar .ico-pedidos .carrito{
+    position: absolute;
+    margin-left: -30px;
+    margin-top: 13px;
+    padding: 4px 10px 4px 10px;
+    background: #800080;
+    color: white;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+}
+.toolbar .ico-pedidos{
+    color: white;
 }
 
 #hacer_pedido h2.precioListProd p{
@@ -391,9 +401,6 @@ div #enviar_cesta button#search_bttn{
     background: #bf3288;
     color:#fff;
  
-}
-.catalogo .close{
-
 }
 
 .controls{

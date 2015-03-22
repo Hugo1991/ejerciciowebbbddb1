@@ -69,6 +69,10 @@ public class Carrito {
 	public ArrayList<Producto> getCarrito(){
 		return productos;
 	}
+	public int getNumeroProductos(){
+		return productos.size();
+		
+	}
 	public double getPrecioFinal(){
 		return precioFinal;
 	}
