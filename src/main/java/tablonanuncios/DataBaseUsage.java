@@ -17,6 +17,7 @@ public class DataBaseUsage implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		
 		 // save a couple of customers
         repository.save(new Producto("TV SAMSUNG", "Televisiones","img/tv.jpg","la mejor del mercaso asjkdasjkl jklsajkl "
         		+ "jkasjk dsajk jkas jklasjkl asjkjkadsjkas ",300.00));

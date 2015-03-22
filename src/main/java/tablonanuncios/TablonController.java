@@ -27,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TablonController {
 	private static final String FILES_FOLDER = "img";
-
 	private List<String> imageTitles = new ArrayList<>();
 	
 	@Autowired
@@ -119,7 +118,7 @@ public class TablonController {
 		Usuario usuario =new Usuario(nombre1,apellidos);
 		pedido.setUsuario(usuario);
 		pedidos.add(pedido);
-		carrito.VaciarCesta();
+		pedido.getCarrito().VaciarCesta();
 		System.out.println("pedido confirmado");
 		return new ModelAndView("/index").addObject("productos",repository.findAll());
 		

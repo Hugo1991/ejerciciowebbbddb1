@@ -3,6 +3,7 @@ package tablonanuncios;
 public class Usuario {
 	private String nombre;
 	private String apellidos;
+	
 	public Usuario(){}
 	public Usuario(String nombre, String apellidos){
 		setNombre(nombre);

@@ -12,6 +12,7 @@ public class Pedido {
 	public void setCarrito(Carrito carrito){
 		this.carrito=carrito;
 	}
+	
 	public Usuario getUsuario(){
 		return usuario;
 	}

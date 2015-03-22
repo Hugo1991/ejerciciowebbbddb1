@@ -51,11 +51,12 @@ public class Carrito {
 		}
 	}
 	public void VaciarCesta(){
-		
+		try{
 		for(Producto p:productos){
 			removeProducto(p);
 			System.out.println(p);
 		}
+		}catch(Exception e){}
 	}
 	public int contador(Producto p){
 		int conta=0;
