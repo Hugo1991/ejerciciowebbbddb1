@@ -63,6 +63,10 @@ public class Carrito {
 			productos=new ArrayList<Producto>();
 		}
 	}
+	public int getNumeroProductos(){
+		return productos.size();
+	}
+	
 	public int contador(Producto p){
 		int conta=0;
 		for(Producto pr:productos){
