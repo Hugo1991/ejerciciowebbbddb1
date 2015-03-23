@@ -130,7 +130,7 @@ public class TablonController {
 		if ((nombre==null)||(pass==null))
 			return new ModelAndView("loginError").addObject(carrito);
 		else{
-			ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito", carrito);//.addObject("pedidos",repositorio.findAll());
+			ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito", carrito).addObject("pedidos",pedidos);
 			if (nombre.equalsIgnoreCase(admin.getNombre()) && pass.equalsIgnoreCase(admin.getPass()))
 				return mv;
 			else
