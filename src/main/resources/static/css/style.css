@@ -393,6 +393,9 @@ div #enviar_cesta button#search_bttn{
 #subir-imagen .container{
     position: relative;
     width: 500px;
+    border:1px solid #ddd;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 .form-control.file-caption{
     width: 250px;
@@ -406,9 +409,6 @@ div #enviar_cesta button#search_bttn{
     background: #bf3288;
     color:#fff;
  
-}
-.catalogo .close{
-
 }
 
 .controls{
@@ -455,4 +455,24 @@ div #enviar_cesta button#search_bttn{
     margin-top: -34px;
     margin-left: 95px;
     padding-bottom: 20px;
+}
+
+
+.Adm-pedido .col-xs-5{
+    width: 100%;
+}
+
+.Adm-pedido .panel-body{
+    height: 120;
+    width: 100%;
+}
+.Adm-pedido{
+    height:  180px;
+}
+.Adm-pedido span{
+    
+}
+.Adm-pedido button{
+    margin-left: 400px;
+    
 }

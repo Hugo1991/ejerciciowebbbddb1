@@ -1,14 +1,12 @@
 <html>
 <head>  
         
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" />
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
-
-    
+        <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="js/modal.js"></script>
 </head>
 <body>
 <div id="pagina">
@@ -96,9 +94,9 @@
 					                   <div id="imp_iqz">
                                             <p><b>Importe total:</b>(gastos de envío incluidos)</p>
 					                   </div>
-					                   <form th:action="@{/crearPedido}" th:object="${carrito}" method="post">
-											<button id="search_bttn" class="button btn btnBold" type="submit">Hacer mi pedido</button>
-                                        </form>
+					                   <!--<form th:action="@{/crearPedido}" th:object="${carrito}" method="post">-->
+											<button id="search_bttn" data-toggle="modal" data-target="#Infom-pedido" class="button btn btnBold">Hacer mi pedido</button>
+                                        <!--</form>-->
                                         <div id="precioInfo">
                                             <span class="precioListProd">
 							                     <ins itemprop="precio" th:text="|${carrito.getPrecioFinal()}|+&euro;">&nbsp;€</ins>
@@ -124,7 +122,52 @@
                             </div>
                         </div>  
                     </div> 
-                
+                    <div class="modal fade" id="Infom-pedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content"> 
+                                                                    <div class="modal-header"> 
+                                                                    <button type="button" class="close" data-dismiss="modal">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                        <span class="sr-only">Cerrar</span>
+                                                                    </button> 
+                                                                    <h4 class="modal-title" id="myModalLabel">Informe del pedido</h4> 
+                                                                    </div> 
+                                                                    <div id="Infom-pedido" class="modal-body">   
+                                                                        <div>
+                                                                            <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>#</th>
+                                                                                        <th>Nombre</th>
+                                                                                        <th>Cantidad</th>
+                                                                                        <th>Coste</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+<!--Seccion a repetir-->
+                                                                                    <tr>
+                                                                                        <td><img th:src="|${producto.getImagen()}|" id="img_prod"/></td>
+                                                                                        <td><a th:href="@{/producto(idProducto=${producto.getId()})}" 
+															th:text="|${producto.getNombre()}|"/></td>
+                                                                                        <td>Cantidad</td>
+                                                                                        <td><a class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/></td>
+<!-- fin Seccion a repetir-->
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="modal-footer">
+                                                                        <h2>Total:</h2>
+                                                                        <form th:action="@{/crearPedido}" th:object="${carrito}" method="post">
+                                                                        <a href="index.html" class="btn btn-success" type="submit">Confirmar pedido</a>
+                                                                        <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+                                                                        </form>
+                                                                        
+                                                                    </div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div>
                     <footer></footer>
                 </div>
                 

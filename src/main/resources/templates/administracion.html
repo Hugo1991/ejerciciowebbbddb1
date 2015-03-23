@@ -2,11 +2,13 @@
 <head>  
 
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="fileinput.css" media="all" rel="stylesheet" type="text/css" />
         <script src="js/jquery.min.js"></script>
         <script src="js/fileinput.min.js" type="text/javascript"></script>
+        <script src="js/javascript.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="js/modal.js"></script>
 </head>
 <body>
 <div id="pagina">
@@ -39,8 +41,8 @@
     	</header>
     	<div id="seleccion">
         	<ul class="nav">
-        	    <li><a href="/logIn">Productos</a></li>
-            	<li><a href="/index?find=TV">Pedidos</a></li>
+        	    <li><a a onclick="show('PRODUCTOS')">Productos</a></li>
+            	<li><a a onclick="show('PEDIDOS')">Pedidos</a></li>
         	</ul>
     	</div>
     </div>
@@ -48,6 +50,7 @@
     <!--Ignacio de lucas & Hugo Fernandez Visier-->
 		<div class="panel panel-default" id="contenido">            
         	<div class="container-fluid">
+                <div id="PRODUCTOS">
         		<div id="informacion">
         			<div class="panel panel-default" id="infor">
         				<div class="panel-heading" id="titulo">
@@ -126,11 +129,86 @@
                                        </fieldset>
                                 </form>
                             </div>
-                        </div>    
+                        </div>
+                        </div>
+        			</div>
+        		</div>
+                </div>
+                <div id="PEDIDOS" style="display:none;">
+                            		<div id="informacion">
+        			<div class="panel panel-default" id="infor">
+        				<div class="panel-heading" id="titulo">
+        					<h3><p th:text="|${categorias}|"/></h3>
+        				</div>
+        				<div class="panel-body" id="panel">
+                            <div id="catalogo">
+        					<p th:each="producto : ${productos}">
+        							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
+										<div class="Adm-pedido">
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4>De: <a href="#">nombre usuario</a></h4>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <span>Nombre</span>
+                                                        <span>PrecioTotal€</span>
+                                                        <button id="search_bttn" class="btn btn-default" data-toggle="modal" data-target="#Infom-pedido">Ver Pedido</button>
+                                                        <div class="modal fade" id="Infom-pedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content"> 
+                                                                    <div class="modal-header"> 
+                                                                    <button type="button" class="close" data-dismiss="modal">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                        <span class="sr-only">Cerrar</span>
+                                                                    </button> 
+                                                                    <h4 class="modal-title" id="myModalLabel">Informe del pedido</h4> 
+                                                                    </div> 
+                                                                    <div id="Infom-pedido" class="modal-body">   
+                                                                        <div>
+                                                                            <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>#</th>
+                                                                                        <th>Nombre</th>
+                                                                                        <th>Cantidad</th>
+                                                                                        <th>Coste</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+<!--Seccion a repetir-->
+                                                                                    <tr>
+                                                                                        <td><img th:src="|${producto.getImagen()}|" id="img_prod"/></td>
+                                                                                        <td><a th:href="@{/producto(idProducto=${producto.getId()})}" 
+															th:text="|${producto.getNombre()}|"/></td>
+                                                                                        <td>Cantidad</td>
+                                                                                        <td><a class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/></td>
+<!-- fin Seccion a repetir-->
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="modal-footer">
+                                                                        <h2>Total:</h2>
+                                                                    </div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+										</div>
+									</div>
+							</p>
+                        </div> 
 
         				</div>
         			</div>
         		</div>  
+                </div>
         	</div> 
 			<footer></footer>
 		</div>
