@@ -87,11 +87,11 @@ public class TablonController {
 		producto = repository.findOne(idProducto);
 		carrito.addProducto(producto);
 		
-		return new ModelAndView("carrito").addObject("producto", producto).addObject(carrito); 
+		return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito",carrito); 
 	}
 	@RequestMapping("/mostrarCarrito")
 	public ModelAndView mostrarCarrito(HttpSession sesion){
-			return new ModelAndView("carrito").addObject("producto", producto).addObject(carrito);
+			return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito",carrito);
 	}
 	@RequestMapping("/eliminarCarrito")
 	public ModelAndView eliminarCarrito(HttpSession sesion, Long idProducto){
@@ -106,7 +106,7 @@ public class TablonController {
 	public ModelAndView crearPedido(HttpSession sesion){
 		Pedido pedido=new Pedido();
 		pedido.setCarrito(carrito);
-		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject(carrito);
+		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject("carrito",carrito);
 		
 	}
 	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)

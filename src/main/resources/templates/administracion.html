@@ -41,8 +41,8 @@
     	</header>
     	<div id="seleccion">
         	<ul class="nav">
-        	    <li><a a onclick="show('PRODUCTOS')">Productos</a></li>
-            	<li><a a onclick="show('PEDIDOS')">Pedidos</a></li>
+        	    <li><a onclick="show('PRODUCTOS')">Productos</a></li>
+            	<li><a onclick="show('PEDIDOS')">Pedidos</a></li>
         	</ul>
     	</div>
     </div>
@@ -142,8 +142,8 @@
         				</div>
         				<div class="panel-body" id="panel">
                             <div id="catalogo">
-        					<p th:each="producto : ${productos}">
-        							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
+        					<p th:each="pedido : ${pedidos}">
+        							<div th:if="(${pedidos} != null)" class="panel panel-default" id="pro">
 										<div class="Adm-pedido">
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -176,8 +176,8 @@
                                                                                         <th>Coste</th>
                                                                                     </tr>
                                                                                 </thead>
-                                                                                <tbody>
-<!--Seccion a repetir-->
+                                                                                <tbody th:each="producto : ${pedido.getCarrito().getCarrito()}">
+<!--Seccion a repetir-->														
                                                                                     <tr>
                                                                                         <td><img th:src="|${producto.getImagen()}|" id="img_prod"/></td>
                                                                                         <td><a th:href="@{/producto(idProducto=${producto.getId()})}" 
