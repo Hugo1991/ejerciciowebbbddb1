@@ -30,7 +30,7 @@
         	<div class="toolbar">
             	<a href="/sesion"><button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button></a>
             	<a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
-            	<span class="ico-pedidos"></span>
+            	<span class="ico-pedidos"><span  th:text="|${carrito.getNumeroProductos()}|" class="carrito">0</span></span>
         	</div>
     	</header>
     	<div id="seleccion">
