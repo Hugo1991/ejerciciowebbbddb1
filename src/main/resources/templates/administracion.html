@@ -127,7 +127,29 @@
                                 </form>
                             </div>
                         </div>    
-                        
+                        PEDIDOS
+                        <div id="catalogo">
+        					<p th:each="pedidos : ${pedidos}">
+        							<div th:if="(${pedidos} != null)" class="panel panel-default" id="pro">
+										<div class="prod_list">
+											<div id="imgProd_nomProd">
+        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" th:text="|${producto.getNombre()}|"/>
+											</div>
+        									<div id="precioInfo">
+        										<h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/>
+        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" > 
+        											<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
+        										</a>
+        									</div>         
+                                                <form id="admin-bor" th:action="@{/borrarProducto}" method="POST">
+                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
+                                                	<button class="eliminar" type="submit">Eliminar x</button>
+                                                </form>
+										</div>
+									</div>
+        						
+							</p>
+                        </div>
         				</div>
         			</div>
         		</div>  

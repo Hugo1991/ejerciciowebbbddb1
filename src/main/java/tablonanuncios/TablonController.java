@@ -137,6 +137,15 @@ public class TablonController {
 				return new ModelAndView("sesion").addObject("carrito", carrito);
 		}
 	}
+	@RequestMapping("/mostrarPedido")
+	public ModelAndView mostrarPedido(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
+		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll());//.addObject("pedidos",repositorio.findAll());
+		
+		if (nombre.equalsIgnoreCase(admin.getNombre()) && pass.equalsIgnoreCase(admin.getPass()))
+			return mv;
+		else
+			return new ModelAndView("loginError");
+	}
 	/*@RequestMapping("/pedidos")
 	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
 		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll());//.addObject("pedidos",repositorio.findAll());
