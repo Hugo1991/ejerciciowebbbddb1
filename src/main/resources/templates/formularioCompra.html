@@ -18,16 +18,15 @@
         </h1>
        <form class="search" id="searchForm" method="GET"  action="/index">
 	       <fieldset>
-		      <span class="ico-pedidos"><span  th:text="|${Carrito.getNumeroProductos()}|" class="carrito">0</span></span>
 		      <input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
 		      <input type="hidden" value="keyword_search" name="subaction"/>
-		      		<button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
+		      <button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
 	       </fieldset>
         </form>	
         <div class="toolbar">
             <button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
             <a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
-            <span class="ico-pedidos"></span>
+            <span class="ico-pedidos"><span  th:text="|${carrito.getNumeroProductos()}|" class="carrito">0</span></span>
         </div>
     </header>
     <div id="seleccion">

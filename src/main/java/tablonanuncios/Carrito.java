@@ -61,6 +61,7 @@ public class Carrito {
 		}
 		finally{
 			productos=new ArrayList<Producto>();
+			precioFinal=0.0;
 		}
 	}
 	public int getNumeroProductos(){
