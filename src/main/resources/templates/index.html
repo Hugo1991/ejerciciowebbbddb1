@@ -29,8 +29,14 @@
         	</form>	
         	<div class="toolbar">
             	<a href="/sesion"><button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button></a>
-            	<a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
-            	<span class="ico-pedidos"><span  th:text="|${carrito.getNumeroProductos()}|" class="carrito">0</span></span>
+            	<a href="/mostrarCarrito">
+                    <button id="search_bttn" class="button btn btnBold" type="submit">
+                        Cesta
+                        <span class="ico-pedidos">
+                            <span  th:text="|${carrito.getNumeroProductos()}|" class="carrito">0</span>
+                        </span>
+                    </button>
+                </a>
         	</div>
     	</header>
     	<div id="seleccion">
@@ -53,7 +59,36 @@
         					<h3><p th:text="|${categorias}|"/></h3>
         				</div>
         				<div class="panel-body" id="panel">
-        					<p th:each="producto : ${productos}">
+                            <div id="busqueda_iz">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">Rango</div>
+                                                    <ul id="categories-menu" class="nav nav-pills nav-stacked">
+                                                        <li id="cid-1"><span>Minimo</span><span>Maximo</span></li>
+                                                        <li id="cid-2">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"></span>
+                                                                <input type="text" class="form-control"/>
+                                                            <span class="input-group-addon"></span>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"></span>
+                                                                <input type="text" class="form-control"/>
+                                                            <span class="input-group-addon"></span>
+                                                        </div>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                            </div>
+
+                                        </div>           
+                                    </div>                                            
+                                </div>
+                            </div>
+                            <div id="pag_princ">
+        					<div th:each="producto : ${productos}">
         							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
 										<div class="prod_list">
 											<div id="imgProd_nomProd">
@@ -69,7 +104,8 @@
 										</div>
 									</div>
         						
-							</p>
+							</div>
+                            </div>
         				</div>
         			</div>
         		</div>  

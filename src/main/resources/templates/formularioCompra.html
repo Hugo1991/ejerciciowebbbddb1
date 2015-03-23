@@ -25,8 +25,14 @@
         </form>	
         <div class="toolbar">
             <button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
-            <a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
-            <span class="ico-pedidos"><span  th:text="|${carrito.getNumeroProductos()}|" class="carrito">0</span></span>
+            	<a href="/mostrarCarrito">
+                    <button id="search_bttn" class="button btn btnBold" type="submit">
+                        Cesta
+                        <span class="ico-pedidos">
+                            <span  th:text="|${carrito.getNumeroProductos()}|" class="carrito">0</span>
+                        </span>
+                    </button>
+                </a>
         </div>
     </header>
     <div id="seleccion">

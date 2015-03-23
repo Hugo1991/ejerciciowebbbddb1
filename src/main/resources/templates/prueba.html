@@ -26,32 +26,24 @@
 	       		</fieldset>
         	</form>	
         	<div class="toolbar">
-            	<button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
-            	<a href="/mostrarCarrito"><button id="search_bttn" class="button btn btnBold" type="submit">Cesta</button></a>
-            	<span class="ico-pedidos"><span  th:text="|${Carrito.getNumeroProductos()}|" class="carrito">0</span></span>
+            	<a href="/sesion"><button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button></a>
+            	<a href="/mostrarCarrito">
+                    <button id="search_bttn" class="button btn btnBold" type="submit">
+                        Cesta
+                        <span class="ico-pedidos">
+                            <span  th:text="|${carrito.getNumeroProductos()}|" class="carrito">0</span>
+                        </span>
+                    </button>
+                </a>
         	</div>
     	</header>
     	<div id="seleccion">
         	<ul class="nav">
-        	    <li><a href="/">Home</a></li>
-            	<li><a href="/index?find=TV">TV/Video</a>
-           			<ul>
-                    	<li><a href="/index?find=Televisiones">Televisiones</a></li>
-                    	<li><a href="/index?find=Reproductores DVD">Reproductores DVD</a></li>
-                	</ul>
-            	</li>
-            	<li><a href="/index?find=Informatica">Informatica</a>
-                	<ul>
-                		<li><a href="/index?find=Portatiles">Portatiles</a></li>
-                    	<li><a href="/index?find=Sobremesas">Sobremesas</a></li>
-                	</ul>
-            	</li>
-            	<li><a href="/index?find=Grandes Electrodomesticos">Grandes Electrodomesticos</a>
-                	<ul>
-                    	<li><a href="/index?find=Lavadoras">Lavadoras</a></li>
-						<li><a href="/index?find=Neveras">Neveras</a></li>
-                	</ul>
-            	</li>
+        	                <li><a href="/">Home</a></li>
+            <li><a href="/index?find=Pequeños electrodomesticos">Pequeños electrodomésticos</a></li>
+            <li><a href="/index?find=Televisiones">Televisiones</a></li>
+			<li><a href="/index?find=Informatica">Informatica</a></li>
+            <li><a href="/index?find=Videoconsolas">Videoconsolas</a></li>
         	</ul>
     	</div>
     </div>
@@ -65,8 +57,36 @@
         					<h3><p th:text="|${categorias}|"/></h3>
         				</div>
         				<div class="panel-body" id="panel">
-                            <div id="catalogo">
-        					<p th:each="producto : ${productos}">
+                            <div id="busqueda_iz">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">Rango</div>
+                                                    <ul id="categories-menu" class="nav nav-pills nav-stacked">
+                                                        <li id="cid-1"><span>Minimo</span><span>Maximo</span></li>
+                                                        <li id="cid-2">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"></span>
+                                                                <input type="text" class="form-control">
+                                                            <span class="input-group-addon"></span>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"></span>
+                                                                <input type="text" class="form-control">
+                                                            <span class="input-group-addon"></span>
+                                                        </div>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                            </div>
+
+                                        </div>           
+                                    </div>                                            
+                                </div>
+                            </div>
+                            <div id="pag_princ">
+        					<div th:each="producto : ${productos}">
         							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
 										<div class="prod_list">
 											<div id="imgProd_nomProd">
@@ -78,59 +98,12 @@
         										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" > 
         											<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
         										</a>
-        									</div>         
-                                                <form id="admin-bor" action="/eliminarCarrito" method="GET">
-                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
-                                                	<button class="eliminar" type="submit">Eliminar x</button>
-                                                </form>
+        									</div>
 										</div>
 									</div>
         						
-							</p>
-                        </div>
-                        <div id="subir-imagen">
-                            <div class="container">      
-                                <form enctype="multipart/form-data">
-                                   <fieldset>
-
-                                        <!-- Form Name -->
-                                        <legend>Nuevo producto</legend>
-
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                          <label class="control-label" for="textinput">Modelo</label>
-                                          <div class="controls">
-                                            <input id="textinput" name="textinput" type="text" placeholder="Modelo" class="input-medium" required="">
-
-                                          </div>
-                                        </div>
-
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                          <label class="control-label" for="precio">Precio</label>
-                                          <div class="controls">
-                                            <input id="precio" name="precio" type="text" placeholder="Precio" class="input-medium">
-
-                                          </div>
-                                        </div>
-
-                                        <!-- Textarea -->
-                                        <div class="control-group">
-                                          <label class="control-label" for="Descripcion">Descripción</label>
-                                          <div class="controls">                     
-                                            <textarea id="Descripcion" name="Descripcion"></textarea>
-                                          </div>
-                                        </div>
-
-                                        
-                                    <div class="form-group">
-                                        <input id="file-1" type="file" class="file" multiple=true data-preview-file-type="any">
-                                    </div>
-                                       </fieldset>
-                                </form>
+							</div>
                             </div>
-                        </div>    
-                        
         				</div>
         			</div>
         		</div>  
