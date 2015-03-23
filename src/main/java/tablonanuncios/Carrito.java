@@ -19,23 +19,31 @@ public class Carrito {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private ArrayList<Producto> productos=new ArrayList<Producto>();
+	private ArrayList<CarritoProd> productos=new ArrayList<CarritoProd>();
 	private Double precioFinal=0.0;
-
+	private CarritoProd cp;
 	public void addProducto(Producto p){
-		productos.add(p);
-		CalcularPrecioFinal();
+		
+		if (productos.isEmpty())
+			cp=new CarritoProd(p);
+		else
+			cp.setProducto(p);
+		productos.add(cp);		
+		//CalcularPrecioFinal();
+
 	}
 	public void removeProducto(Producto p){
-		for(Producto pr:productos){
-			if(pr.getId()==(p.getId())){
+		for(CarritoProd pr:productos){
+			if(pr.getProducto().getId()==(p.getId())){
 				productos.remove(pr);
-				break;
+					break;
+					
+				}
 			}
-			}
-		CalcularPrecioFinal();
+			
+		//CalcularPrecioFinal();
 	}
-	public int CalcularCantidadProducto(Producto p){
+	/*public int CalcularCantidadProducto(Producto p){
 		int cont=0;
 		for(Producto x:productos){
 			if (x.equals(p)){
@@ -47,7 +55,7 @@ public class Carrito {
 	private void CalcularPrecioFinal(){
 		precioFinal=0.0;
 		for(Producto x:productos){
-			precioFinal+=x.getPrecio();
+			precioFinal+=x.getPrecio()*cantidad;
 		}
 	}
 	public void VaciarCesta(){
@@ -63,24 +71,25 @@ public class Carrito {
 			productos=new ArrayList<Producto>();
 			precioFinal=0.0;
 		}
-	}
+	}*/
 	public int getNumeroProductos(){
 		return productos.size();
 	}
-	
+	/*
 	public int contador(Producto p){
 		int conta=0;
 		for(Producto pr:productos){
 			if (pr.equals(p)){
 				conta+=1;
+				
 			}
 		}
 		return conta;
-	}
+	}*/
 	public long getId(){
 		return id;
 	}
-	public ArrayList<Producto> getCarrito(){
+	public ArrayList<CarritoProd> getCarrito(){
 		return productos;
 	}
 	public double getPrecioFinal(){

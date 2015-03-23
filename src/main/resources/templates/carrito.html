@@ -64,9 +64,9 @@
                                              <div  class="panel panel-default" id="pro">
 				                        <div class="prod_list">
 					                       <div id="imgProd_nomProd">
-						                      <img th:src="|${producto.getImagen()}|" id="img_prod"/>
-                                               <a th:href="@{/producto(idProducto=${producto.getId()})}" 
-												th:text="|${producto.getNombre()}|"/>
+						                      <img th:src="|${producto.getProducto().getImagen()}|" id="img_prod"/>
+                                               <a th:href="@{/producto(idProducto=${producto.getProducto().getId()})}" 
+												th:text="|${producto.getProducto().getNombre()}|"/>
 					                       </div>
                                             <div class="cantidad">
                                                 <form>
@@ -75,13 +75,13 @@
                                                     <button>Actualizar cantidad</button>
                                                 </form>
                                                 <form action="/eliminarCarrito" method="GET">
-                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
+                                                	<input th:value="${producto.getProducto().getId()}" type="hidden" th:name="idProducto"/>
                                                 	<button class="eliminar" type="submit">x Eliminar</button>
                                                 </form>
                                             </div>
                                             <div id="precioInfo">
                                                 <span class="precioListProd">
-							                         <ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+							                         <ins itemprop="precio" th:text="|${producto.getProducto().getPrecio()}|+&euro;">&nbsp;€</ins>
                                                     <span>iva incluido</span>
 								                </span>
                                            </div>
@@ -146,11 +146,11 @@
                                                                                 <tbody th:each="producto : ${carrito.getCarrito()}">>
 <!--Seccion a repetir-->
                                                                                     <tr>
-                                                                                        <td><img th:src="|${producto.getImagen()}|" id="img_prod"/></td>
-                                                                                        <td><a th:href="@{/producto(idProducto=${producto.getId()})}" 
-															th:text="|${producto.getNombre()}|"/></td>
+                                                                                        <td><img th:src="|${producto.getProducto().getImagen()}|" id="img_prod"/></td>
+                                                                                        <td><a th:href="@{/producto(idProducto=${producto.getProducto().getId()})}" 
+															th:text="|${producto.getProducto().getNombre()}|"/></td>
                                                                                         <td>Cantidad</td>
-                                                                                        <td><a class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/></td>
+                                                                                        <td><a class="precioListProd" th:text="|${producto.getProducto().getPrecio()}|+&euro;"/></td>
 <!-- fin Seccion a repetir-->
                                                                                     </tr>
                                                                                 </tbody>
@@ -158,11 +158,23 @@
                                                                         </div>
                                                                     </div> 
                                                                     <div class="modal-footer">
-                                                                        <h2>Total:</h2>
-                                                                        <form th:action="@{/crearPedido}" th:object="${carrito}" method="post">
-                                                                        <a href="index.html" class="btn btn-success" type="submit">Confirmar pedido</a>
-                                                                        <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-                                                                        </form>
+                                                                        <h2>Total:<p th:text="|${carrito.getPrecioFinal()}|"/></h2>
+                                      <form class="form-horizontal" role="form" action="#"  th:action="@{/confirmarPedido}" method="post">
+                                		<div class="form-group">
+                                			<label for="inputName"  class="col-lg-2 control-label">Nombre</label>
+                                			<div class="col-lg-10">
+                                				<input type="name" class="form-control" placeholder="Nombre" th:value="${nombre1}" name="nombre1" />
+                                			</div>
+                                			<label class="col-lg-2 control-label">apellidos</label>
+                                			<div class="col-lg-10">
+                                				<input type="text" class="form-control" th:value="${apellidos}" name="apellidos"/>
+                                			</div>
+                                		</div>
+                                		<button type="submit" class="btn btn-success">enviar</button>
+                                		
+                                        <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+                                  	</form>
+                                                                        
                                                                         
                                                                     </div> 
                                                                 </div> 

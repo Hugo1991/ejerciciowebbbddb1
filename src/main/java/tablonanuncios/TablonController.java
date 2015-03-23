@@ -44,7 +44,7 @@ public class TablonController {
 			mv.addObject("saludo", "Bienvenido!!");
 			 
 			carrito=new Carrito();
-			sesion.setAttribute("carrito", carrito.getId());
+			//sesion.setAttribute("carrito", carrito.getId());
 		}
 		return mv;
 	}
@@ -115,8 +115,8 @@ public class TablonController {
 		pedido.setUsuario(usuario);
 		pedidos.add(pedido);
 		System.out.println("ahora se procedera a borrar el carrito");
-		carrito.VaciarCesta();
-		return new ModelAndView("/index").addObject("productos",repository.findAll()).addObject(carrito);
+		//carrito.VaciarCesta();
+		return new ModelAndView("/").addObject("productos",repository.findAll()).addObject(carrito);
 		
 	}
 	//Pagina de administracion
