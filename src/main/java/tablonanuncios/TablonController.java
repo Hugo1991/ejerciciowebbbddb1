@@ -127,12 +127,15 @@ public class TablonController {
 	}
 	@RequestMapping(value="admin",method=RequestMethod.POST)
 	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
-		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito", carrito);//.addObject("pedidos",repositorio.findAll());
-		
-		if (nombre.equalsIgnoreCase(admin.getNombre()) && pass.equalsIgnoreCase(admin.getPass()))
-			return mv;
-		else
-			return new ModelAndView("loginError");
+		if ((nombre==null)||(pass==null))
+			return new ModelAndView("loginError").addObject(carrito);
+		else{
+			ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito", carrito);//.addObject("pedidos",repositorio.findAll());
+			if (nombre.equalsIgnoreCase(admin.getNombre()) && pass.equalsIgnoreCase(admin.getPass()))
+				return mv;
+			else
+				return new ModelAndView("sesion").addObject("carrito", carrito);
+		}
 	}
 	/*@RequestMapping("/pedidos")
 	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
