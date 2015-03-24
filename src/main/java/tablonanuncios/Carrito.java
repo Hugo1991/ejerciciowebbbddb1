@@ -1,6 +1,7 @@
 package tablonanuncios;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,14 +22,32 @@ public class Carrito {
 	private long id;
 	private ArrayList<CarritoProd> productos=new ArrayList<CarritoProd>();
 	private Double precioFinal=0.0;
-	private CarritoProd cp;
+	private CarritoProd cp=new CarritoProd();
 	public void addProducto(Producto p){
-		
-		if (productos.isEmpty())
-			cp=new CarritoProd(p);
-		else
+		boolean encontrado=false;
+		int conta=0;
+
+		if (productos.isEmpty()){
+			System.out.println("carrito vacio");
 			cp.setProducto(p);
-		productos.add(cp);		
+			productos.add(cp);
+			encontrado=true;
+		}else{
+			Iterator<CarritoProd> iterador= productos.iterator();
+			while(!encontrado&&iterador.hasNext()){
+				if (iterador.next().existe(p)){
+					System.out.println("producto igual");
+					iterador.next().sumaCantidad();
+					encontrado=true;
+				}
+				
+			}
+		}
+		if (!encontrado){
+			cp.setProducto(p);
+			productos.add(cp);
+			System.out.println("producto diferente,añadido");
+		}
 		//CalcularPrecioFinal();
 
 	}

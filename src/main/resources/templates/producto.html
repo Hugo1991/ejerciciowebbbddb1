@@ -81,10 +81,11 @@
                                 
                                 <div id="enviar_cesta" class="cesta">
                                     <div class="panel panel-default" id="hpedido">
-
-                                        <a th:href="@{/addCarrito(idProducto=${producto.getId()})}" > 
+										<form th:if="|${producto.getId()}|" th:action="@{/addCarrito}" method="POST">
+                                        <input type="hidden" name="idProducto" th:value="${producto.getId()}" /> 
                                             <button id="search_bttn" class="button btn btnBold" type="submit">A&ntilde;adir al carrito</button>
-                                        </a>
+                                        
+                                        </form>
                                     </div>
                                 </div>
                             </div>

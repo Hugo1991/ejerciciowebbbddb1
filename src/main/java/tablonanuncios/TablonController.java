@@ -79,15 +79,15 @@ public class TablonController {
 		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
 	}
 	
-	
-	
 	//METODOS DE CESTA DE LA COMPRA
-	@RequestMapping("/addCarrito")
-	public ModelAndView anadirCarrito(HttpSession sesion,Long idProducto){
-		producto = repository.findOne(idProducto);
-		carrito.addProducto(producto);
-		
-		return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito",carrito); 
+	@RequestMapping(value="/addCarrito",method=RequestMethod.POST)
+	public ModelAndView anadirCarrito(HttpSession sesion,@RequestParam Long idProducto){
+		if (idProducto!=null){
+			producto = repository.findOne(idProducto);
+			carrito.addProducto(producto);
+			return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito",carrito); 
+		}
+		return new ModelAndView("/");
 	}
 	@RequestMapping("/mostrarCarrito")
 	public ModelAndView mostrarCarrito(HttpSession sesion){

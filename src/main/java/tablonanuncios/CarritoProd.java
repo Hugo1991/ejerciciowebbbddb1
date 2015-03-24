@@ -3,16 +3,15 @@ package tablonanuncios;
 public class CarritoProd {
 	private Producto producto;
 	private int cantidad=0;
-	public CarritoProd(Producto p){
-		setProducto(p);
+	public CarritoProd(){
+		cantidad=1;
 	}
 	public void setProducto(Producto p){
 		producto=p;
-		cantidad=1;
+		
 	}
 	public boolean existe(Producto p){
-		
-		return this.getProducto()==p;
+		return this.getProducto().getId()==p.getId();
 	}
 	public void sumaCantidad(){
 		cantidad+=1;
