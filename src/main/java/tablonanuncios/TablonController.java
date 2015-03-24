@@ -32,7 +32,7 @@ public class TablonController {
 	@Autowired
 	private ProductRepository repository;
 	private ArrayList<Pedido> pedidos=new ArrayList<Pedido>();
-	private Carrito carrito=new Carrito();
+	private Carrito carrito=new Carrito("as");
 	private Producto producto=new Producto();
 	
 	@RequestMapping("/")
@@ -43,7 +43,7 @@ public class TablonController {
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
 			 
-			carrito=new Carrito();
+			carrito=new Carrito("as");
 			//sesion.setAttribute("carrito", carrito.getId());
 		}
 		return mv;

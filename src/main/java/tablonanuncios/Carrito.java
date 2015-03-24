@@ -22,33 +22,38 @@ public class Carrito {
 	private long id;
 	private ArrayList<CarritoProd> productos=new ArrayList<CarritoProd>();
 	private Double precioFinal=0.0;
-	private CarritoProd cp=new CarritoProd();
+	public Carrito(String l){
+		String u;
+		u=l;
+	}
+	
 	public void addProducto(Producto p){
 		boolean encontrado=false;
-		int conta=0;
+		 CarritoProd pi;
 
 		if (productos.isEmpty()){
-			System.out.println("carrito vacio");
-			cp.setProducto(p);
+			System.out.println("carrito vacio"+p.getId());
+			CarritoProd cp=new CarritoProd(p);
 			productos.add(cp);
 			encontrado=true;
 		}else{
 			Iterator<CarritoProd> iterador= productos.iterator();
 			while(!encontrado&&iterador.hasNext()){
-				if (iterador.next().existe(p)){
+				pi = iterador.next();
+				if (pi.existe(p)){
 					System.out.println("producto igual");
-					iterador.next().sumaCantidad();
+					pi.sumaCantidad();
 					encontrado=true;
 				}
 				
 			}
 		}
 		if (!encontrado){
-			cp.setProducto(p);
+			CarritoProd cp=new CarritoProd(p);
 			productos.add(cp);
-			System.out.println("producto diferente,añadido");
+			System.out.println("producto diferente,añadido"+p.getId());
 		}
-		//CalcularPrecioFinal();
+		calcularPrecioTotal();
 
 	}
 	public void removeProducto(Producto p){
@@ -110,6 +115,13 @@ public class Carrito {
 	}
 	public ArrayList<CarritoProd> getCarrito(){
 		return productos;
+	}
+	
+	private void calcularPrecioTotal(){
+		precioFinal=0.0;
+		for(CarritoProd p:productos){
+			precioFinal+=p.getCantidad()*p.getProducto().getPrecio();
+		}
 	}
 	public double getPrecioFinal(){
 		return precioFinal;

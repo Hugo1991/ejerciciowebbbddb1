@@ -149,7 +149,7 @@
                                                                                         <td><img th:src="|${producto.getProducto().getImagen()}|" id="img_prod"/></td>
                                                                                         <td><a th:href="@{/producto(idProducto=${producto.getProducto().getId()})}" 
 															th:text="|${producto.getProducto().getNombre()}|"/></td>
-                                                                                        <td>Cantidad</td>
+                                                                                        <td><a class="precioListProd" th:text="|${producto.getCantidad()}|"/></td>
                                                                                         <td><a class="precioListProd" th:text="|${producto.getProducto().getPrecio()}|+&euro;"/></td>
 <!-- fin Seccion a repetir-->
                                                                                     </tr>

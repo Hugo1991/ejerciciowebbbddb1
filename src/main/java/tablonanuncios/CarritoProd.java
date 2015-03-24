@@ -3,7 +3,8 @@ package tablonanuncios;
 public class CarritoProd {
 	private Producto producto;
 	private int cantidad=0;
-	public CarritoProd(){
+	public CarritoProd(Producto p){
+		setProducto(p);
 		cantidad=1;
 	}
 	public void setProducto(Producto p){
