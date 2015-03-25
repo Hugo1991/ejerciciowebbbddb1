@@ -37,8 +37,7 @@ public class TablonController {
 	
 	@RequestMapping("/")
 	public ModelAndView index(HttpSession sesion) {
-		ModelAndView mv = new ModelAndView("index").addObject("productos",
-				repository.findAll()).addObject("carrito",carrito);
+		ModelAndView mv = new ModelAndView("index").addObject("productos",repository.findAll()).addObject("carrito",carrito);
 
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
@@ -82,16 +81,7 @@ public class TablonController {
 		Producto producto = repository.findOne(idProducto);
 		return new ModelAndView("producto").addObject("producto", producto).addObject("carrito",carrito);
 	}
-	@RequestMapping(value="/addProducto",method=RequestMethod.POST)
-	public ModelAndView insertar(HttpSession sesion,@RequestParam String nombre,@RequestParam String categoria,@RequestParam String descripcion, @RequestParam Double precio) {
-		repository.save(new Producto(nombre, categoria,"img/",descripcion,precio));
-		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
-	}
-	@RequestMapping(value="/borrarProducto",method=RequestMethod.POST)
-	public ModelAndView borrar(@RequestParam Long idProducto, HttpSession sesion) {
-		repository.delete(idProducto);
-		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
-	}
+
 	
 	//METODOS DE CESTA DE LA COMPRA
 	@RequestMapping(value="/addCarrito",method=RequestMethod.POST)
@@ -160,6 +150,28 @@ public class TablonController {
 		else
 			return new ModelAndView("loginError");
 	}
+	@RequestMapping(value="/addProducto",method=RequestMethod.POST)
+	public ModelAndView insertar(HttpSession sesion,@RequestParam String nombre,@RequestParam String categoria,@RequestParam Double precio,@RequestParam String descripcion,@RequestParam("imagen") MultipartFile imagen) {
+		String fileName = imagen.getName() + ".jpg";
+		if (!imagen.isEmpty()) {
+			   try {
+				   File filesFolder = new File(FILES_FOLDER);
+				   if (!filesFolder.exists()) {
+					   filesFolder.mkdirs();
+				   }
+				   File uploadedFile = new File("img/"+ fileName);
+				   imagen.transferTo(uploadedFile);
+				   System.out.println(uploadedFile);
+			   }catch(Exception e){}
+		}
+		repository.save(new Producto(nombre, categoria,precio,descripcion,fileName));
+		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
+	}
+	@RequestMapping(value="/borrarProducto",method=RequestMethod.POST)
+	public ModelAndView borrar(@RequestParam Long idProducto, HttpSession sesion) {
+		repository.delete(idProducto);
+		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
+	}
 	/*@RequestMapping("/pedidos")
 	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
 		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll());//.addObject("pedidos",repositorio.findAll());
@@ -169,6 +181,8 @@ public class TablonController {
 		else
 			return new ModelAndView("loginError");
 	}*/
+	
+
 	@RequestMapping("/image/{fileName}")
 	public void handleFileDownload(@PathVariable String fileName,
 			HttpServletResponse res) throws FileNotFoundException, IOException {

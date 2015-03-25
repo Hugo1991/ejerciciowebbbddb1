@@ -82,7 +82,7 @@
                         </div>
                         <div id="subir-imagen">
                             <div class="container">      
-                                <form method="POST" th:action="@{/addproducto}" enctype="multipart/form-data">
+                                <form method="POST" th:action="@{/addProducto}" action="#" enctype="multipart/form-data">
                                    <fieldset>
 
                                         <!-- Form Name -->
@@ -90,20 +90,21 @@
 
                                         <!-- Text input-->
                                         <div class="control-group">
-                                          <label class="control-label" for="textinput">Modelo</label>
+                                          <label class="control-label" for="textinput">Nombre</label>
                                           <div class="controls">
-                                            <input id="textinput" name="nombre" type="text" placeholder="Modelo" class="input-medium" required="true"/>
+                                            <input id="textinput" name="nombre" type="text" placeholder="Nombre" class="input-medium" required="true"/>
 
                                           </div>
                                         </div>
  										<div class="control-group">
-                                          <label class="control-label" for="textinput">Modelo</label>
+                                          <label class="control-label" for="textinput">Categoria</label>
                                           <div class="controls">
-                                            <input id="textinput" name="categoria" type="text" placeholder="Modelo" class="input-medium" required="true"/>
+                                            <input id="textinput" name="categoria" type="text" placeholder="Categoria" class="input-medium" required="true"/>
 
                                           </div>
                                         </div>
 
+                                
                                         <!-- Text input-->
                                         <div class="control-group">
                                           <label class="control-label" for="precio">Precio</label>
@@ -112,22 +113,24 @@
 
                                           </div>
                                         </div>
-
+                                
                                         <!-- Textarea -->
                                         <div class="control-group">
                                           <label class="control-label" for="Descripcion">Descripción</label>
                                           <div class="controls">                     
-                                            <textarea id="Descripcion" name="Descripcion"></textarea>
+                                            <textarea id="Descripcion" name="descripcion"></textarea>
                                           </div>
-                                        </div>                                        
+                                        </div>   
+ 
+                                    <!--IMAGEN-->                                                          
                                    		<div class="form-group">
-                                    		<input id="file-1" type="file" class="file" multiple="true" data-preview-file-type="any"/>
+                                    		<input id="file-1" type="file" class="file" name="imagen" multiple="true" data-preview-file-type="any"/>
                                     	</div>
                                     	<div id="bot-articulo">
                                     		<button id="search_bttn" class="button btn btnBold" type="submit">Subir articulo nuevo</button>
                                     	</div>
                                        </fieldset>
-                                </form>
+                                </form> 
                             </div>
                         </div>
                         </div>
