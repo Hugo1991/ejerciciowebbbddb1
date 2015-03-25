@@ -13,22 +13,23 @@
 <body>
 <div id="pagina">
     <div id="super">
-    	<header>
-        	<h1 id="logo" class="logo" itemscope="" itemtype="http://schema.org/Organization">
-            	<a itemprop="url" href="/" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
-					<img itemprop="logo" src="img/poxmania.png" alt="Poxmania"/>
-				</a>
-        	</h1>
-       		<form class="search" id="searchForm" method="GET"  action="/index">
-	       		<fieldset>
-		      		<span class="icon-search"></span>
-		      		<input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
-		      		<input type="hidden" value="keyword_search" name="subaction"/>
-		      		<button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
-	       		</fieldset>
-        	</form>	
-        	<div class="toolbar">
-            	<button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
+    <header>
+        <h1 id="logo" class="logo" itemscope="" itemtype="http://schema.org/Organization">
+            <a itemprop="url" href="/" title="back_to_home"  onclick="Webtrends.multiTrack({argsa: ['WT.dl', '99','DCSext.hdr_type','logo PIX']})">
+				<img itemprop="logo" src="img/poxmania.png" alt="Poxmania"/>
+			</a>
+        </h1>
+       <form class="search" id="searchForm" method="POST"  action="/index">
+	       <fieldset>
+		      <span class="icon-search"></span>
+		      <input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
+		      <input type="hidden" value="keyword_search" name="subaction"/>
+		      <button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
+	       </fieldset>
+        </form>	
+        <div class="toolbar">
+            
+            <button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
             	<a href="/mostrarCarrito">
                     <button id="search_bttn" class="button btn btnBold" type="submit">
                         Cesta
@@ -37,182 +38,71 @@
                         </span>
                     </button>
                 </a>
-        	</div>
-    	</header>
-    	<div id="seleccion">
-        	<ul class="nav">
-        	    <li><a a onclick="show('PRODUCTOS')">Productos</a></li>
-            	<li><a a onclick="show('PEDIDOS')">Pedidos</a></li>
-        	</ul>
-    	</div>
+        </div>
+    </header>
+    <div id="seleccion">
+        <ul class="nav">
+                       <li><a href="/">Home</a></li>
+            <li><a href="/index?find=Pequeños electrodomesticos">Pequeños electrodomésticos</a></li>
+            <li><a href="/index?find=Televisiones">Televisiones</a></li>
+			<li><a href="/index?find=Informatica">Informatica</a></li>
+            <li><a href="/index?find=Videoconsolas">Videoconsolas</a></li>
+        </ul>
+    </div>
     </div>
     <div id="cuerpo">      
-    <!--Ignacio de lucas & Hugo Fernandez Visier-->
-		<div class="panel panel-default" id="contenido">            
-        	<div class="container-fluid">
-                <div id="PRODUCTOS">
-        		<div id="informacion">
-        			<div class="panel panel-default" id="infor">
-        				<div class="panel-heading" id="titulo">
-        					<h3><p th:text="|${categorias}|"/></h3>
-        				</div>
-        				<div class="panel-body" id="panel">
-                            <div id="catalogo">
-        					<p th:each="producto : ${productos}">
-        							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
-										<div class="prod_list">
-											<div id="imgProd_nomProd">
-												<img th:src="|${producto.getImagen()}|" id="img_prod"/>
-        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" th:text="|${producto.getNombre()}|"/>
-											</div>
-        									<div id="precioInfo">
-        										<h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/>
-        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" > 
-        											<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
-        										</a>
-        									</div>         
-                                                <form id="admin-bor" th:action="@{/borrarProducto}" method="POST">
-                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
-                                                	<button class="eliminar" type="submit">Eliminar x</button>
-                                                </form>
-										</div>
-									</div>
-        						
-							</p>
-                        </div>
-                        <div id="subir-imagen">
-                            <div class="container">      
-                                <form method="POST" th:action="@{/addproducto}" enctype="multipart/form-data">
-                                   <fieldset>
+                <!--Ignacio de lucas & Hugo Fernandez Visier-->
+                <div class="panel panel-default" id="contenido">            
+                    <div class="container-fluid">
+                        <div id="informacion">
+                            <div class="panel panel-default" id="infor">
+                                <div class="panel-heading" id="titulo">
+                                    <h3><p th:text="|${producto.getNombre()}|"/></h3>
+                                </div>
+                                <div class="panel-body" id="panel">
+                                          <div  class="panel panel-default" id="mostrar">
+				                        		<div class="prod_list">
+					                       			<div id="imgProd_nomProd">
+						                      			<img th:src="|${producto.getImagen()}|" id="img_prod"/>
+                                               			<a th:href="@{/producto(idProducto=${producto.getId()})}" 
+															th:text="|${producto.getNombre()}|"/>
+															<span id="descrip-pro">
+                                                                <h2>Descripción</h2>
+                                                                <hr>
+                                                                <ins  itemprop="info" th:text="|${producto.getDescripcion()}|"/>
+								                		</span>
+					                       			</div>
 
-                                        <!-- Form Name -->
-                                        <legend>Nuevo producto</legend>
-
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                          <label class="control-label" for="textinput">Modelo</label>
-                                          <div class="controls">
-                                            <input id="textinput" name="nombre" type="text" placeholder="Modelo" class="input-medium" required="true"/>
-
-                                          </div>
-                                        </div>
- 										<div class="control-group">
-                                          <label class="control-label" for="textinput">Modelo</label>
-                                          <div class="controls">
-                                            <input id="textinput" name="categoria" type="text" placeholder="Modelo" class="input-medium" required="true"/>
-
-                                          </div>
-                                        </div>
-
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                          <label class="control-label" for="precio">Precio</label>
-                                          <div class="controls">
-                                            <input id="precio" name="precio" type="text" placeholder="Precio" class="input-medium"/>
-
-                                          </div>
-                                        </div>
-
-                                        <!-- Textarea -->
-                                        <div class="control-group">
-                                          <label class="control-label" for="Descripcion">Descripción</label>
-                                          <div class="controls">                     
-                                            <textarea id="Descripcion" name="Descripcion"></textarea>
-                                          </div>
-                                        </div>                                        
-                                   		<div class="form-group">
-                                    		<input id="file-1" type="file" class="file" multiple="true" data-preview-file-type="any"/>
-                                    	</div>
-                                    	<div id="bot-articulo">
-                                    		<button id="search_bttn" class="button btn btnBold" type="submit">Subir articulo nuevo</button>
-                                    	</div>
-                                       </fieldset>
-                                </form>
+                                            		<div id="precioInfo">
+                                                		<span class="precioListProd">
+							                         		<ins itemprop="precio" th:text="|${producto.getPrecio()}|+&euro;">&nbsp;€</ins>
+                                                    		<span>iva incluido</span>
+								                		</span>
+								                		
+                            						</div>
+                                        		</div>
+                                        	</div>
+                                
+                                <div id="enviar_cesta" class="cesta">
+                                    <div class="panel panel-default" id="hpedido">
+										<form th:if="|${producto.getId()}|" th:action="@{/addCarrito}" method="POST">
+                                        <input type="hidden" name="idProducto" th:value="${producto.getId()}" /> 
+                                        <input type="hidden" name="cantidad" value="1" /> 
+                                        
+                                            <button id="search_bttn" class="button btn btnBold" type="submit">A&ntilde;adir al carrito</button>
+                                        
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        </div>
-        			</div>
-        		</div>
+                        </div>  
+                    </div> 
+                
+                    <footer></footer>
                 </div>
-                <div id="PEDIDOS" style="display:none;">
-                            		<div id="informacion">
-        			<div class="panel panel-default" id="infor">
-        				<div class="panel-heading" id="titulo">
-        					<h3><p th:text="|${categorias}|"/></h3>
-        				</div>
-        				<div class="panel-body" id="panel">
-                            <div id="catalogo">
-        					<p th:each="producto : ${productos}">
-        							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
-										<div class="Adm-pedido">
-                                        <div class="row">
-                                            <div class="col-xs-5">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4>De: <a href="#">nombre usuario</a></h4>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        <span>Nombre</span>
-                                                        <span>PrecioTotal€</span>
-                                                        <button id="search_bttn" class="btn btn-default" data-toggle="modal" data-target="#Infom-pedido">Ver Pedido</button>
-                                                        <div class="modal fade" id="Infom-pedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content"> 
-                                                                    <div class="modal-header"> 
-                                                                    <button type="button" class="close" data-dismiss="modal">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                        <span class="sr-only">Cerrar</span>
-                                                                    </button> 
-                                                                    <h4 class="modal-title" id="myModalLabel">Informe del pedido</h4> 
-                                                                    </div> 
-                                                                    <div id="Infom-pedido" class="modal-body">   
-                                                                        <div>
-                                                                            <table class="table">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>#</th>
-                                                                                        <th>Nombre</th>
-                                                                                        <th>Cantidad</th>
-                                                                                        <th>Coste</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-<!--Seccion a repetir-->
-                                                                                    <tr>
-                                                                                        <td><img th:src="|${producto.getImagen()}|" id="img_prod"/></td>
-                                                                                        <td><a th:href="@{/producto(idProducto=${producto.getId()})}" 
-															th:text="|${producto.getNombre()}|"/></td>
-                                                                                        <td>Cantidad</td>
-                                                                                        <td><a class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/></td>
-<!-- fin Seccion a repetir-->
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div> 
-                                                                    <div class="modal-footer">
-                                                                        <h2>Total:</h2>
-                                                                    </div> 
-                                                                </div> 
-                                                            </div> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-										</div>
-									</div>
-							</p>
-                        </div> 
-
-        				</div>
-        			</div>
-        		</div>  
-                </div>
-        	</div> 
-			<footer></footer>
+                
+    		</div>
 		</div>
-	</div>
-</div>
+		</div>
 </body>
 </html>

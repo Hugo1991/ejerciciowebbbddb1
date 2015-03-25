@@ -64,8 +64,10 @@
 						                      			<img th:src="|${producto.getImagen()}|" id="img_prod"/>
                                                			<a th:href="@{/producto(idProducto=${producto.getId()})}" 
 															th:text="|${producto.getNombre()}|"/>
-															<span>
-								                			<ins itemprop="info" th:text="|${producto.getDescripcion()}|"/>
+															<span id="descrip-pro">
+                                                                <h2>Descripción</h2>
+                                                                <hr/>
+                                                                <ins  itemprop="info" th:text="|${producto.getDescripcion()}|"/>
 								                		</span>
 					                       			</div>
 

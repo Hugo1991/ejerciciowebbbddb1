@@ -223,7 +223,7 @@ width: 670px;
 
 #precioInfo  {
     position: absolute;
-	top:30px;
+	top:24px;
 	right:40px;
     width: 140px; 
     text-align: right;
@@ -475,4 +475,12 @@ div #enviar_cesta button#search_bttn{
 .Adm-pedido button{
     margin-left: 400px;
     
+}
+.prod_list  #descrip-pro{
+    position: absolute;
+    margin-left: 80px;
+    margin-top: -20px;
+    width: 400px;
+    height: 40px;
+    padding-bottom: 1 auto;
 }
