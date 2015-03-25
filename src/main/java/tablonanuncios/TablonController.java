@@ -61,14 +61,14 @@ public class TablonController {
 		}
 		return mv;
 	}
-	@RequestMapping("/indexPrice")
-	public ModelAndView indexPrice(HttpSession sesion, String find) {
+	@RequestMapping(value="/indexPrice",method=RequestMethod.GET)
+	public ModelAndView indexPrice(HttpSession sesion, Double precioMin,Double precioMax) {
 		ArrayList<Producto> productos=new ArrayList<Producto>();
 		for(Producto p:repository.findAll())
-			if (p.getCategoria().contains(find) || p.getNombre().contains(find)||p.getDescripcion().contains(find))
+			if ((p.getPrecio()>=precioMin) && (p.getPrecio()<=precioMax))
 				productos.add(p);
 		//añadiendo las categorias
-		ModelAndView mv = new ModelAndView("index").addObject("productos",productos).addObject("categorias",find).addObject("carrito", carrito);
+		ModelAndView mv = new ModelAndView("index").addObject("productos",productos).addObject("carrito", carrito);
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
 		}
