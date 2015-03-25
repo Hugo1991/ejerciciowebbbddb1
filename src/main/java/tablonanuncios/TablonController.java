@@ -155,14 +155,27 @@ public class TablonController {
 		String fileName = imagen.getName() + ".jpg";
 		if (!imagen.isEmpty()) {
 			   try {
-				   File filesFolder = new File(FILES_FOLDER);
+				   System.out.println("pasa 1");
+				   File filesFolder = new File("/src/main/resources/static/img/");
+				   System.out.println("pasa 2");
 				   if (!filesFolder.exists()) {
+					   System.out.println("carpeta no existe");
 					   filesFolder.mkdirs();
+					   System.out.println("pasa 3");
 				   }
-				   File uploadedFile = new File("img/"+ fileName);
+				   
+				   File uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
+				   System.out.println("pasa 4");
 				   imagen.transferTo(uploadedFile);
+				   System.out.println("pasa 5");
 				   System.out.println(uploadedFile);
-			   }catch(Exception e){}
+			   }catch(Exception e){
+				   System.out.println("error subiendo");
+			   }
+		}else{
+			
+			
+			System.out.println("archivo vacio");
 		}
 		repository.save(new Producto(nombre, categoria,precio,descripcion,fileName));
 		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
