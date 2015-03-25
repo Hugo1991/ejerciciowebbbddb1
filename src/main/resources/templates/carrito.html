@@ -69,12 +69,12 @@
 												th:text="|${producto.getProducto().getNombre()}|"/>
 					                       </div>
                                             <div class="cantidad">
-                                                <form>
-                                                    <textarea type="text" class="estilotextarea" readonly="true"></textarea>
-                                                
-                                                    <button>Actualizar cantidad</button>
+												<form th:action="@{/addCarrito}" method="POST">
+													<input th:value="${producto.getProducto().getId()}" type="hidden" th:name="idProducto"/>
+                                                    <textarea type="text" class="estilotextarea" name="cantidad" th:text="|${producto.getCantidad()}|"/>                                                		
+                                            		<button id="search_bttn" type="submit">actualizar cantidad</button>
                                                 </form>
-                                                <form action="/eliminarCarrito" method="GET">
+                                                <form action="/eliminarCarrito" method="POST">
                                                 	<input th:value="${producto.getProducto().getId()}" type="hidden" th:name="idProducto"/>
                                                 	<button class="eliminar" type="submit">x Eliminar</button>
                                                 </form>

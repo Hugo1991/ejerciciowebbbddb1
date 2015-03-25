@@ -18,6 +18,14 @@ public class CarritoProd {
 		cantidad+=1;
 		
 	}
+	public void setCantidad(int cantidad){
+		this.cantidad=cantidad;
+		
+	}
+	public void restaCantidad(){
+		
+		cantidad--;
+	}
 	public int getCantidad(){
 		
 		return cantidad;

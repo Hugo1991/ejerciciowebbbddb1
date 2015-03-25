@@ -27,7 +27,7 @@ public class Carrito {
 		u=l;
 	}
 	
-	public void addProducto(Producto p){
+	public void addProducto(Producto p,int cantidad){
 		boolean encontrado=false;
 		 CarritoProd pi;
 
@@ -42,7 +42,7 @@ public class Carrito {
 				pi = iterador.next();
 				if (pi.existe(p)){
 					System.out.println("producto igual");
-					pi.sumaCantidad();
+					pi.setCantidad(cantidad);
 					encontrado=true;
 				}
 				
@@ -59,13 +59,16 @@ public class Carrito {
 	public void removeProducto(Producto p){
 		for(CarritoProd pr:productos){
 			if(pr.getProducto().getId()==(p.getId())){
-				productos.remove(pr);
-					break;
+				if (pr.getCantidad()>=2)
+					pr.restaCantidad();
+				else
+					productos.remove(pr);
+				break;
 					
 				}
 			}
 			
-		//CalcularPrecioFinal();
+		calcularPrecioTotal();
 	}
 	/*public int CalcularCantidadProducto(Producto p){
 		int cont=0;

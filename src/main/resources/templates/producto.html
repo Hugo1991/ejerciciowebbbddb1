@@ -83,6 +83,8 @@
                                     <div class="panel panel-default" id="hpedido">
 										<form th:if="|${producto.getId()}|" th:action="@{/addCarrito}" method="POST">
                                         <input type="hidden" name="idProducto" th:value="${producto.getId()}" /> 
+                                        <input type="hidden" name="cantidad" value="1" /> 
+                                        
                                             <button id="search_bttn" class="button btn btnBold" type="submit">A&ntilde;adir al carrito</button>
                                         
                                         </form>

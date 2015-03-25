@@ -13,7 +13,6 @@ public class DataBaseUsage implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository repository;
-	private CarritoRepository repositorye;
 	//private PedidosRepository repositorioPedidos;
 	@Override
 	public void run(String... args) throws Exception {
@@ -43,7 +42,6 @@ public class DataBaseUsage implements CommandLineRunner {
         repository.save(new Producto("Microsoft - Xbox 360 250Gb, Negra", "Videoconsolas","img/xbox.jpg","La Xbox 360 dispone del mejor entretenimiento en juegos. Además, podrás aprovecharla para ver películas con su lector de DVD",239d));
         repository.save(new Producto("Wii U Premium, 32Gb + Mario Kart 8 + New Super Mario Bros U", "Videoconsolas","img/WiiU.jpg","Wii U es una consola que ofrece diversión para todos lo públicos, juega con tu familia, con tus amigos y con quien tu quieras.",314d));
         
-        repositorye.save(new Carrito(""));
                 // fetch all customers
         Iterable<Producto> productos = repository.findAll();
         System.out.println("Customers found with findAll():");
