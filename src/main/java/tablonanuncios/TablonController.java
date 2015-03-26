@@ -34,16 +34,14 @@ public class TablonController {
 	private ArrayList<Pedido> pedidos=new ArrayList<Pedido>();
 	private Carrito carrito=new Carrito("as");
 	private Producto producto=new Producto();
-	
+	private Usuario usuario=new Usuario();
 	@RequestMapping("/")
 	public ModelAndView index(HttpSession sesion) {
 		ModelAndView mv = new ModelAndView("index").addObject("productos",repository.findAll()).addObject("carrito",carrito);
 
 		if (sesion.isNew()) {
 			mv.addObject("saludo", "Bienvenido!!");
-			 
-			carrito=new Carrito("as");
-			//sesion.setAttribute("carrito", carrito.getId());
+			sesion.setAttribute("usuario", usuario);
 		}
 		return mv;
 	}
@@ -61,23 +59,20 @@ public class TablonController {
 		return mv;
 	}
 	@RequestMapping(value="/indexPrice",method=RequestMethod.GET)
-	public ModelAndView indexPrice(HttpSession sesion, Double precioMin,Double precioMax) {
+	public ModelAndView indexPrice(Double precioMin,Double precioMax) {
 		ArrayList<Producto> productos=new ArrayList<Producto>();
 		for(Producto p:repository.findAll())
 			if ((p.getPrecio()>=precioMin) && (p.getPrecio()<=precioMax))
 				productos.add(p);
 		//añadiendo las categorias
 		ModelAndView mv = new ModelAndView("index").addObject("productos",productos).addObject("carrito", carrito);
-		if (sesion.isNew()) {
-			mv.addObject("saludo", "Bienvenido!!");
-		}
 		return mv;
 	}
 
 
 	//METDOS DE PRODUCTOS
 	@RequestMapping("/mostrarProducto")
-	public ModelAndView mostrar(HttpSession sesion,@RequestParam long idProducto) {
+	public ModelAndView mostrar(@RequestParam long idProducto) {
 		Producto producto = repository.findOne(idProducto);
 		return new ModelAndView("producto").addObject("producto", producto).addObject("carrito",carrito);
 	}
@@ -85,7 +80,7 @@ public class TablonController {
 	
 	//METODOS DE CESTA DE LA COMPRA
 	@RequestMapping(value="/addCarrito",method=RequestMethod.POST)
-	public ModelAndView anadirCarrito(HttpSession sesion,@RequestParam Long idProducto,int cantidad){
+	public ModelAndView anadirCarrito(@RequestParam Long idProducto,int cantidad){
 		if (idProducto!=null){
 			producto = repository.findOne(idProducto);
 			carrito.addProducto(producto,cantidad);
@@ -94,11 +89,11 @@ public class TablonController {
 		return new ModelAndView("/");
 	}
 	@RequestMapping("/mostrarCarrito")
-	public ModelAndView mostrarCarrito(HttpSession sesion){
+	public ModelAndView mostrarCarrito(){
 			return new ModelAndView("carrito").addObject("producto", producto).addObject("carrito",carrito);
 	}
 	@RequestMapping(value="/eliminarCarrito",method=RequestMethod.POST)
-	public ModelAndView eliminarCarrito(HttpSession sesion, Long idProducto){
+	public ModelAndView eliminarCarrito(Long idProducto){
 		producto = repository.findOne(idProducto);		
 		carrito.removeProducto(producto);
 		return new ModelAndView("carrito").addObject("producto",producto).addObject(carrito); 
@@ -107,14 +102,14 @@ public class TablonController {
 	
 	//METODOS DE PEDIDO
 	@RequestMapping(value="/crearPedido",method=RequestMethod.POST)
-	public ModelAndView crearPedido(HttpSession sesion){
+	public ModelAndView crearPedido(){
 		Pedido pedido=new Pedido();
 		pedido.setCarrito(carrito);
 		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject("carrito",carrito);
 		
 	}
 	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
-	public ModelAndView confirmarPedido(HttpSession sesion,@ModelAttribute("pedido") Pedido pedido, @RequestParam String nombre1, @RequestParam String apellidos){
+	public ModelAndView confirmarPedido(@ModelAttribute("pedido") Pedido pedido, @RequestParam String nombre1, @RequestParam String apellidos){
 		Usuario usuario =new Usuario(nombre1,apellidos);
 		pedido.setUsuario(usuario);
 		pedidos.add(pedido);
@@ -125,12 +120,12 @@ public class TablonController {
 	}
 	//Pagina de administracion
 	@RequestMapping("/sesion")
-	public ModelAndView sesion(){
+	public ModelAndView sesion(HttpSession sesion){
 		Administrador admin=new Administrador();
 		return new ModelAndView("sesion").addObject("admin", admin).addObject("carrito",carrito);
 	}
 	@RequestMapping(value="admin",method=RequestMethod.POST)
-	public ModelAndView logIn(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
+	public ModelAndView logIn(@ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
 		if ((nombre==null)||(pass==null))
 			return new ModelAndView("loginError").addObject(carrito);
 		else{
@@ -142,7 +137,7 @@ public class TablonController {
 		}
 	}
 	@RequestMapping("/mostrarPedido")
-	public ModelAndView mostrarPedido(HttpSession sesion, @ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
+	public ModelAndView mostrarPedido(@ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
 		ModelAndView mv=new ModelAndView("administracion").addObject("productos",repository.findAll());//.addObject("pedidos",repositorio.findAll());
 		
 		if (nombre.equalsIgnoreCase(admin.getNombre()) && pass.equalsIgnoreCase(admin.getPass()))
@@ -151,38 +146,37 @@ public class TablonController {
 			return new ModelAndView("loginError");
 	}
 	@RequestMapping(value="/addProducto",method=RequestMethod.POST)
-	public ModelAndView insertar(HttpSession sesion,@RequestParam String nombre,@RequestParam String categoria,@RequestParam Double precio,@RequestParam String descripcion,@RequestParam("imagen") MultipartFile imagen) {
-		String fileName = imagen.getName() + ".jpg";
+	public ModelAndView insertar(@RequestParam String nombre,@RequestParam String categoria,@RequestParam Double precio,@RequestParam String descripcion,@RequestParam("imagen") MultipartFile imagen) {
+		String fileName = imagen.getOriginalFilename();
+		File uploadedFile=new File("");
 		if (!imagen.isEmpty()) {
 			   try {
-				   System.out.println("pasa 1");
-				   File filesFolder = new File("/src/main/resources/static/img/");
-				   System.out.println("pasa 2");
+				   File filesFolder = new File("src/main/resources/static/img/");
 				   if (!filesFolder.exists()) {
 					   System.out.println("carpeta no existe");
-					   filesFolder.mkdirs();
-					   System.out.println("pasa 3");
 				   }
 				   
-				   File uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
-				   System.out.println("pasa 4");
+				    uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
 				   imagen.transferTo(uploadedFile);
-				   System.out.println("pasa 5");
-				   System.out.println(uploadedFile);
 			   }catch(Exception e){
-				   System.out.println("error subiendo");
 			   }
 		}else{
 			
 			
 			System.out.println("archivo vacio");
 		}
-		repository.save(new Producto(nombre, categoria,precio,descripcion,fileName));
+		repository.save(new Producto(nombre, categoria,precio,descripcion,"img/"+fileName));
 		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
 	}
 	@RequestMapping(value="/borrarProducto",method=RequestMethod.POST)
 	public ModelAndView borrar(@RequestParam Long idProducto, HttpSession sesion) {
 		repository.delete(idProducto);
+		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
+	}
+	@RequestMapping(value="/modificarPrducto",method=RequestMethod.POST)
+	public ModelAndView modificarProducto(@RequestParam Long idProducto, HttpSession sesion) {
+		
+		
 		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
 	}
 	/*@RequestMapping("/pedidos")
