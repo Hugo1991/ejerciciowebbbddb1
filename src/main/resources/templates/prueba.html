@@ -58,7 +58,7 @@
         				</div>
         				<div class="panel-body" id="panel">
                             <div id="catalogo">
-        					<p th:each="producto : ${productos}">
+        					<div th:each="producto : ${productos}">
         							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
 										<div class="prod_list">
 											<div id="imgProd_nomProd">
@@ -77,7 +77,8 @@
                                                 </form>
                                             <button class="bot-editar" onclick="mostrarEdicion('editar')" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
                                             <div id="editar" >
-                                                <form class="form-horizontal" role="form" action="#" th:action=""  method="POST">
+                                                <form class="form-horizontal" role="form" action="#" 
+                                                      method="POST">
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
                                                     <div class="col-lg-3">
@@ -86,13 +87,13 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Precio</label>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-lg-3 ">
                                                         <input type="name" class="form-control"  placeholder="precio" name="precio" th:field=""/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Descripción</label>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-lg-3 ">
                                                         <textarea class="form-control" placeholder="Descripción del producto" rows="1"></textarea>
                                                     </div>
                                                 </div>
@@ -104,13 +105,14 @@
 										</div>
 									</div>
         						
-							</p>
+							</div>
                         </div>
                         <div  id="nuevo_prod">
                             <div class="container">
                                 <button id="search_bttn" class="button btn btnBold"  data-toggle="modal" data-target="#plantilla-producto">Nuevo Producto...</button>
                             </div>
                         </div>
+                        
                         <div class="modal fade" id="plantilla-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">                                    
                                 <div class="modal-content">                                     
@@ -122,7 +124,7 @@
                                         <h4 class="modal-title" id="myModalLabel">Producto</h4> 
                                     </div> 
                                     <div id="plantilla-producto" class="modal-body"> 
-                                        <form class="form-horizontal" role="form" action="#" th:action=""  method="POST">
+                                        <form class="form-horizontal" role="form" action="#"  method="POST">
                                             <div class="form-group">
                                                 <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
                                                 <div class="col-lg-3">
@@ -158,6 +160,7 @@
                                 </div> 
                             </div> 
                         </div>
+                       
                         </div>
         			</div>
         		</div>
