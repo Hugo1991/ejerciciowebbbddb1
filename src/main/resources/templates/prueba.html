@@ -75,8 +75,8 @@
                                                 	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
                                                     <button class="eliminar" type="submit"><span class="glyphicon glyphicon-remove-sign"></span>Eliminar</button>
                                                 </form>
-                                            <button class="bot-editar" onclick="mostrarEdicion('editar')" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
-                                            <div id="editar" >
+                                            <button class="bot-editar" onclick="mostrarEdicion('editar',${producto.getId()})" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
+                                            <div id="${producto.getId()}" class="editar" >
                                                 <form class="form-horizontal" role="form" action="#" 
                                                       method="POST">
                                                 <div class="form-group">
@@ -100,7 +100,7 @@
                                                 <button  class="btn btn-success guardar">Guardar</button>
                                                 
                                                 </form>
-                                                <button onclick="mostrarEdicion('salir-editar')" class="btn btn-default salir">salir</button>
+                                                <button onclick="mostrarEdicion('salir-editar',${producto.getId()})" class="btn btn-default salir">salir</button>
                                             </div>
 										</div>
 									</div>

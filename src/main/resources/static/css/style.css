@@ -480,32 +480,28 @@ div #enviar_cesta button#search_bttn{
     margin-top: 10px;
 }
 
-#catalogo .prod_list #editar{
+#catalogo .prod_list .editar{
  position:relative;
     margin-top: -30;
     margin-left: 95px;
     background: #fff;
     width: 550px;
     height: 120px;
-    display: none;
+    display: block;
 }
 #catalogo .prod_list .form-group{
     width: 200px;
     padding-left: 6px;
 }
 #catalogo .prod_list .col-lg-2{
-width: 80;
+    width: 80;
     padding-left: 10px;
     
 }
 #catalogo .prod_list input{
-    margin-left: 70px;
-    margin-top: -24px;
     width: 80;
 }
-#catalogo .prod_list input{
-    width: 80;
-}
+
 #catalogo .prod_list .form-group:nth-child(2){
     width: 200px;
     margin-top: -50px;
@@ -513,8 +509,6 @@ width: 80;
 }
 #catalogo .prod_list  textarea{
     resize:none;
-    margin-top: -30px;
-    margin-left: 80px;
     width: 350px;
 
 }

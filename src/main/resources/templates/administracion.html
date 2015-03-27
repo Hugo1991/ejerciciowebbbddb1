@@ -58,7 +58,7 @@
         				</div>
         				<div class="panel-body" id="panel">
                             <div id="catalogo">
-        					<p th:each="producto : ${productos}">
+        					<div th:each="producto : ${productos}">
         							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
 										<div class="prod_list">
 											<div id="imgProd_nomProd">
@@ -75,8 +75,8 @@
                                                 	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
                                                     <button class="eliminar" type="submit"><span class="glyphicon glyphicon-remove-sign"></span>Eliminar</button>
                                                 </form>
-                                            <button class="bot-editar" onclick="mostrarEdicion('editar')" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
-                                            <div id="editar" >
+                                            <button class="bot-editar" onclick="mostrarEdicion('editar',|$producto.getId()|)" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
+                                            <div id="|$producto.getId()|" class="editar" >
                                                 <form class="form-horizontal" role="form" action="#" 
                                                       method="POST">
                                                 <div class="form-group">
@@ -87,25 +87,25 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Precio</label>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-lg-3 ">
                                                         <input type="name" class="form-control"  placeholder="precio" name="precio" th:field=""/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Descripción</label>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-lg-3 ">
                                                         <textarea class="form-control" placeholder="Descripción del producto" rows="1"></textarea>
                                                     </div>
                                                 </div>
                                                 <button  class="btn btn-success guardar">Guardar</button>
                                                 
                                                 </form>
-                                                <button onclick="mostrarEdicion('salir-editar')" class="btn btn-default salir">salir</button>
+                                                <button onclick="mostrarEdicion('salir-editar',|$producto.getId()|)" class="btn btn-default salir">salir</button>
                                             </div>
 										</div>
 									</div>
         						
-							</p>
+							</div>
                         </div>
                         <div  id="nuevo_prod">
                             <div class="container">
