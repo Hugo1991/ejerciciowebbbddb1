@@ -21,7 +21,7 @@
         	</h1>
        		<form class="search" id="searchForm" method="GET"  action="/index">
 	       		<fieldset>
-		      		<span class="icon-search"></span>
+		      		<span class="glyphicon glyphicon-search"></span>
 		      		<input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
 		      		<input type="hidden" value="keyword_search" name="subaction"/>
 		      		<button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
@@ -73,65 +73,90 @@
         									</div>         
                                                 <form id="admin-bor" th:action="@{/borrarProducto}" method="POST">
                                                 	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
-                                                	<button class="eliminar" type="submit">Eliminar x</button>
+                                                    <button class="eliminar" type="submit"><span class="glyphicon glyphicon-remove-sign"></span>Eliminar</button>
                                                 </form>
+                                            <button class="bot-editar" onclick="mostrarEdicion('editar')" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
+                                            <div id="editar" >
+                                                <form class="form-horizontal" role="form" action="#" th:action=""  method="POST">
+                                                <div class="form-group">
+                                                    <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
+                                                    <div class="col-lg-3">
+                                                        <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName"  class="col-lg-2 control-label">Precio</label>
+                                                    <div class="col-lg-3">
+                                                        <input type="name" class="form-control"  placeholder="precio" name="precio" th:field=""/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputName"  class="col-lg-2 control-label">Descripción</label>
+                                                    <div class="col-lg-3">
+                                                        <textarea class="form-control" placeholder="Descripción del producto" rows="1"></textarea>
+                                                    </div>
+                                                </div>
+                                                <button  class="btn btn-success guardar">Guardar</button>
+                                                
+                                                </form>
+                                                <button onclick="mostrarEdicion('salir-editar')" class="btn btn-default salir">salir</button>
+                                            </div>
 										</div>
 									</div>
         						
 							</p>
                         </div>
-                        <div id="subir-imagen">
-                            <div class="container">      
-                                <form method="POST" th:action="@{/addProducto}" action="#" enctype="multipart/form-data">
-                                   <fieldset>
-
-                                        <!-- Form Name -->
-                                        <legend>Nuevo producto</legend>
-
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                          <label class="control-label" for="textinput">Nombre</label>
-                                          <div class="controls">
-                                            <input id="textinput" name="nombre" type="text" placeholder="Nombre" class="input-medium" required="true"/>
-
-                                          </div>
-                                        </div>
- 										<div class="control-group">
-                                          <label class="control-label" for="textinput">Categoria</label>
-                                          <div class="controls">
-                                            <input id="textinput" name="categoria" type="text" placeholder="Categoria" class="input-medium" required="true"/>
-
-                                          </div>
-                                        </div>
-
-                                
-                                        <!-- Text input-->
-                                        <div class="control-group">
-                                          <label class="control-label" for="precio">Precio</label>
-                                          <div class="controls">
-                                            <input id="precio" name="precio" type="text" placeholder="Precio" class="input-medium"/>
-
-                                          </div>
-                                        </div>
-                                
-                                        <!-- Textarea -->
-                                        <div class="control-group">
-                                          <label class="control-label" for="Descripcion">Descripción</label>
-                                          <div class="controls">                     
-                                            <textarea id="Descripcion" name="descripcion"></textarea>
-                                          </div>
-                                        </div>   
- 
-                                    <!--IMAGEN-->                                                          
-                                   		<div class="form-group">
-                                    		<input id="file-1" type="file" class="file" name="imagen" multiple="true" data-preview-file-type="any"/>
-                                    	</div>
-                                    	<div id="bot-articulo">
-                                    		<button id="search_bttn" class="button btn btnBold" type="submit">Subir articulo nuevo</button>
-                                    	</div>
-                                       </fieldset>
-                                </form> 
+                        <div  id="nuevo_prod">
+                            <div class="container">
+                                <button id="search_bttn" class="button btn btnBold"  data-toggle="modal" data-target="#plantilla-producto">Nuevo Producto...</button>
                             </div>
+                        </div>
+                        <div class="modal fade" id="plantilla-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">                                    
+                                <div class="modal-content">                                     
+                                    <div class="modal-header">                                    
+                                        <button type="button" class="close" data-dismiss="modal">                                
+                                            <span aria-hidden="true">&times;</span>
+                                            <span class="sr-only">Cerrar</span>
+                                        </button> 
+                                        <h4 class="modal-title" id="myModalLabel">Producto</h4> 
+                                    </div> 
+                                    <div id="plantilla-producto" class="modal-body"> 
+                                        <form class="form-horizontal" role="form" action="#" th:action=""  method="POST">
+                                            <div class="form-group">
+                                                <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
+                                                <div class="col-lg-3">
+                                                <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputName"  class="col-lg-2 control-label">Categoria</label>
+                                                <div class="col-lg-3">
+                                                <input type="name" class="form-control"  placeholder="Categoria" name="nombre" th:field="${nombre}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputName"  class="col-lg-2 control-label">Precio</label>
+                                                <div class="col-lg-3">
+                                                <input type="name" class="form-control"  placeholder="Precio" name="nombre" th:field="${nombre}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputName"  class="col-lg-2 control-label">Descripción</label>
+                                                <div class="col-lg-3">
+                                                <textarea class="form-control" placeholder="Descripción del producto" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                    		<input id="file-1" type="file" class="file" name="imagen" multiple="true" data-preview-file-type="any"/>
+                                    	   </div>
+                                    	 </form>
+                                    </div> 
+                                    <div class="modal-footer">
+                                        <button id="search_bttn" class="button btn btnBold" type="submit">Añadir Producto</button>
+                                    </div> 
+                                </div> 
+                            </div> 
                         </div>
                         </div>
         			</div>

@@ -10,4 +10,12 @@ function show(bloq){
 }
 	
 }
+function mostrarEdicion(bloq){
+if(bloq == 'editar'){
+	document.getElementById(bloq).style.display='block';
+}
 
+if(bloq == 'salir-editar'){
+	document.getElementById('editar').style.display='none';  
+}
+}
