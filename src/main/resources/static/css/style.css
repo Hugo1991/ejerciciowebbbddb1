@@ -345,7 +345,7 @@ div #imgProd_nomProd img{
 }
 .cantidad .eliminar,
 #admin-bor button,
-.prod_list .bot-editar{
+.prod_list #bot-editar{
     color:#bf3288;
     background-color: inherit;
     border: 0;
@@ -487,7 +487,7 @@ div #enviar_cesta button#search_bttn{
     background: #fff;
     width: 550px;
     height: 120px;
-    display: block;
+    display: none;
 }
 #catalogo .prod_list .form-group{
     width: 200px;
@@ -512,7 +512,7 @@ div #enviar_cesta button#search_bttn{
     width: 350px;
 
 }
-.prod_list .bot-editar{
+.prod_list #bot-editar{
     position: absolute;
     margin-left: 500px;
     margin-top: -48px;

@@ -60,7 +60,7 @@
                             <div id="catalogo">
         					<div th:each="producto : ${productos}">
         							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
-										<div class="prod_list">
+										<div id="cos" class="prod_list">
 											<div id="imgProd_nomProd">
 												<img th:src="|${producto.getImagen()}|" id="img_prod"/>
         										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" th:text="|${producto.getNombre()}|"/>
@@ -73,10 +73,10 @@
         									</div>         
                                                 <form id="admin-bor" th:action="@{/borrarProducto}" method="POST">
                                                 	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
-                                                    <button class="eliminar" type="submit"><span class="glyphicon glyphicon-remove-sign"></span>Eliminar</button>
+                                                    <button  class="eliminar" type="submit"><span class="glyphicon glyphicon-remove-sign"></span>Eliminar</button>
                                                 </form>
-                                            <button class="bot-editar" onclick="mostrarEdicion('editar',${producto.getId()})" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
-                                            <div id="${producto.getId()}" class="editar" >
+                                            <button  th:class="${producto.getId()}" id="bot-editar" onclick="mostrarEdicion('editar',this.className)" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
+                                            <div th:id="${producto.getId()}" class="editar" >
                                                 <form class="form-horizontal" role="form" action="#" 
                                                       method="POST">
                                                 <div class="form-group">
@@ -100,7 +100,7 @@
                                                 <button  class="btn btn-success guardar">Guardar</button>
                                                 
                                                 </form>
-                                                <button onclick="mostrarEdicion('salir-editar',${producto.getId()})" class="btn btn-default salir">salir</button>
+                                                <button th:name="${producto.getId()}" onclick="mostrarEdicion('salir-editar',this.name)" class="btn btn-default salir">salir</button>
                                             </div>
 										</div>
 									</div>
