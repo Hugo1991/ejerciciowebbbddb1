@@ -82,11 +82,13 @@
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
                                                     <div class="col-lg-3">
+                                                        <input type="name" class="form-control"  name="nombre" th:value="|${producto.getNombre()}|"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Precio</label>
                                                     <div class="col-lg-3 ">
+                                                        <input type="name" class="form-control"  name="precio" th:value="|${producto.getPrecio()}|"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
