@@ -21,7 +21,7 @@
         	</h1>
        		<form class="search" id="searchForm" method="GET"  action="/index">
 	       		<fieldset>
-		      		<span class="glyphicon glyphicon-search"></span>
+		      		<span class="icon-search"></span>
 		      		<input class="searchInput" id="search" name="find" data-search-url="http://www.pixmania.es/autocomplete/q/placeholder/ajax.html" data-min-chars="1" type="search" autocomplete="off" spellcheck="false" placeholder="¿Qué estás buscando?" dir="ltr" required="true"/>
 		      		<input type="hidden" value="keyword_search" name="subaction"/>
 		      		<button id="search_bttn" class="button btn btnBold" type="submit"> Buscar</button>
@@ -41,8 +41,25 @@
     	</header>
     	<div id="seleccion">
         	<ul class="nav">
-        	    <li><a onclick="show('PRODUCTOS')">Productos</a></li>
-            	<li><a onclick="show('PEDIDOS')">Pedidos</a></li>
+        	    <li><a href="/">Home</a></li>
+            	<li><a href="/index?find=TV">TV/Video</a>
+           			<ul>
+                    	<li><a href="/index?find=Televisiones">Televisiones</a></li>
+                    	<li><a href="/index?find=Reproductores DVD">Reproductores DVD</a></li>
+                	</ul>
+            	</li>
+            	<li><a href="/index?find=Informatica">Informatica</a>
+                	<ul>
+                		<li><a href="/index?find=Portatiles">Portatiles</a></li>
+                    	<li><a href="/index?find=Sobremesas">Sobremesas</a></li>
+                	</ul>
+            	</li>
+            	<li><a href="/index?find=Grandes Electrodomesticos">Grandes Electrodomesticos</a>
+                	<ul>
+                    	<li><a href="/index?find=Lavadoras">Lavadoras</a></li>
+						<li><a href="/index?find=Neveras">Neveras</a></li>
+                	</ul>
+            	</li>
         	</ul>
     	</div>
     </div>
@@ -50,200 +67,59 @@
     <!--Ignacio de lucas & Hugo Fernandez Visier-->
 		<div class="panel panel-default" id="contenido">            
         	<div class="container-fluid">
-                <div id="PRODUCTOS">
         		<div id="informacion">
         			<div class="panel panel-default" id="infor">
         				<div class="panel-heading" id="titulo">
         					<h3><p th:text="|${categorias}|"/></h3>
         				</div>
         				<div class="panel-body" id="panel">
-                            <div id="catalogo">
-        					<div th:each="producto : ${productos}">
-        							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
-										<div id="cos" class="prod_list">
-											<div id="imgProd_nomProd">
-												<img th:src="|${producto.getImagen()}|" id="img_prod"/>
-        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" th:text="|${producto.getNombre()}|"/>
-											</div>
-        									<div id="precioInfo">
-        										<h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/>
-        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" > 
-        											<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
-        										</a>
-        									</div>         
-                                                <form id="admin-bor" th:action="@{/borrarProducto}" method="POST">
-                                                	<input th:value="${producto.getId()}" type="hidden" th:name="idProducto"/>
-                                                    <button  class="eliminar" type="submit"><span class="glyphicon glyphicon-remove-sign"></span>Eliminar</button>
-                                                </form>
-                                            <button  th:class="${producto.getId()}" id="bot-editar" onclick="mostrarEdicion('editar',this.className)" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
-                                            <div th:id="${producto.getId()}" class="editar" >
-                                                <form class="form-horizontal" role="form" action="#" 
-                                                      method="POST">
-                                                <div class="form-group">
-                                                    <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
-                                                    <div class="col-lg-3">
-                                                        <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inputName"  class="col-lg-2 control-label">Precio</label>
-                                                    <div class="col-lg-3 ">
-                                                        <input type="name" class="form-control"  placeholder="precio" name="precio" th:field=""/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inputName"  class="col-lg-2 control-label">Descripción</label>
-                                                    <div class="col-lg-3 ">
-                                                        <textarea class="form-control" placeholder="Descripción del producto" rows="1"></textarea>
-                                                    </div>
-                                                </div>
-                                                <button  class="btn btn-success guardar">Guardar</button>
-                                                
-                                                </form>
-                                                <button th:name="${producto.getId()}" onclick="mostrarEdicion('salir-editar',this.name)" class="btn btn-default salir">salir</button>
-                                            </div>
-										</div>
-									</div>
-        						
-							</div>
-                        </div>
-                        <div  id="nuevo_prod">
-                            <div class="container">
-                                <button id="search_bttn" class="button btn btnBold"  data-toggle="modal" data-target="#plantilla-producto">Nuevo Producto...</button>
-                            </div>
-                        </div>
-                        
-                        <div class="modal fade" id="plantilla-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">                                    
-                                <div class="modal-content">                                     
-                                    <div class="modal-header">                                    
-                                        <button type="button" class="close" data-dismiss="modal">                                
-                                            <span aria-hidden="true">&times;</span>
-                                            <span class="sr-only">Cerrar</span>
-                                        </button> 
-                                        <h4 class="modal-title" id="myModalLabel">Producto</h4> 
-                                    </div> 
-                                    <div id="plantilla-producto" class="modal-body"> 
-                                        <form class="form-horizontal" role="form" action="#"  method="POST">
-                                            <div class="form-group">
-                                                <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
-                                                <div class="col-lg-3">
-                                                <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputName"  class="col-lg-2 control-label">Categoria</label>
-                                                <div class="col-lg-3">
-                                                <input type="name" class="form-control"  placeholder="Categoria" name="nombre" th:field="${nombre}"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputName"  class="col-lg-2 control-label">Precio</label>
-                                                <div class="col-lg-3">
-                                                <input type="name" class="form-control"  placeholder="Precio" name="nombre" th:field="${nombre}"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputName"  class="col-lg-2 control-label">Descripción</label>
-                                                <div class="col-lg-3">
-                                                <textarea class="form-control" placeholder="Descripción del producto" rows="3"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                    		<input id="file-1" type="file" class="file" name="imagen" multiple="true" data-preview-file-type="any"/>
-                                    	   </div>
-                                    	 </form>
-                                    </div> 
-                                    <div class="modal-footer">
-                                        <button id="search_bttn" class="button btn btnBold" type="submit">Añadir Producto</button>
-                                    </div> 
-                                </div> 
-                            </div> 
-                        </div>
-                       
-                        </div>
-        			</div>
-        		</div>
-                </div>
-                <div id="PEDIDOS" style="display:none;">
-                            		<div id="informacion">
-        			<div class="panel panel-default" id="infor">
-        				<div class="panel-heading" id="titulo">
-        					<h3><p th:text="|${categorias}|"/></h3>
-        				</div>
-        				<div class="panel-body" id="panel">
-                            <div id="catalogo">
-        					<p th:each="pedido : ${pedidos}">
-        							<div th:if="(${pedidos} != null)" class="panel panel-default" id="pro">
-										<div class="Adm-pedido">
-                                        <div class="row">
-                                            <div class="col-xs-5">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4>De: <a href="#">nombre usuario</a></h4>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        <span>Nombre</span>
-                                                        <span>PrecioTotal€</span>
-                                                        <button id="search_bttn" class="btn btn-default" data-toggle="modal" data-target="#Infom-pedido">Ver Pedido</button>
-                                                        <div class="modal fade" id="Infom-pedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content"> 
-                                                                    <div class="modal-header"> 
-                                                                    <button type="button" class="close" data-dismiss="modal">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                        <span class="sr-only">Cerrar</span>
-                                                                    </button> 
-                                                                    <h4 class="modal-title" id="myModalLabel">Informe del pedido</h4> 
-                                                                    </div> 
-                                                                    <div id="Infom-pedido" class="modal-body">   
-                                                                        <div>
-                                                                            <table class="table">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>#</th>
-                                                                                        <th>Nombre</th>
-                                                                                        <th>Cantidad</th>
-                                                                                        <th>Coste</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody th:each="producto : ${pedido.getCarrito().getCarrito()}">
-<!--Seccion a repetir-->														
-                                                                                    <tr>
-                                                                                        <td><img th:src="|${producto.getImagen()}|" id="img_prod"/></td>
-                                                                                        <td><a th:href="@{/producto(idProducto=${producto.getId()})}" 
-															th:text="|${producto.getNombre()}|"/></td>
-                                                                                        <td>Cantidad</td>
-                                                                                        <td><a class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/></td>
-<!-- fin Seccion a repetir-->
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div> 
-                                                                    <div class="modal-footer">
-                                                                        <h2>Total:</h2>
-                                                                    </div> 
-                                                                </div> 
-                                                            </div> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-										</div>
-									</div>
-							</p>
-                        </div> 
-
-        				</div>
+                            <form class="form-horizontal izq" role="form" action="#" th:action="@{/admin}"  method="POST">
+                                <h2>Administrador</h2>
+                              <div class="form-group">
+                                <label for="inputName"  class="col-lg-1 control-label">Nombre</label>
+                                <div class="col-lg-3">
+                                  <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-lg-1 control-label">Contraseña</label>
+                                <div class="col-lg-3">
+                                  <input type="password" class="form-control" placeholder="Contrasena" name="pass" />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                  <button type="submit" class="btn btn-default">Entrar</button>
+                                </div>
+                              </div>
+                            </form> 
+                            <form class="form-horizontal der pull-right" role="form" action="#" th:action="@{/usuario}"  method="POST">
+                                <h2>Usuario</h2>
+                              <div class="form-group">
+                                <label for="inputName"  class="col-lg-1 control-label">Nombre</label>
+                                <div class="col-lg-3">
+                                  <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-lg-1 control-label">Apellidos</label>
+                                <div class="col-lg-3">
+                                  <input type="name" class="form-control"  placeholder="Apellidos" name="nombre" th:field="${apellidos}"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                  <button type="submit" class="btn btn-default">Entrar</button>
+                                </div>
+                              </div>
+                            </form>  
         			</div>
         		</div>  
-                </div>
         	</div> 
 			<footer></footer>
 		</div>
 	</div>
+</div>
 </div>
 </body>
 </html>
