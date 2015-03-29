@@ -12,7 +12,7 @@ public class Usuario {
 	private String apellidos;
 	private Carrito carro = new Carrito();
 	private Producto prod;
-	
+	private Pedido pedido;
 
 	public Usuario(){}
 	public Usuario(String nombre, String apellidos){
@@ -43,5 +43,11 @@ public class Usuario {
 	public void setProductoCarrito(Producto p,int cantidad) {
 		this.carro.addProducto(p,cantidad);
 		
+	}
+	public void setPedido(Pedido pedido){
+		this.pedido=pedido;
+	}
+	public Pedido getPedido(){
+		return pedido;
 	}
 }

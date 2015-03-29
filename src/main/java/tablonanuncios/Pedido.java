@@ -2,18 +2,18 @@ package tablonanuncios;
 
 public class Pedido {
 	private Carrito carrito;
-	private Usuario usuario;
+	private String usuario;
 	public Pedido(){}
 	public Pedido(Usuario usuario,Carrito carrito){}
 	
-	public void setUsuario(Usuario usuario){
+	public void setUsuario(String usuario){
 		this.usuario=usuario;
 	}
 	public void setCarrito(Carrito carrito){
 		this.carrito=carrito;
 	}
 	
-	public Usuario getUsuario(){
+	public String getUsuario(){
 		return usuario;
 	}
 	public Carrito getCarrito(){

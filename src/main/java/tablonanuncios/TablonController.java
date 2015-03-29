@@ -29,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class TablonController{
 	private static final String FILES_FOLDER = "img";
 	private List<String> imageTitles = new ArrayList<>();
-	
 	@Autowired
 	private ProductRepository repository;
 	
@@ -112,25 +111,31 @@ public class TablonController{
 	@RequestMapping(value="/crearPedido",method=RequestMethod.POST)
 	public ModelAndView crearPedido(){
 		Pedido pedido=new Pedido();
-		pedido.setCarrito(usuario.getCarro());
 		return new ModelAndView("formularioCompra").addObject("pedido", pedido).addObject("carrito",usuario.getCarro());
 		
 	}
 	@RequestMapping(value ="/confirmarPedido", method=RequestMethod.POST)
 	public ModelAndView confirmarPedido(@ModelAttribute("pedido") Pedido pedido, @RequestParam String nombre1, @RequestParam String apellidos){
-		Usuario usuario =new Usuario(nombre1,apellidos);
-		pedido.setUsuario(usuario);
+		Carrito carrito=(Carrito)usuario.getCarro().clone();
+		
+		usuario.setNombre(nombre1);
+		usuario.setApellidos(apellidos);
+		
+		pedido.setUsuario(nombre1);
+		pedido.setCarrito(carrito);
+		
+		usuario.setPedido(pedido);
 		pedidos.add(pedido);
 		System.out.println("ahora se procedera a borrar el carrito");
-		//carrito.VaciarCesta();
-		return new ModelAndView("/").addObject("productos",repository.findAll()).addObject(usuario.getCarro());
+		usuario.getCarro().VaciarCesta();
+		return new ModelAndView("carrito").addObject("productos",repository.findAll()).addObject(usuario.getCarro());
 		
 	}
 	//Pagina de administracion
 	@RequestMapping("/sesion")
 	public ModelAndView sesion(HttpSession sesion){
 		Administrador admin=new Administrador();
-		return new ModelAndView("sesion").addObject("admin", admin).addObject("carrito",usuario.getCarro());
+		return new ModelAndView("sesion").addObject("admin", admin).addObject("carrito",usuario.getCarro()).addObject(pedidos);
 	}
 	@RequestMapping(value="admin",method=RequestMethod.POST)
 	public ModelAndView logIn(@ModelAttribute("admin") Administrador admin, @RequestParam String nombre, @RequestParam String pass){
@@ -163,9 +168,7 @@ public class TablonController{
 				   if (!filesFolder.exists()) {
 					   System.out.println("carpeta no existe");
 				   }
-				   System.out.println("ahora subira la foto");
 				    uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
-				    System.out.println("ha subido la foto");
 				   imagen.transferTo(uploadedFile);
 			   }catch(Exception e){
 			   }

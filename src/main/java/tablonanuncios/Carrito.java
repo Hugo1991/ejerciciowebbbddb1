@@ -14,14 +14,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class Carrito {
+public class Carrito implements Cloneable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private ArrayList<CarritoProd> productos=new ArrayList<CarritoProd>();
-	private Double precioFinal=0.0;
+	private Double precioFinal=1000.0;
 	
 	public Carrito(){}
 	public Carrito(String l){
@@ -31,8 +30,7 @@ public class Carrito {
 	
 	public void addProducto(Producto p,int cantidad){
 		boolean encontrado=false;
-		 CarritoProd pi;
-
+		CarritoProd pi;
 		if (productos.isEmpty()){
 			System.out.println("carrito vacio"+p.getId());
 			CarritoProd cp=new CarritoProd(p);
@@ -72,35 +70,21 @@ public class Carrito {
 			
 		calcularPrecioTotal();
 	}
-	/*public int CalcularCantidadProducto(Producto p){
-		int cont=0;
-		for(Producto x:productos){
-			if (x.equals(p)){
-				cont++;	
-			} 
-		}
-		return cont;
-	}
-	private void CalcularPrecioFinal(){
-		precioFinal=0.0;
-		for(Producto x:productos){
-			precioFinal+=x.getPrecio()*cantidad;
-		}
-	}
+
 	public void VaciarCesta(){
 		try{
-		for(Producto p:productos){
-			removeProducto(p);
+		for(CarritoProd p:productos){
+			removeProducto(p.getProducto());
 			System.out.println(p+" borrado");
 		}
 		}catch(Exception e){
 			System.out.println("error borrando producto");
 		}
 		finally{
-			productos=new ArrayList<Producto>();
+			productos=new ArrayList<CarritoProd>();
 			precioFinal=0.0;
 		}
-	}*/
+	}
 	public int getNumeroProductos(){
 		int cantidad=0;
 
@@ -109,17 +93,7 @@ public class Carrito {
 		}
 		return cantidad;
 	}
-	/*
-	public int contador(Producto p){
-		int conta=0;
-		for(Producto pr:productos){
-			if (pr.equals(p)){
-				conta+=1;
-				
-			}
-		}
-		return conta;
-	}*/
+	
 	public long getId(){
 		return id;
 	}
@@ -136,5 +110,14 @@ public class Carrito {
 	public double getPrecioFinal(){
 		return precioFinal;
 	}
-	
+    public Object clone(){
+        Object obj=null;
+        try{
+            obj=super.clone();
+        }catch(CloneNotSupportedException ex){
+            System.out.println(" no se puede duplicar");
+        }
+        return obj;
+    }
+
 }
