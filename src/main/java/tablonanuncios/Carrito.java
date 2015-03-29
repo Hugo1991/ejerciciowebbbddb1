@@ -22,6 +22,8 @@ public class Carrito {
 	private long id;
 	private ArrayList<CarritoProd> productos=new ArrayList<CarritoProd>();
 	private Double precioFinal=0.0;
+	
+	public Carrito(){}
 	public Carrito(String l){
 		String u;
 		u=l;
@@ -100,7 +102,12 @@ public class Carrito {
 		}
 	}*/
 	public int getNumeroProductos(){
-		return productos.size();
+		int cantidad=0;
+
+		for (CarritoProd p: productos){
+			cantidad+=p.getCantidad();
+		}
+		return cantidad;
 	}
 	/*
 	public int contador(Producto p){

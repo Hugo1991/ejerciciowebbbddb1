@@ -27,7 +27,6 @@ public class CarritoProd {
 		cantidad--;
 	}
 	public int getCantidad(){
-		
 		return cantidad;
 	}
 	public Producto getProducto(){

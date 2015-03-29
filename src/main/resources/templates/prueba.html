@@ -28,7 +28,7 @@
 	       		</fieldset>
         	</form>	
         	<div class="toolbar">
-            	<button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button>
+            	<a href="/sesion"><button id="micuenta" class="button btn btnBold" type="submit">Mi Cuenta</button></a>
             	<a href="/mostrarCarrito">
                     <button id="search_bttn" class="button btn btnBold" type="submit">
                         Cesta
@@ -41,25 +41,11 @@
     	</header>
     	<div id="seleccion">
         	<ul class="nav">
-        	    <li><a href="/">Home</a></li>
-            	<li><a href="/index?find=TV">TV/Video</a>
-           			<ul>
-                    	<li><a href="/index?find=Televisiones">Televisiones</a></li>
-                    	<li><a href="/index?find=Reproductores DVD">Reproductores DVD</a></li>
-                	</ul>
-            	</li>
-            	<li><a href="/index?find=Informatica">Informatica</a>
-                	<ul>
-                		<li><a href="/index?find=Portatiles">Portatiles</a></li>
-                    	<li><a href="/index?find=Sobremesas">Sobremesas</a></li>
-                	</ul>
-            	</li>
-            	<li><a href="/index?find=Grandes Electrodomesticos">Grandes Electrodomesticos</a>
-                	<ul>
-                    	<li><a href="/index?find=Lavadoras">Lavadoras</a></li>
-						<li><a href="/index?find=Neveras">Neveras</a></li>
-                	</ul>
-            	</li>
+        	                <li><a href="/">Home</a></li>
+            <li><a href="/index?find=Pequeños electrodomesticos">Pequeños electrodomésticos</a></li>
+            <li><a href="/index?find=Televisiones">Televisiones</a></li>
+			<li><a href="/index?find=Informatica">Informatica</a></li>
+            <li><a href="/index?find=Videoconsolas">Videoconsolas</a></li>
         	</ul>
     	</div>
     </div>
@@ -73,53 +59,62 @@
         					<h3><p th:text="|${categorias}|"/></h3>
         				</div>
         				<div class="panel-body" id="panel">
-                            <form class="form-horizontal izq" role="form" action="#" th:action="@{/admin}"  method="POST">
-                                <h2>Administrador</h2>
-                              <div class="form-group">
-                                <label for="inputName"  class="col-lg-1 control-label">Nombre</label>
-                                <div class="col-lg-3">
-                                  <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
+                            <div id="busqueda_iz">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">Rango</div>
+                                                <form action="/indexPrice" method="GET">
+                                                    <ul id="categories-menu" class="nav nav-pills nav-stacked">
+                                                        <li id="cid-1"><span>Minimo</span><span>Maximo</span></li>
+                                                        <li id="cid-2">
+                                                        	<div class="input-group">
+                                                            	<span class="input-group-addon"></span>
+                                                                	<input type="text" name="precioMin" class="form-control"/>
+                                                            	<span class="input-group-addon"></span>
+                                                        	</div>
+                                                        	<div class="input-group">
+                                                            	<span class="input-group-addon"></span>
+                                                                	<input type="text" name="precioMax" class="form-control"/>
+                                                            	<span class="input-group-addon"></span>
+                                                        	</div>
+                                                        </li>
+                                                    </ul>
+                                                    <input type="submit" value="Enviar"/>
+                                                    </form>
+                                            	</div>
+
+                                        </div>           
+                                    </div>                                            
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-lg-1 control-label">Contraseña</label>
-                                <div class="col-lg-3">
-                                  <input type="password" class="form-control" placeholder="Contrasena" name="pass" />
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                  <button type="submit" class="btn btn-default">Entrar</button>
-                                </div>
-                              </div>
-                            </form> 
-                            <form class="form-horizontal der pull-right" role="form" action="#" th:action="@{/usuario}"  method="POST">
-                                <h2>Usuario</h2>
-                              <div class="form-group">
-                                <label for="inputName"  class="col-lg-1 control-label">Nombre</label>
-                                <div class="col-lg-3">
-                                  <input type="name" class="form-control"  placeholder="Nombre" name="nombre" th:field="${nombre}"/>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-lg-1 control-label">Apellidos</label>
-                                <div class="col-lg-3">
-                                  <input type="name" class="form-control"  placeholder="Apellidos" name="nombre" th:field="${apellidos}"/>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                  <button type="submit" class="btn btn-default">Entrar</button>
-                                </div>
-                              </div>
-                            </form>  
+                            </div>
+                            <div id="pag_princ">
+        					<div th:each="producto : ${productos}">
+        							<div th:if="(${productos} != null)" class="panel panel-default" id="pro">
+										<div class="prod_list">
+											<div id="imgProd_nomProd">
+												<img th:src="|${producto.getImagen()}|" id="img_prod"/>
+        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" th:text="|${producto.getNombre()}|"/>
+											</div>
+        									<div id="precioInfo">
+        										<h2 class="precioListProd" th:text="|${producto.getPrecio()}|+&euro;"/>
+        										<a th:href="@{/mostrarProducto(idProducto=${producto.getId()})}" > 
+        											<button id="search_bttn" class="button btn btnBold" type="submit">Más Información</button>
+        										</a>
+        									</div>
+										</div>
+									</div>
+        						
+							</div>
+                            </div>
+        				</div>
         			</div>
         		</div>  
         	</div> 
 			<footer></footer>
 		</div>
 	</div>
-</div>
 </div>
 </body>
 </html>
