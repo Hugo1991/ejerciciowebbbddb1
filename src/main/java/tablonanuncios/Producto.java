@@ -20,6 +20,11 @@ public class Producto {
 	protected Producto() {
 		// Used by SpringData
 	}
+public Producto(String nombre,String categria){
+		
+		setNombre(nombre);
+		setCategoria(categria);
+	}
 	public Producto(String nombre,String categria,Double precio,String descripcion){
 		
 		setNombre(nombre);
@@ -27,6 +32,7 @@ public class Producto {
 		setPrecio(precio);
 		setDescription(descripcion);
 	}
+	
 	public Producto(String nombre, String categoria,Double precio,String descripcion,String imagen) {
 		setNombre(nombre);
 		setCategoria(categoria);

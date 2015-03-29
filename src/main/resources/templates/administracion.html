@@ -77,14 +77,15 @@
                                                 </form>
                                             <button  th:class="${producto.getId()}" id="bot-editar" onclick="mostrarEdicion('editar',this.className)" ><span class="glyphicon glyphicon-pencil" ></span> Modificar</button>
                                             <div th:id="${producto.getId()}" class="editar" >
-                                                <form class="form-horizontal" role="form" action="#" 
-                                                      method="POST">
+                                                <form class="form-horizontal" role="form" action="#" th:action="@{/modificarProducto}"  method="POST">
+                                                <input th:value="${producto.getId()}" type="hidden" name="idProducto"/>
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Nombre</label>
                                                     <div class="col-lg-3">
                                                         <input type="name" class="form-control"  name="nombre" th:value="|${producto.getNombre()}|"/>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="categoria" th:value="|${producto.getCategoria()}|"/>
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Precio</label>
                                                     <div class="col-lg-3 ">
@@ -94,10 +95,11 @@
                                                 <div class="form-group">
                                                     <label for="inputName"  class="col-lg-2 control-label">Descripción</label>
                                                     <div class="col-lg-3 ">
-                                                        <textarea class="form-control" th:text="|${producto.getDescripcion()}|" rows="1"></textarea>
+                                                        <textarea class="form-control" name="descripcion" th:text="|${producto.getDescripcion()}|" rows="1"></textarea>
                                                     </div>
                                                 </div>
-                                                <button  class="btn btn-success guardar">Guardar</button>
+                                                <input type="hidden" name="imagen" th:value="|${producto.getImagen()}|"/>
+                                                <button type="submit" class="btn btn-success guardar">Guardar</button>
                                                 
                                                 </form>
                                                 <button th:name="${producto.getId()}" onclick="mostrarEdicion('salir-editar',this.name)" class="btn btn-default salir">salir</button>

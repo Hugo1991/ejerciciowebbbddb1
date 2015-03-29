@@ -155,8 +155,9 @@ public class TablonController {
 				   if (!filesFolder.exists()) {
 					   System.out.println("carpeta no existe");
 				   }
-				   
+				   System.out.println("ahora subira la foto");
 				    uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
+				    System.out.println("ha subido la foto");
 				   imagen.transferTo(uploadedFile);
 			   }catch(Exception e){
 			   }
@@ -173,10 +174,10 @@ public class TablonController {
 		repository.delete(idProducto);
 		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
 	}
-	@RequestMapping(value="/modificarPrducto",method=RequestMethod.POST)
-	public ModelAndView modificarProducto(@RequestParam Long idProducto, HttpSession sesion) {
-		
-		
+	@RequestMapping(value="/modificarProducto",method=RequestMethod.POST)
+	public ModelAndView modificarProducto(@RequestParam Long idProducto, HttpSession sesion, @RequestParam String nombre, @RequestParam String categoria,@RequestParam Double precio,@RequestParam String descripcion,@RequestParam String imagen) {
+		repository.delete(idProducto);
+		repository.save(new Producto(nombre,categoria,precio,descripcion,imagen));
 		return new ModelAndView("administracion").addObject("productos",repository.findAll()).addObject("carrito",carrito);
 	}
 	/*@RequestMapping("/pedidos")
