@@ -13,10 +13,9 @@ public class DataBaseUsage implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository repository;
-	//private PedidosRepository repositorioPedidos;
 	@Override
 	public void run(String... args) throws Exception {
-		repository.deleteAll();
+		//repository.deleteAll();
 
         //PEQUEÑOS ELECTRODOMESTICOS
         repository.save(new Producto("Depiladora - Rio Beauty LAH-R Depilación láser", "Pequeños electrodomesticos",94.90,"Ahora podrás disfrutar de los beneficios de la depilación láser, sin tener que pagar costosos tratamientos","img/DepLaser.jpg"));
